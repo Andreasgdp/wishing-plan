@@ -82,17 +82,17 @@ export function HeroSection() {
 					</Heading>
 					<Flex flexDirection={'column'} gap={2}>
 						<Text color={'gray.500'}>
-							Wishing Plan allows you to save your wishes and plan
-							when you can buy them based on the price and the
-							amount of money you set aside each month. The app
-							will then track the your monthly savings and
-							calculate when you are able to purchase your wishes.
+							Wishing Plan allows the you to track your savings
+							and calculate purchase feasibility of the your
+							wishes. It will also become a hub for planning
+							bigger purchases with others, creating individual or
+							collective wish lists to share on occasions like
+							birthdays, Christmas and more.
 						</Text>
 						<Text color={'gray.500'}>
-							You can also view a dashboard with a summary of
-							their wishes and their progress towards achieving
-							them. This app is useful for helping you save money
-							and plan for their future purchases.
+							This app is useful for helping you save money and
+							plan for their future purchases as well as for
+							destributing wishlists to friends and family.
 						</Text>
 					</Flex>
 					<Stack

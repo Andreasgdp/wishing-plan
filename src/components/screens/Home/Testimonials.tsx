@@ -107,12 +107,12 @@ export function TestemonialSection() {
 					<Testimonial>
 						<TestimonialContent>
 							<TestimonialHeading>
-								Efficient Collaborating
+								Amazing Product
 							</TestimonialHeading>
 							<TestimonialText>
-								Easy to use and very intuitive. I love how I can
-								easily collaborate others creating shared
-								wishLists.
+								Wishing Plan brings a new level of organization
+								to my life. It allows me to focus saving for
+								important goals.
 							</TestimonialText>
 						</TestimonialContent>
 						<TestimonialAvatar
@@ -129,8 +129,8 @@ export function TestemonialSection() {
 								Intuitive Design
 							</TestimonialHeading>
 							<TestimonialText>
-								I love how easy it is to use and how intuitive
-								the design is.
+								I love how easy and intuitive the application is
+								to use.
 							</TestimonialText>
 						</TestimonialContent>
 						<TestimonialAvatar

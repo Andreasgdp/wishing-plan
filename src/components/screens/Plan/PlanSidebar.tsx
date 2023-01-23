@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+import type { ChangeEvent } from 'react';
 import {
 	Button,
 	Input,
@@ -15,7 +17,6 @@ import {
 	useColorModeValue,
 } from '@chakra-ui/react';
 import type { Plan } from '@prisma/client';
-import { useEffect, useState } from 'react';
 
 type PlanSidebarProps = {
 	plan?: Plan;
@@ -40,11 +41,11 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 		setAmountToSave(Number(value));
 
 	const [firstSaving, setFirstSaving] = useState(new Date());
-	const handleFirstSavingChange = (event: any) =>
+	const handleFirstSavingChange = (event: ChangeEvent<HTMLInputElement>) =>
 		setFirstSaving(new Date(event.target.value));
 
 	const [frequency, setFrequency] = useState('som');
-	const handleFrequencyChange = (event: any) => {
+	const handleFrequencyChange = (event: ChangeEvent<HTMLSelectElement>) => {
 		setFrequency(event.target.value);
 	};
 

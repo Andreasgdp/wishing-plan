@@ -67,7 +67,6 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 
 	const submitPlanSettingsChange = (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		console.log('submitPlanSettingsChange');
 		if (
 			amountToSave !== props.plan?.amountToSave ||
 			savedAmount !== props.plan?.currentAmountSaved ||

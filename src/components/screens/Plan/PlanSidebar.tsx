@@ -64,7 +64,9 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 		setFrequency(props.plan?.frequency ?? 'som');
 	}, [props.plan?.frequency]);
 
-	const submitPlanSettingsChange = () => {
+	const submitPlanSettingsChange = (e: React.SyntheticEvent) => {
+		e.preventDefault();
+		console.log('submitPlanSettingsChange');
 		if (
 			amountToSave !== props.plan?.amountToSave ||
 			savedAmount !== props.plan?.currentAmountSaved ||
@@ -89,129 +91,133 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 			flexShrink={0}
 			display={{ base: 'none', lg: 'block' }}
 		>
-			<Stack>
-				<Button
-					colorScheme={'purple'}
-					onClick={submitPlanSettingsChange}
-				>
-					Update
-				</Button>
-				<Text
-					align={'center'}
-					textTransform={'uppercase'}
-					color={categoryColor}
-					fontWeight={700}
-					fontSize={'sm'}
-					letterSpacing={1}
-					pt={0.5}
-				>
-					Amount Saved
-				</Text>
-				<Tooltip
-					hasArrow
-					label="Amount saved in total"
-					placement="auto"
-				>
-					<InputGroup>
-						<NumberInput
-							allowMouseWheel
-							defaultValue={props.plan?.currentAmountSaved}
-							value={savedAmount}
-							onChange={handleSavedAmountChange}
-						>
-							<NumberInputField />
-							<NumberInputStepper>
-								<NumberIncrementStepper />
-								<NumberDecrementStepper />
-							</NumberInputStepper>
-						</NumberInput>
-						<InputRightAddon>{props.currency}</InputRightAddon>
-					</InputGroup>
-				</Tooltip>
+			<form onSubmit={submitPlanSettingsChange}>
+				<Stack>
+					<Button type="submit" colorScheme={'purple'}>
+						Update
+					</Button>
+					<Text
+						align={'center'}
+						textTransform={'uppercase'}
+						color={categoryColor}
+						fontWeight={700}
+						fontSize={'sm'}
+						letterSpacing={1}
+						pt={0.5}
+					>
+						Amount Saved
+					</Text>
+					<Tooltip
+						hasArrow
+						label="Amount saved in total"
+						placement="auto"
+					>
+						<InputGroup>
+							<NumberInput
+								allowMouseWheel
+								defaultValue={props.plan?.currentAmountSaved}
+								value={savedAmount}
+								onChange={handleSavedAmountChange}
+							>
+								<NumberInputField />
+								<NumberInputStepper>
+									<NumberIncrementStepper />
+									<NumberDecrementStepper />
+								</NumberInputStepper>
+							</NumberInput>
+							<InputRightAddon>{props.currency}</InputRightAddon>
+						</InputGroup>
+					</Tooltip>
 
-				<Text
-					align={'center'}
-					textTransform={'uppercase'}
-					color={categoryColor}
-					fontWeight={700}
-					fontSize={'sm'}
-					letterSpacing={1}
-				>
-					Amount to Save
-				</Text>
+					<Text
+						align={'center'}
+						textTransform={'uppercase'}
+						color={categoryColor}
+						fontWeight={700}
+						fontSize={'sm'}
+						letterSpacing={1}
+					>
+						Amount to Save
+					</Text>
 
-				<Tooltip
-					hasArrow
-					label="Amount add to current savings based on savings frequency"
-					placement="auto"
-				>
-					<InputGroup>
-						<NumberInput
-							allowMouseWheel
-							defaultValue={props.plan?.amountToSave}
-							min={0}
-							value={amountToSave}
-							onChange={handleAmountToSaveChange}
+					<Tooltip
+						hasArrow
+						label="Amount add to current savings based on savings frequency"
+						placement="auto"
+					>
+						<InputGroup>
+							<NumberInput
+								allowMouseWheel
+								defaultValue={props.plan?.amountToSave}
+								min={0}
+								value={amountToSave}
+								onChange={handleAmountToSaveChange}
+							>
+								<NumberInputField />
+								<NumberInputStepper>
+									<NumberIncrementStepper />
+									<NumberDecrementStepper />
+								</NumberInputStepper>
+							</NumberInput>
+							<InputRightAddon>{props.currency}</InputRightAddon>
+						</InputGroup>
+					</Tooltip>
+					<Text
+						align={'center'}
+						textTransform={'uppercase'}
+						color={categoryColor}
+						fontWeight={500}
+						fontSize={'sm'}
+						letterSpacing={1}
+					>
+						Savings Frequency
+					</Text>
+					<Tooltip
+						hasArrow
+						label="Frequency of current amount saved updated based on Savings Amount"
+						placement="auto"
+					>
+						<Select
+							value={frequency}
+							onChange={handleFrequencyChange}
 						>
-							<NumberInputField />
-							<NumberInputStepper>
-								<NumberIncrementStepper />
-								<NumberDecrementStepper />
-							</NumberInputStepper>
-						</NumberInput>
-						<InputRightAddon>{props.currency}</InputRightAddon>
-					</InputGroup>
-				</Tooltip>
-				<Text
-					align={'center'}
-					textTransform={'uppercase'}
-					color={categoryColor}
-					fontWeight={500}
-					fontSize={'sm'}
-					letterSpacing={1}
-				>
-					Savings Frequency
-				</Text>
-				<Tooltip
-					hasArrow
-					label="Frequency of current amount saved updated based on Savings Amount"
-					placement="auto"
-				>
-					<Select value={frequency} onChange={handleFrequencyChange}>
-						<option value="som">Start of month</option>
-						<option value="eom">End of month</option>
-						<option value="ed">Every day</option>
-						<option value="ew">Every week</option>
-						<option value="e14d">Every 14th day</option>
-					</Select>
-				</Tooltip>
-				{frequency !== 'som' && frequency !== 'eom' && (
-					<>
-						<Text
-							align={'center'}
-							textTransform={'uppercase'}
-							color={categoryColor}
-							fontWeight={500}
-							fontSize={'sm'}
-							letterSpacing={1}
-						>
-							First Saving
-						</Text>
-						<Tooltip
-							hasArrow
-							label="Date of first saving"
-							placement="auto"
-						>
-							<Input
-								size="md"
-								type="date"
-								value={firstSaving.toISOString().split('T')[0]}
-								onChange={handleFirstSavingChange}
-							/>
-						</Tooltip>
-					</>
-				)}
-			</Stack>
+							<option value="som">Start of month</option>
+							<option value="eom">End of month</option>
+							<option value="ed">Every day</option>
+							<option value="ew">Every week</option>
+							<option value="e14d">Every 14th day</option>
+						</Select>
+					</Tooltip>
+					{frequency !== 'som' && frequency !== 'eom' && (
+						<>
+							<Text
+								align={'center'}
+								textTransform={'uppercase'}
+								color={categoryColor}
+								fontWeight={500}
+								fontSize={'sm'}
+								letterSpacing={1}
+							>
+								First Saving
+							</Text>
+							<Tooltip
+								hasArrow
+								label="Date of first saving"
+								placement="auto"
+							>
+								<Input
+									size="md"
+									type="date"
+									value={
+										firstSaving.toISOString().split('T')[0]
+									}
+									onChange={handleFirstSavingChange}
+								/>
+							</Tooltip>
+						</>
+					)}
+				</Stack>
+			</form>
 		</Stack>
 	);
 };

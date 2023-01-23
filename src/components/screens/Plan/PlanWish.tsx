@@ -325,6 +325,11 @@ export function PlanWishComponent(props: SortableItemProps) {
 							</Box>
 						</Flex>
 						<Progress
+							sx={{
+								'& > div:first-child': {
+									transitionProperty: 'width',
+								},
+							}}
 							mt={2}
 							colorScheme={'purple'}
 							value={props.wish.percentage}

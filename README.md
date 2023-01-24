@@ -12,6 +12,12 @@ Wishing Plan allows the user to tracks savings and calculates purchase feasibili
     <img align="center" width="600" alt="" src="https://user-images.githubusercontent.com/39928082/213713001-b72c08f2-e861-4851-b58a-4fcf727ffeff.gif" />
 </div>
 
+</br>
+
+<div align="center">
+    <a href="https://discord.gg/uud4thzzY2">Join our Discord server</a> for faster responses and easier discussions about Wishing Plan.
+</div>
+
 # Open Source
 
 Wishting Plan is an open source project. We welcome contributions from the community. There are many ways to contribute to the project, from writing tutorials or blog posts, submitting bug reports and feature requests or writing code which can be incorporated into Wishing Plan itself. Here is a list of some of the ways you can contribute to the project:

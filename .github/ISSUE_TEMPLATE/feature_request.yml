@@ -1,6 +1,6 @@
 name: Feature Request
 description: Suggest an idea for this project
-title: "[Feature]: "
+title: '[Feature]: '
 labels: [feature]
 body:
   - type: markdown
@@ -26,13 +26,13 @@ body:
   - type: textarea
     id: alternatives
     attributes:
-      label: Describe alternatives you've considered 
+      label: Describe alternatives you've considered
       description: A clear and concise description of any alternative solutions or features you've considered.
       placeholder: A possible alternative to the current solution could be...
   - type: textarea
     id: additional-context
     attributes:
-      label: Additional context 
+      label: Additional context
       description: Add any other context or screenshots about the feature request here.
   - type: checkboxes
     id: terms

@@ -8,10 +8,7 @@ const Product: NextPage = () => {
 		<>
 			<Head>
 				<title>Wishing Plan - Product</title>
-				<meta
-					name="description"
-					content="landing page for wishing plan"
-				/>
+				<meta name="description" content="landing page for wishing plan" />
 			</Head>
 
 			<HomeScreen />

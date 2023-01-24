@@ -14,8 +14,7 @@ import theme from '../libs/theme';
 import '../styles/globals.css';
 
 const prefersDarkMode = () => {
-	return globalThis?.window?.matchMedia('(prefers-color-scheme: dark)')
-		.matches;
+	return globalThis?.window?.matchMedia('(prefers-color-scheme: dark)').matches;
 };
 
 const MyApp: AppType<{ session: Session | null }> = ({
@@ -28,10 +27,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 			<Head>
 				{!prefersDarkMode() && (
 					<>
-						<link
-							rel="shortcut icon"
-							href="/favicon/light/favicon.ico"
-						/>
+						<link rel="shortcut icon" href="/favicon/light/favicon.ico" />
 
 						<link
 							rel="apple-touch-icon"
@@ -54,10 +50,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 				)}
 				{prefersDarkMode() && (
 					<>
-						<link
-							rel="shortcut icon"
-							href="/favicon/dark/favicon.ico"
-						/>
+						<link rel="shortcut icon" href="/favicon/dark/favicon.ico" />
 						<link
 							rel="apple-touch-icon"
 							sizes="180x180"

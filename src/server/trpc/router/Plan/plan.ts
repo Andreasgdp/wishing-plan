@@ -21,30 +21,29 @@ export const planRouter = router({
 
 		return ctx.prisma.plan.findFirst({ where: { userId: userId } });
 	}),
-	getWishes: protectedProcedure
-		.query(async ({  ctx }) => {
-			const planId = await getPlanIdFromSession(ctx);
-			assertHasAccessToPlan(ctx, planId);
+	getWishes: protectedProcedure.query(async ({ ctx }) => {
+		const planId = await getPlanIdFromSession(ctx);
+		assertHasAccessToPlan(ctx, planId);
 
-			return ctx.prisma.planWish
-				.findMany({
-					where: { planId: planId },
-					orderBy: { placement: 'asc' },
-					include: { wish: true },
-				})
-				.then((planWishes) => {
-					let currentSum = 0;
-					return planWishes.map((planWish) => {
-						const wishSum = currentSum + planWish.wish.price;
-						currentSum = wishSum;
-						return {
-							...planWish.wish,
-							placement: planWish.placement,
-							sumOfMoney: wishSum,
-						};
-					});
+		return ctx.prisma.planWish
+			.findMany({
+				where: { planId: planId },
+				orderBy: { placement: 'asc' },
+				include: { wish: true },
+			})
+			.then((planWishes) => {
+				let currentSum = 0;
+				return planWishes.map((planWish) => {
+					const wishSum = currentSum + planWish.wish.price;
+					currentSum = wishSum;
+					return {
+						...planWish.wish,
+						placement: planWish.placement,
+						sumOfMoney: wishSum,
+					};
 				});
-		}),
+			});
+	}),
 	createAndAddWish: protectedProcedure
 		.input(
 			z.object({
@@ -53,7 +52,7 @@ export const planRouter = router({
 				wishPrice: z.number(),
 				wishUrl: z.string(),
 				wishImageUrl: z.string().nullish(),
-			})
+			}),
 		)
 		.mutation(async ({ input, ctx }) => {
 			const planId = await getPlanIdFromSession(ctx);
@@ -124,7 +123,7 @@ export const planRouter = router({
 				wishUrl: z.string(),
 				wishImageUrl: z.string().nullish(),
 				placement: z.number(),
-			})
+			}),
 		)
 		.mutation(async ({ input, ctx }) => {
 			const planId = await getPlanIdFromSession(ctx);
@@ -165,7 +164,7 @@ export const planRouter = router({
 				wishId: z.string(),
 				oldIndex: z.number(),
 				newIndex: z.number(),
-			})
+			}),
 		)
 		.mutation(async ({ input, ctx }) => {
 			const planId = await getPlanIdFromSession(ctx);
@@ -188,7 +187,7 @@ export const planRouter = router({
 			const newPlanWishes = updatePlacement(
 				planWishes,
 				input.oldIndex,
-				input.newIndex
+				input.newIndex,
 			);
 
 			return await Promise.all(
@@ -197,7 +196,7 @@ export const planRouter = router({
 						where: { id: planWish.id },
 						data: { placement: planWish.placement },
 					});
-				})
+				}),
 			);
 		}),
 	deleteWish: protectedProcedure
@@ -205,7 +204,7 @@ export const planRouter = router({
 		.input(
 			z.object({
 				wishId: z.string(),
-			})
+			}),
 		)
 		.mutation(async ({ input, ctx }) => {
 			const planId = await getPlanIdFromSession(ctx);
@@ -225,10 +224,7 @@ export const planRouter = router({
 				orderBy: { placement: 'asc' },
 			});
 
-			const newPlanWishes = removePlacement(
-				planWishes,
-				planWish.placement
-			);
+			const newPlanWishes = removePlacement(planWishes, planWish.placement);
 
 			await Promise.all(
 				newPlanWishes.map((planWish) => {
@@ -236,7 +232,7 @@ export const planRouter = router({
 						where: { id: planWish.id },
 						data: { placement: planWish.placement },
 					});
-				})
+				}),
 			);
 
 			await ctx.prisma.planWish.delete({
@@ -255,7 +251,7 @@ export const planRouter = router({
 				currentAmountSaved: z.number(),
 				firstSaving: z.date(),
 				frequency: z.string(),
-			})
+			}),
 		)
 		.mutation(async ({ input, ctx }) => {
 			const planId = await getPlanIdFromSession(ctx);

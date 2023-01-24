@@ -35,7 +35,7 @@ export const WishListScreen = (props: WishListScreenProps) => {
 		description: string,
 		url: string,
 		imageUrl: string,
-		price: number
+		price: number,
 	) => {
 		await createWish.mutateAsync({
 			title: title,
@@ -68,11 +68,7 @@ export const WishListScreen = (props: WishListScreenProps) => {
 						data={wishes}
 						EmptyComponent={
 							<Center>
-								<Tag
-									size={'lg'}
-									variant="solid"
-									colorScheme="teal"
-								>
+								<Tag size={'lg'} variant="solid" colorScheme="teal">
 									No Wishes Yet
 								</Tag>
 							</Center>

@@ -34,18 +34,13 @@ const Layout = ({ children }: LayoutProps) => {
 	return (
 		<Box as="main">
 			<Head>
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1"
-				/>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<title>Wishing Plan</title>
 			</Head>
 
 			<Navbar path={router.asPath} />
 
-			<div style={{ paddingTop: '3.5rem', minHeight: '100vh' }}>
-				{children}
-			</div>
+			<div style={{ paddingTop: '3.5rem', minHeight: '100vh' }}>{children}</div>
 
 			<Footer />
 		</Box>

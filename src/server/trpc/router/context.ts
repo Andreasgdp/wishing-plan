@@ -6,7 +6,7 @@ import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from 'src/pages/api/auth/[...nextauth]';
 
 export const createContext = async (
-	opts?: trpcNext.CreateNextContextOptions
+	opts?: trpcNext.CreateNextContextOptions,
 ) => {
 	const req = opts?.req;
 	const res = opts?.res;

@@ -1,29 +1,29 @@
 name: Format and lint check
 
 on:
-    pull_request:
-        branches: [master]
-        types:
-            - opened
-            - reopened
-            - synchronize
-            - ready_for_review
+  pull_request:
+    branches: [master]
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
 
 permissions:
-    pull-requests: write
-    contents: write
+  pull-requests: write
+  contents: write
 
 jobs:
-    format_check:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
-              with:
-                  node-version: 16.15
-            - name: Install dependencies
-              run: yarn
-            - name: Run format
-              run: yarn format:check
-            - name: Run lint
-              run: yarn lint
+  format_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16.15
+      - name: Install dependencies
+        run: yarn
+      - name: Run format
+        run: yarn format:check
+      - name: Run lint
+        run: yarn lint

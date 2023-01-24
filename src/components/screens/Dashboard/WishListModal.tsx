@@ -53,7 +53,7 @@ export const WishListModal = (props: WishListModalProps) => {
 	};
 
 	const handleDescriptionChange = (
-		e: React.ChangeEvent<HTMLTextAreaElement>
+		e: React.ChangeEvent<HTMLTextAreaElement>,
 	) => {
 		setDescriptionValue(e.target.value);
 	};
@@ -63,11 +63,7 @@ export const WishListModal = (props: WishListModalProps) => {
 			<Button {...props.buttonProps} onClick={openModal}>
 				{props.buttonName}
 			</Button>
-			<Modal
-				isOpen={isOpen}
-				onClose={onClose}
-				size={{ base: 'xs', md: 'xl' }}
-			>
+			<Modal isOpen={isOpen} onClose={onClose} size={{ base: 'xs', md: 'xl' }}>
 				<ModalOverlay />
 
 				<ModalContent>

@@ -25,7 +25,7 @@ type PlanSidebarProps = {
 		amountToSave: number,
 		currentAmountSaved: number,
 		firstSaving: Date,
-		frequency: string
+		frequency: string,
 	) => void;
 };
 
@@ -77,7 +77,7 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 				amountToSave,
 				savedAmount,
 				firstSaving,
-				frequency
+				frequency,
 			);
 		}
 	};
@@ -107,11 +107,7 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 					>
 						Amount Saved
 					</Text>
-					<Tooltip
-						hasArrow
-						label="Amount saved in total"
-						placement="auto"
-					>
+					<Tooltip hasArrow label="Amount saved in total" placement="auto">
 						<InputGroup>
 							<NumberInput
 								allowMouseWheel
@@ -177,10 +173,7 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 						label="Frequency of current amount saved updated based on Savings Amount"
 						placement="auto"
 					>
-						<Select
-							value={frequency}
-							onChange={handleFrequencyChange}
-						>
+						<Select value={frequency} onChange={handleFrequencyChange}>
 							<option value="som">Start of month</option>
 							<option value="eom">End of month</option>
 							<option value="ed">Every day</option>
@@ -200,17 +193,11 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 							>
 								First Saving
 							</Text>
-							<Tooltip
-								hasArrow
-								label="Date of first saving"
-								placement="auto"
-							>
+							<Tooltip hasArrow label="Date of first saving" placement="auto">
 								<Input
 									size="md"
 									type="date"
-									value={
-										firstSaving.toISOString().split('T')[0]
-									}
+									value={firstSaving.toISOString().split('T')[0]}
 									onChange={handleFirstSavingChange}
 								/>
 							</Tooltip>

@@ -64,7 +64,7 @@ type SortableItemProps = {
 	onPlacementChange: (
 		wishId: string,
 		oldIndex: number,
-		newIndex: number
+		newIndex: number,
 	) => void;
 	onDelete: (id: string, index: number) => void;
 	onEdit: (
@@ -74,7 +74,7 @@ type SortableItemProps = {
 		url: string,
 		imageUrl: string,
 		price: number,
-		placement: number
+		placement: number,
 	) => void;
 };
 
@@ -164,7 +164,7 @@ export function PlanWishComponent(props: SortableItemProps) {
 			data.url,
 			data.imageUrl,
 			Number(priceValue),
-			props.wish.placement
+			props.wish.placement,
 		);
 		reset();
 		setDescriptionValue('');
@@ -182,7 +182,7 @@ export function PlanWishComponent(props: SortableItemProps) {
 	};
 
 	const handleDescriptionChange = (
-		e: React.ChangeEvent<HTMLTextAreaElement>
+		e: React.ChangeEvent<HTMLTextAreaElement>,
 	) => {
 		setDescriptionValue(e.target.value);
 	};
@@ -222,12 +222,8 @@ export function PlanWishComponent(props: SortableItemProps) {
 						>
 							<NumberInputField />
 							<NumberInputStepper>
-								<NumberDecrementStepper
-									transform={'scaleY(-1)'}
-								/>
-								<NumberIncrementStepper
-									transform={'scaleY(-1)'}
-								/>
+								<NumberDecrementStepper transform={'scaleY(-1)'} />
+								<NumberIncrementStepper transform={'scaleY(-1)'} />
 							</NumberInputStepper>
 						</NumberInput>
 					</Center>
@@ -248,10 +244,7 @@ export function PlanWishComponent(props: SortableItemProps) {
 								boxSize={{ base: '2.5rem', md: '100px' }}
 								borderRadius={'lg'}
 								objectFit="cover"
-								src={
-									props.wish.imageUrl ??
-									'/images/placeholderWish.png'
-								}
+								src={props.wish.imageUrl ?? '/images/placeholderWish.png'}
 								alt="Wish image"
 								mr={2}
 								mt={-0.1}
@@ -290,10 +283,7 @@ export function PlanWishComponent(props: SortableItemProps) {
 								</Heading>
 								<Text
 									align={'left'}
-									color={useColorModeValue(
-										'gray.800',
-										'gray.200'
-									)}
+									color={useColorModeValue('gray.800', 'gray.200')}
 									fontWeight={500}
 									fontSize={'lg'}
 									letterSpacing={1}
@@ -311,10 +301,7 @@ export function PlanWishComponent(props: SortableItemProps) {
 								<Text
 									align={'right'}
 									textTransform={'uppercase'}
-									color={useColorModeValue(
-										'gray.800',
-										'gray.200'
-									)}
+									color={useColorModeValue('gray.800', 'gray.200')}
 									fontWeight={700}
 									fontSize={'lg'}
 									letterSpacing={1}
@@ -348,21 +335,14 @@ export function PlanWishComponent(props: SortableItemProps) {
 								mb={{ base: '2', sm: '6', md: '2' }}
 							/>
 							<MenuList>
-								<MenuItem
-									icon={<EditIcon />}
-									command="⌘E"
-									onClick={openModal}
-								>
+								<MenuItem icon={<EditIcon />} command="⌘E" onClick={openModal}>
 									Edit
 								</MenuItem>
 								<MenuItem
 									icon={<DeleteIcon />}
 									command="⌘D"
 									onClick={() =>
-										props.onDelete(
-											props.wish.id,
-											props.wish.placement
-										)
+										props.onDelete(props.wish.id, props.wish.placement)
 									}
 								>
 									Delete
@@ -406,11 +386,7 @@ export function PlanWishComponent(props: SortableItemProps) {
 							<form id="new-note" onSubmit={onSubmit}>
 								<FormControl>
 									<FormLabel>URL for Wish</FormLabel>
-									<Input
-										id="url"
-										type="url"
-										{...register('url')}
-									/>
+									<Input id="url" type="url" {...register('url')} />
 								</FormControl>
 								<FormControl>
 									<Center mt={6} mb={2}>
@@ -421,19 +397,11 @@ export function PlanWishComponent(props: SortableItemProps) {
 								</FormControl>
 								<FormControl>
 									<FormLabel>URL for Image</FormLabel>
-									<Input
-										id="imageUrl"
-										type="url"
-										{...register('imageUrl')}
-									/>
+									<Input id="imageUrl" type="url" {...register('imageUrl')} />
 								</FormControl>
 								<FormControl isRequired>
 									<FormLabel>Name of Wish</FormLabel>
-									<Input
-										id="title"
-										type="text"
-										{...register('title')}
-									/>
+									<Input id="title" type="text" {...register('title')} />
 								</FormControl>
 								<FormControl isRequired>
 									<FormLabel>Price of your Wish</FormLabel>
@@ -441,9 +409,7 @@ export function PlanWishComponent(props: SortableItemProps) {
 									<NumberInput
 										id="price"
 										{...register('price')}
-										onChange={(valueString) =>
-											setPriceValue(valueString)
-										}
+										onChange={(valueString) => setPriceValue(valueString)}
 										value={priceValue}
 										max={100000000}
 										min={0}

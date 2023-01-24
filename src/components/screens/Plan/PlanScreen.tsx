@@ -61,7 +61,7 @@ export const PlanScreen = () => {
 		amountToSave: number,
 		currentAmountSaved: number,
 		firstSaving: Date,
-		frequency: string
+		frequency: string,
 	) => {
 		await updatePlanSettings
 			.mutateAsync({
@@ -104,7 +104,7 @@ export const PlanScreen = () => {
 		description: string,
 		url: string,
 		imageUrl: string,
-		price: number
+		price: number,
 	) => {
 		await createAndAddWish
 			.mutateAsync({
@@ -145,7 +145,7 @@ export const PlanScreen = () => {
 		url: string,
 		imageUrl: string,
 		price: number,
-		placement: number
+		placement: number,
 	) => {
 		await editWish
 			.mutateAsync({
@@ -222,11 +222,7 @@ export const PlanScreen = () => {
 						data={plan}
 						EmptyComponent={
 							<Center>
-								<Tag
-									size={'lg'}
-									variant="solid"
-									colorScheme="teal"
-								>
+								<Tag size={'lg'} variant="solid" colorScheme="teal">
 									No Plan
 								</Tag>
 							</Center>
@@ -246,19 +242,11 @@ export const PlanScreen = () => {
 						maxW={{ lg: 'calc(100% - 16rem)' }}
 					>
 						<EmptyStateWrapper
-							isLoading={
-								isLoading ||
-								isLoadingCurrency ||
-								isLoadingWishes
-							}
+							isLoading={isLoading || isLoadingCurrency || isLoadingWishes}
 							data={plan}
 							EmptyComponent={
 								<Center>
-									<Tag
-										size={'lg'}
-										variant="solid"
-										colorScheme="teal"
-									>
+									<Tag size={'lg'} variant="solid" colorScheme="teal">
 										No Plan
 									</Tag>
 								</Center>
@@ -284,9 +272,7 @@ export const PlanScreen = () => {
 										<Stack spacing={4}>
 											<SortableContext
 												items={stateWishes}
-												strategy={
-													verticalListSortingStrategy
-												}
+												strategy={verticalListSortingStrategy}
 											>
 												<>
 													{/* We need components that use the useSortable hook */}
@@ -295,20 +281,12 @@ export const PlanScreen = () => {
 															<PlanWishComponent
 																key={wish.id}
 																wish={addTimeLeftAndPercentage(
-																	plan ??
-																		undefined,
-																	wish
+																	plan ?? undefined,
+																	wish,
 																)}
-																currency={
-																	currency ??
-																	''
-																}
-																onPlacementChange={
-																	handlePlacementChange
-																}
-																onDelete={
-																	onWishDelete
-																}
+																currency={currency ?? ''}
+																onPlacementChange={handlePlacementChange}
+																onDelete={onWishDelete}
 																onEdit={onEdit}
 															/>
 														);
@@ -329,7 +307,7 @@ export const PlanScreen = () => {
 	function handlePlacementChange(
 		wishId: string,
 		newIndex: number,
-		oldIndex: number
+		oldIndex: number,
 	) {
 		relocateWish
 			.mutateAsync({
@@ -341,8 +319,7 @@ export const PlanScreen = () => {
 				await refetchWishLists();
 				await refetchCurrency();
 				toast({
-					title:
-						'Wish moved from ' + oldIndex + ' to ' + newIndex + '.',
+					title: 'Wish moved from ' + oldIndex + ' to ' + newIndex + '.',
 					description: 'Your wish has been moved',
 					status: 'success',
 					duration: 2000,
@@ -381,9 +358,7 @@ export const PlanScreen = () => {
 				const activeIndex = items
 					.map((e) => e.id)
 					.indexOf(active.id.toString());
-				const overIndex = items
-					.map((e) => e.id)
-					.indexOf(over.id.toString());
+				const overIndex = items.map((e) => e.id).indexOf(over.id.toString());
 				return arrayMove(items, activeIndex, overIndex);
 			});
 		}
@@ -391,7 +366,7 @@ export const PlanScreen = () => {
 
 	function addTimeLeftAndPercentage(
 		plan: Plan | undefined,
-		wish: PlanWishType
+		wish: PlanWishType,
 	): SortablePlanWishType {
 		if (plan === undefined) {
 			return {
@@ -430,10 +405,7 @@ export const PlanScreen = () => {
 		return percentage;
 	}
 
-	function calculateIntervalsLeft(
-		plan: Plan | undefined,
-		wish: PlanWishType
-	) {
+	function calculateIntervalsLeft(plan: Plan | undefined, wish: PlanWishType) {
 		if (plan === undefined) {
 			return 0;
 		}
@@ -457,7 +429,7 @@ export const PlanScreen = () => {
 		const nextSavingDate = calculateNextSavingDate(
 			intervalsLeft,
 			frequency,
-			firstSavingDate
+			firstSavingDate,
 		);
 
 		const today = new Date();
@@ -471,12 +443,12 @@ export const PlanScreen = () => {
 	function calculateNextSavingDate(
 		intervalsLeft: number,
 		frequency: string,
-		firstSavingDate: Date
+		firstSavingDate: Date,
 	) {
 		const today = new Date();
 		const firstSaving = new Date(firstSavingDate);
 		const daysSinceFirstSaving = Math.floor(
-			(today.getTime() - firstSaving.getTime()) / (1000 * 60 * 60 * 24)
+			(today.getTime() - firstSaving.getTime()) / (1000 * 60 * 60 * 24),
 		);
 
 		switch (frequency) {
@@ -484,21 +456,21 @@ export const PlanScreen = () => {
 				return new Date(
 					today.getFullYear(),
 					today.getMonth() + 1 * intervalsLeft,
-					1
+					1,
 				);
 			case 'eom':
 				const correctMultiplyer = intervalsLeft === 1 ? 0 : 1;
 				return new Date(
 					today.getFullYear(),
 					today.getMonth() + correctMultiplyer * intervalsLeft,
-					0
+					0,
 				);
 
 			case 'ed':
 				return new Date(
 					today.getFullYear(),
 					today.getMonth(),
-					today.getDate() + 1 * intervalsLeft
+					today.getDate() + 1 * intervalsLeft,
 				);
 			case 'ew':
 				const daysSinceLastWeeklySaving = daysSinceFirstSaving % 7;
@@ -506,7 +478,7 @@ export const PlanScreen = () => {
 				return new Date(
 					today.getFullYear(),
 					today.getMonth(),
-					today.getDate() + daysUntilNextWeeklySaving * intervalsLeft
+					today.getDate() + daysUntilNextWeeklySaving * intervalsLeft,
 				);
 			case 'e14d':
 				const daysSinceLast14DaySaving = daysSinceFirstSaving % 14;
@@ -514,14 +486,10 @@ export const PlanScreen = () => {
 				return new Date(
 					today.getFullYear(),
 					today.getMonth(),
-					today.getDate() + daysUntilNext14DaySaving * intervalsLeft
+					today.getDate() + daysUntilNext14DaySaving * intervalsLeft,
 				);
 			default:
-				return new Date(
-					today.getFullYear(),
-					today.getMonth(),
-					today.getDate()
-				);
+				return new Date(today.getFullYear(), today.getMonth(), today.getDate());
 		}
 	}
 };

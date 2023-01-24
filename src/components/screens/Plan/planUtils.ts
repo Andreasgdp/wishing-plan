@@ -12,7 +12,7 @@ export const SavingsFrequency = {
 export function updatePlacement(
 	planWishes: PlanWish[] | PlanWishType[],
 	oldIndex: number,
-	newIndex: number
+	newIndex: number,
 ) {
 	for (const planWish of planWishes) {
 		if (planWish.placement === oldIndex) {
@@ -35,7 +35,7 @@ export function updatePlacement(
 
 export function removePlacement(
 	planWishes: PlanWish[] | PlanWishType[],
-	index: number
+	index: number,
 ) {
 	for (const planWish of planWishes) {
 		if (planWish.placement > index) {

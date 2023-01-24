@@ -1,6 +1,6 @@
 name: Minor contribution
 description: Suggest a minor contrubution
-title: "[Minor]: "
+title: '[Minor]: '
 labels: [MINOR, good first issue]
 body:
   - type: markdown
@@ -12,7 +12,7 @@ body:
     attributes:
       label: Description
       description: Short description of the contribution
-      placeholder: "Describe the contribution"
+      placeholder: 'Describe the contribution'
     validations:
       required: true
   - type: textarea

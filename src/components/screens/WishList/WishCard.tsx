@@ -56,7 +56,7 @@ export const WishCard = ({
 		description: string,
 		url: string,
 		imageUrl: string,
-		price: number
+		price: number,
 	) => {
 		await updateWish.mutateAsync({
 			id: wish.id,
@@ -95,18 +95,12 @@ export const WishCard = ({
 					NonEmptyComponent={
 						<Card
 							maxW={'30rem'}
-							background={useColorModeValue(
-								'gray.100',
-								'gray.700'
-							)}
+							background={useColorModeValue('gray.100', 'gray.700')}
 						>
 							<CardBody>
 								<Center>
 									<Image
-										src={
-											wish.imageUrl ??
-											'/images/placeholderWish.png'
-										}
+										src={wish.imageUrl ?? '/images/placeholderWish.png'}
 										alt={wish.title}
 										borderRadius="lg"
 									/>

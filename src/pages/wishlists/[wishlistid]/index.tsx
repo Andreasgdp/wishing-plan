@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = requireAuthentication(
 		return {
 			props: {},
 		};
-	}
+	},
 );
 
 export default ClassroomPage;

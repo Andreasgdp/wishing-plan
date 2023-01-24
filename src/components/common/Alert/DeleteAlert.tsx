@@ -44,19 +44,15 @@ export const DeleteAlert = (props: DeleteAlertProps) => {
 						</AlertDialogHeader>
 
 						<AlertDialogBody>
-							Are you sure you want to delete {props.typeToDelete}{' '}
-							&quot;{props.entityName}&quot;?
+							Are you sure you want to delete {props.typeToDelete} &quot;
+							{props.entityName}&quot;?
 						</AlertDialogBody>
 
 						<AlertDialogFooter>
 							<Button ref={cancelRef} onClick={onClose}>
 								Cancel
 							</Button>
-							<Button
-								colorScheme="red"
-								onClick={onDeletePressed}
-								ml={3}
-							>
+							<Button colorScheme="red" onClick={onDeletePressed} ml={3}>
 								Delete
 							</Button>
 						</AlertDialogFooter>

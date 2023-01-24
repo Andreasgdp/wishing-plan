@@ -46,10 +46,7 @@ const Contact: NextPage = () => {
 								<WrapItem>
 									<Box>
 										<Heading>Contact</Heading>
-										<Text
-											mt={{ sm: 3, md: 3, lg: 5 }}
-											color="gray.300"
-										>
+										<Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.300">
 											Fill up the form below to contact
 										</Text>
 										<Box
@@ -60,11 +57,7 @@ const Contact: NextPage = () => {
 												lg: 10,
 											}}
 										>
-											<VStack
-												pl={0}
-												spacing={3}
-												alignItems="flex-start"
-											>
+											<VStack pl={0} spacing={3} alignItems="flex-start">
 												<Button
 													size="md"
 													height="48px"
@@ -74,12 +67,7 @@ const Contact: NextPage = () => {
 													_hover={{
 														border: '2px solid #1C6FEB',
 													}}
-													leftIcon={
-														<MdPhone
-															color="#ba3f86"
-															size="20px"
-														/>
-													}
+													leftIcon={<MdPhone color="#ba3f86" size="20px" />}
 												>
 													+45-93606242
 												</Button>
@@ -92,12 +80,7 @@ const Contact: NextPage = () => {
 													_hover={{
 														border: '2px solid #1C6FEB',
 													}}
-													leftIcon={
-														<MdEmail
-															color="#ba3f86"
-															size="20px"
-														/>
-													}
+													leftIcon={<MdEmail color="#ba3f86" size="20px" />}
 												>
 													andreasgdp@gmail.com
 												</Button>
@@ -111,10 +94,7 @@ const Contact: NextPage = () => {
 														border: '2px solid #1C6FEB',
 													}}
 													leftIcon={
-														<MdLocationOn
-															color="#ba3f86"
-															size="20px"
-														/>
+														<MdLocationOn color="#ba3f86" size="20px" />
 													}
 												>
 													Odense, Denmark
@@ -133,9 +113,7 @@ const Contact: NextPage = () => {
 												size="lg"
 												isRound={true}
 												_hover={{ bg: 'green.400' }}
-												icon={
-													<MdFacebook size="28px" />
-												}
+												icon={<MdFacebook size="28px" />}
 											/>
 											<IconButton
 												aria-label="github"
@@ -158,24 +136,16 @@ const Contact: NextPage = () => {
 								</WrapItem>
 								<WrapItem>
 									<Box
-										bg={useColorModeValue(
-											'white',
-											'gray.600'
-										)}
+										bg={useColorModeValue('white', 'gray.600')}
 										borderRadius="lg"
 									>
 										<Box
 											m={8}
-											color={useColorModeValue(
-												'gray.600',
-												'gray.100'
-											)}
+											color={useColorModeValue('gray.600', 'gray.100')}
 										>
 											<VStack spacing={5}>
 												<FormControl id="name">
-													<FormLabel>
-														Your Name
-													</FormLabel>
+													<FormLabel>Your Name</FormLabel>
 													<InputGroup borderColor="gray.100">
 														<InputLeftElement pointerEvents="none">
 															<BsPerson color="gray.800" />
@@ -209,9 +179,7 @@ const Contact: NextPage = () => {
 													</InputGroup>
 												</FormControl>
 												<FormControl id="name">
-													<FormLabel>
-														Message
-													</FormLabel>
+													<FormLabel>Message</FormLabel>
 													<Textarea
 														borderColor="gray.100"
 														placeholder="message"
@@ -221,17 +189,11 @@ const Contact: NextPage = () => {
 														}}
 													/>
 												</FormControl>
-												<FormControl
-													id="name"
-													float="right"
-												>
+												<FormControl id="name" float="right">
 													<Button
 														variant="solid"
 														bg="green.400"
-														color={useColorModeValue(
-															'gray.50',
-															'gray.700'
-														)}
+														color={useColorModeValue('gray.50', 'gray.700')}
 														_hover={{}}
 													>
 														Send Message

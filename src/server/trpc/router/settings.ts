@@ -12,9 +12,11 @@ export const settingsRouter = router({
 	getCurrency: protectedProcedure.query(async ({ ctx }) => {
 		const userId = ctx.session?.user?.id;
 
-		return (await ctx.prisma.userSettings.findFirst({
-			where: { userId: userId },
-		}))?.currency;
+		return (
+			await ctx.prisma.userSettings.findFirst({
+				where: { userId: userId },
+			})
+		)?.currency;
 	}),
 	updateCurrency: protectedProcedure
 		.input(z.object({ currency: z.string() }))

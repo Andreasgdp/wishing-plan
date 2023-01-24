@@ -55,10 +55,7 @@ export function HeroSection() {
 									position: 'absolute',
 									bottom: -1,
 									left: 0,
-									bg: useColorModeValue(
-										'green.300',
-										'green.500'
-									),
+									bg: useColorModeValue('green.300', 'green.500'),
 									zIndex: -1,
 									borderRadius(theme) {
 										return `${theme.radii.full}`;
@@ -70,10 +67,7 @@ export function HeroSection() {
 							<br />
 							<Text
 								as={'span'}
-								color={useColorModeValue(
-									'green.300',
-									'green.500'
-								)}
+								color={useColorModeValue('green.300', 'green.500')}
 								style={{ marginTop: '-4rem' }}
 							>
 								find what is most important
@@ -82,17 +76,16 @@ export function HeroSection() {
 					</Heading>
 					<Flex flexDirection={'column'} gap={2}>
 						<Text color={'gray.500'}>
-							Wishing Plan allows the you to track your savings
-							and calculate purchase feasibility of the your
-							wishes. It will also become a hub for planning
-							bigger purchases with others, creating individual or
-							collective wish lists to share on occasions like
-							birthdays, Christmas and more.
+							Wishing Plan allows the you to track your savings and calculate
+							purchase feasibility of the your wishes. It will also become a hub
+							for planning bigger purchases with others, creating individual or
+							collective wish lists to share on occasions like birthdays,
+							Christmas and more.
 						</Text>
 						<Text color={'gray.500'}>
-							This app is useful for helping you save money and
-							plan for their future purchases as well as for
-							destributing wishlists to friends and family.
+							This app is useful for helping you save money and plan for their
+							future purchases as well as for destributing wishlists to friends
+							and family.
 						</Text>
 					</Flex>
 					<Stack
@@ -108,10 +101,7 @@ export function HeroSection() {
 								colorScheme={'red'}
 								bg={useColorModeValue('green.300', 'green.500')}
 								_hover={{
-									bg: useColorModeValue(
-										'green.200',
-										'green.700'
-									),
+									bg: useColorModeValue('green.200', 'green.700'),
 								}}
 							>
 								Get started
@@ -122,9 +112,7 @@ export function HeroSection() {
 							size={'lg'}
 							fontWeight={'normal'}
 							px={6}
-							leftIcon={
-								<PlayIcon h={4} w={4} color={'gray.300'} />
-							}
+							leftIcon={<PlayIcon h={4} w={4} color={'gray.300'} />}
 							onClick={() => {
 								setPlay(true);
 							}}
@@ -188,11 +176,7 @@ export function HeroSection() {
 							/>
 						)) || (
 							<AspectRatio maxH="300px" ratio={1}>
-								<iframe
-									title="Showcase Video"
-									src={url}
-									allowFullScreen
-								/>
+								<iframe title="Showcase Video" src={url} allowFullScreen />
 							</AspectRatio>
 						)}
 					</Box>

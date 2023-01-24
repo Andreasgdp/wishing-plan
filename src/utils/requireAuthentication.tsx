@@ -23,7 +23,7 @@ export function requireAuthentication(gssp: GetServerSideProps) {
 			} else {
 				ctx.res.setHeader(
 					'Cache-Control',
-					'public, s-maxage=1000, stale-while-revalidate=604800'
+					'public, s-maxage=1000, stale-while-revalidate=604800',
 				);
 				// If the user exists, return the props
 				return await gssp(ctx);

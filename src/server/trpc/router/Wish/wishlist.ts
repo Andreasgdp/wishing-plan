@@ -36,7 +36,7 @@ export const wishListRouter = router({
 				wishId: z.string(),
 				fromWishListId: z.string(),
 				toWishListId: z.string(),
-			})
+			}),
 		)
 		.mutation(({ input, ctx }) => {
 			assertIsWishListCreator(ctx, input.fromWishListId);
@@ -56,7 +56,7 @@ export const wishListRouter = router({
 			z.object({
 				name: z.string(),
 				description: z.string(),
-			})
+			}),
 		)
 		.mutation(({ input, ctx }) => {
 			const userId = ctx.session?.user?.id;
@@ -77,7 +77,7 @@ export const wishListRouter = router({
 				id: z.string(),
 				name: z.string(),
 				description: z.string(),
-			})
+			}),
 		)
 		.mutation(({ input, ctx }) => {
 			assertIsWishListCreator(ctx, input.id);

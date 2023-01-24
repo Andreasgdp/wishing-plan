@@ -25,16 +25,9 @@ const Profile = () => {
 					direction={{ base: 'column', lg: 'row' }}
 					spacing={{ base: 0, lg: 8 }}
 				>
-					<Navigation
-						data={settingsNavigationData}
-						baseURL="/settings"
-					/>
+					<Navigation data={settingsNavigationData} baseURL="/settings" />
 					<Content>
-						<Button
-							onClick={() => signOut()}
-							variant="solid"
-							colorScheme="red"
-						>
+						<Button onClick={() => signOut()} variant="solid" colorScheme="red">
 							Sign Out
 						</Button>
 					</Content>
@@ -49,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = requireAuthentication(
 		return {
 			props: {},
 		};
-	}
+	},
 );
 
 export default Profile;

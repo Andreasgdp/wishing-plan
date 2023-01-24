@@ -47,11 +47,7 @@ export const DashboardScreen = () => {
 						data={wishLists}
 						EmptyComponent={
 							<Center>
-								<Tag
-									size={'lg'}
-									variant="solid"
-									colorScheme="teal"
-								>
+								<Tag size={'lg'} variant="solid" colorScheme="teal">
 									No WishLists
 								</Tag>
 							</Center>
@@ -63,9 +59,7 @@ export const DashboardScreen = () => {
 							/>
 						}
 					/>
-					<FormErrorMessage>
-						Description is required.
-					</FormErrorMessage>
+					<FormErrorMessage>Description is required.</FormErrorMessage>
 				</Container>
 			</Content>
 		</>

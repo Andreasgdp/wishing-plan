@@ -79,10 +79,7 @@ const TestimonialAvatar = ({
 			<Avatar src={src} mb={2} />
 			<Stack spacing={-1} align={'center'}>
 				<Text fontWeight={600}>{name}</Text>
-				<Text
-					fontSize={'sm'}
-					color={useColorModeValue('gray.600', 'gray.400')}
-				>
+				<Text fontSize={'sm'} color={useColorModeValue('gray.600', 'gray.400')}>
 					{title}
 				</Text>
 			</Stack>
@@ -96,9 +93,7 @@ export function TestemonialSection() {
 			<Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
 				<Stack spacing={0} align={'center'}>
 					<Heading>Our Clients Speak</Heading>
-					<Text>
-						Our clients love us! Check out what they have to say
-					</Text>
+					<Text>Our clients love us! Check out what they have to say</Text>
 				</Stack>
 				<Stack
 					direction={{ base: 'column', md: 'row' }}
@@ -106,13 +101,10 @@ export function TestemonialSection() {
 				>
 					<Testimonial>
 						<TestimonialContent>
-							<TestimonialHeading>
-								Amazing Product
-							</TestimonialHeading>
+							<TestimonialHeading>Amazing Product</TestimonialHeading>
 							<TestimonialText>
-								Wishing Plan brings a new level of organization
-								to my life. It allows me to focus saving for
-								important goals.
+								Wishing Plan brings a new level of organization to my life. It
+								allows me to focus saving for important goals.
 							</TestimonialText>
 						</TestimonialContent>
 						<TestimonialAvatar
@@ -125,12 +117,9 @@ export function TestemonialSection() {
 					</Testimonial>
 					<Testimonial>
 						<TestimonialContent>
-							<TestimonialHeading>
-								Intuitive Design
-							</TestimonialHeading>
+							<TestimonialHeading>Intuitive Design</TestimonialHeading>
 							<TestimonialText>
-								I love how easy and intuitive the application is
-								to use.
+								I love how easy and intuitive the application is to use.
 							</TestimonialText>
 						</TestimonialContent>
 						<TestimonialAvatar
@@ -143,12 +132,9 @@ export function TestemonialSection() {
 					</Testimonial>
 					<Testimonial>
 						<TestimonialContent>
-							<TestimonialHeading>
-								Easy Planning
-							</TestimonialHeading>
+							<TestimonialHeading>Easy Planning</TestimonialHeading>
 							<TestimonialText>
-								It is amazing how easy it is to plan and
-								prioritize my wishList.
+								It is amazing how easy it is to plan and prioritize my wishList.
 							</TestimonialText>
 						</TestimonialContent>
 						<TestimonialAvatar

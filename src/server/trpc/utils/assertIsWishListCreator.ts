@@ -8,7 +8,7 @@ import type { Context } from '../router/context';
  */
 export const assertIsWishListCreator = async (
 	ctx: Context,
-	wishListId: string
+	wishListId: string,
 ) => {
 	// Get the authenticated user's ID
 	const userId = ctx.session?.user?.id;

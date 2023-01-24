@@ -88,11 +88,7 @@ export default function SimpleCard({ providers }: { providers: any }) {
 					<Heading fontSize={'4xl'}>Sign in to your account</Heading>
 					<Text fontSize={'lg'} color={'gray.600'}>
 						to enjoy all of our cool{' '}
-						<Link
-							as={NextLink}
-							color={'blue.400'}
-							href={'/features'}
-						>
+						<Link as={NextLink} color={'blue.400'} href={'/features'}>
 							features
 						</Link>{' '}
 						✌️
@@ -112,9 +108,7 @@ export default function SimpleCard({ providers }: { providers: any }) {
 								<Input
 									type="email"
 									placeholder="Email (Not Setup - Please Use Google/Discord)"
-									onChange={(event) =>
-										setEmail(event.currentTarget.value)
-									}
+									onChange={(event) => setEmail(event.currentTarget.value)}
 								/>
 							</FormControl>
 
@@ -135,14 +129,9 @@ export default function SimpleCard({ providers }: { providers: any }) {
 
 							<Stack spacing={5}>
 								{providers &&
-									Object.values(providers).map(
-										(provider: any) => (
-											<FormButton
-												key={provider.name}
-												provider={provider}
-											/>
-										)
-									)}
+									Object.values(providers).map((provider: any) => (
+										<FormButton key={provider.name} provider={provider} />
+									))}
 							</Stack>
 						</Stack>
 					</form>
@@ -155,7 +144,7 @@ export default function SimpleCard({ providers }: { providers: any }) {
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 	ctx.res.setHeader(
 		'Cache-Control',
-		'public, s-maxage=1000, stale-while-revalidate=604800'
+		'public, s-maxage=1000, stale-while-revalidate=604800',
 	);
 
 	const session = await getSession(ctx);

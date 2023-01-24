@@ -21,7 +21,7 @@ const CreateLinkForm: NextPage = () => {
 			refetchOnReconnect: false, // replacement for enable: false which isn't respected.
 			refetchOnMount: false,
 			refetchOnWindowFocus: false,
-		}
+		},
 	);
 	const createSlug = trpc.shortLink.createSlug.useMutation();
 

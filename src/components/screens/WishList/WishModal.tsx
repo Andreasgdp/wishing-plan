@@ -44,7 +44,7 @@ type WishModalProps = {
 		description: string,
 		url: string,
 		imageUrl: string,
-		price: number
+		price: number,
 	) => void;
 	existingWish?: Wish;
 };
@@ -82,7 +82,7 @@ export const WishModal = (props: WishModalProps) => {
 			descriptionValue,
 			data.url,
 			data.imageUrl,
-			Number(priceValue)
+			Number(priceValue),
 		);
 		reset();
 		setDescriptionValue('');
@@ -102,7 +102,7 @@ export const WishModal = (props: WishModalProps) => {
 	};
 
 	const handleDescriptionChange = (
-		e: React.ChangeEvent<HTMLTextAreaElement>
+		e: React.ChangeEvent<HTMLTextAreaElement>,
 	) => {
 		setDescriptionValue(e.target.value);
 	};
@@ -112,11 +112,7 @@ export const WishModal = (props: WishModalProps) => {
 			<Button {...props.buttonProps} onClick={openModal}>
 				{props.buttonName}
 			</Button>
-			<Modal
-				isOpen={isOpen}
-				onClose={onClose}
-				size={{ base: 'xs', md: 'xl' }}
-			>
+			<Modal isOpen={isOpen} onClose={onClose} size={{ base: 'xs', md: 'xl' }}>
 				<ModalOverlay />
 
 				<ModalContent>
@@ -142,9 +138,7 @@ export const WishModal = (props: WishModalProps) => {
 							</FormControl>
 							<FormControl>
 								<Center mt={6} mb={2}>
-									<Button onClick={onGetProductData}>
-										Get Data From URL
-									</Button>
+									<Button onClick={onGetProductData}>Get Data From URL</Button>
 								</Center>
 							</FormControl>
 							<FormControl isRequired>
@@ -167,9 +161,7 @@ export const WishModal = (props: WishModalProps) => {
 								<NumberInput
 									id="price"
 									{...register('price')}
-									onChange={(valueString) =>
-										setPriceValue(valueString)
-									}
+									onChange={(valueString) => setPriceValue(valueString)}
 									value={priceValue}
 									max={100000000}
 									min={0}

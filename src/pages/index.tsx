@@ -28,5 +28,5 @@ export const getServerSideProps: GetServerSideProps = requireAuthentication(
 		return {
 			props: {},
 		};
-	}
+	},
 );

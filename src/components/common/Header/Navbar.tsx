@@ -37,7 +37,7 @@ const LinkItem = ({ href, path, children }: LinkItemProps) => {
 	const inacitiveColor = useColorModeValue('gray200', 'white.900');
 	const activeColor = useColorModeValue(
 		'navBarPrimaryLight',
-		'navBarPrimaryDark'
+		'navBarPrimaryDark',
 	);
 	return (
 		<Link
@@ -192,10 +192,7 @@ function CollapsedMenu() {
 							</MenuItem>
 						</>
 					)}
-					<MenuItem
-						as={Link}
-						href="https://github.com/Andreasgdp/Portfolio"
-					>
+					<MenuItem as={Link} href="https://github.com/Andreasgdp/Portfolio">
 						View Source
 					</MenuItem>
 				</MenuList>

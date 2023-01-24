@@ -95,9 +95,7 @@ export default function SmallCentered() {
 						alignItems="center"
 						style={{ gap: 4 }}
 					>
-						<IoLogoGithub
-							color={useColorModeValue('black', 'white')}
-						/>
+						<IoLogoGithub color={useColorModeValue('black', 'white')} />
 						<Center>Source</Center>
 					</Link>
 				</Stack>

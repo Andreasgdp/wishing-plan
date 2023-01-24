@@ -27,7 +27,7 @@ export const wishRouter = router({
 				url: z.string(),
 				imageUrl: z.string().nullish(),
 				wishListId: z.string(),
-			})
+			}),
 		)
 		.mutation(({ input, ctx }) => {
 			const userId = ctx.session?.user?.id;
@@ -58,7 +58,7 @@ export const wishRouter = router({
 				url: z.string(),
 				imageUrl: z.string().nullish(),
 				wishListId: z.string().nullish(),
-			})
+			}),
 		)
 		.mutation(({ input, ctx }) => {
 			if (!input.wishListId) {

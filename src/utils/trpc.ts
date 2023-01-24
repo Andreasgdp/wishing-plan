@@ -28,7 +28,7 @@ export const trpc = createTRPCNext<AppRouter>({
 		};
 	},
 	ssr: true,
-	responseMeta({ ctx, clientErrors }) {
+	responseMeta({ clientErrors }) {
 		if (clientErrors.length) {
 			// propagate http first error from API calls
 			return {

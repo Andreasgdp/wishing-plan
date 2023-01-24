@@ -181,7 +181,7 @@ export const PlanScreen = () => {
 			});
 	};
 
-	const onWishDelete = async (wishId: string, index: number) => {
+	const onWishDelete = async (wishId: string) => {
 		await deleteWish
 			.mutateAsync({
 				wishId,

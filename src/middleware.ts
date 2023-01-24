@@ -1,7 +1,7 @@
-import type { NextFetchEvent, NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-export async function middleware(req: NextRequest, _ev: NextFetchEvent) {
+export async function middleware(req: NextRequest) {
 	if (req.nextUrl.pathname.startsWith('/url')) {
 		const slug = req.nextUrl.pathname.split('/').pop();
 

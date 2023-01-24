@@ -1,8 +1,11 @@
+import type { StyleFunctionProps } from '@chakra-ui/react';
 import { extendTheme } from '@chakra-ui/react';
-import { mode, Styles } from '@chakra-ui/theme-tools';
+import type { Styles } from '@chakra-ui/theme-tools';
+import { mode } from '@chakra-ui/theme-tools';
 
 const styles: Styles = {
-	global: (props: any) => ({
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	global: (props: Record<string, any> | StyleFunctionProps) => ({
 		body: {
 			// Light, dark
 			bg: mode('#ffffff', 'gray.800')(props),
@@ -31,7 +34,8 @@ const components = {
 		},
 	},
 	Link: {
-		baseStyle: (props: any) => ({
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		baseStyle: (props: Record<string, any> | StyleFunctionProps) => ({
 			color: mode('#bb71e8', '#ba3f86')(props),
 			textUnderlineOffset: 3,
 		}),

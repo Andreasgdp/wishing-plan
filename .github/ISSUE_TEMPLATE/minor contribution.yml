@@ -1,12 +1,12 @@
-name: Minor contribution
-description: Suggest a minor contrubution
-title: '[Minor]: '
-labels: [MINOR, good first issue]
+name: Good First Issue
+description: Suggest a simple contribution to improve our product
+title: '[GFI]: '
+labels: [good first issue]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for suggesting a new minor contribution to improve our product!
+        Thanks for suggesting a good first issue for this project! Please fill out the following template to help the maintainers and the community understand your suggestion.
   - type: textarea
     id: description
     attributes:
@@ -20,7 +20,7 @@ body:
     attributes:
       label: Comments / questions
       description: Any comments or questions relating the contribution.
-      placeholder: We should devide this into sub-tasks...
+      placeholder: 'Comments / questions'
   - type: checkboxes
     id: terms
     attributes:

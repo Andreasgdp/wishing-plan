@@ -48,7 +48,9 @@ body:
         - Linux
         - macOS
         - Windows
+        - Server
         - Other
+        - All Platforms
     validations:
       required: true
   - type: textarea

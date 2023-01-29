@@ -25,19 +25,18 @@ import { trpc } from '@utils/trpc';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 
-export const PlanScreen = () => {
+type PlanScreenProps = {
+	planId?: string;
+};
+
+export const PlanScreen = (props: PlanScreenProps) => {
 	const toast = useToast();
+	const planId = props.planId !== undefined ? props.planId : null;
 	const {
 		data: plan,
 		isLoading,
 		refetch: refetchPlan,
-	} = trpc.plan.get.useQuery();
-
-	const {
-		data: wishes,
-		isLoading: isLoadingWishes,
-		refetch: refetchWishLists,
-	} = trpc.plan.getWishes.useQuery();
+	} = trpc.plan.get.useQuery({ planId });
 
 	const {
 		data: currency,
@@ -65,6 +64,7 @@ export const PlanScreen = () => {
 	) => {
 		await updatePlanSettings
 			.mutateAsync({
+				planId,
 				amountToSave,
 				currentAmountSaved,
 				firstSaving,
@@ -73,7 +73,6 @@ export const PlanScreen = () => {
 			.then(async () => {
 				await refetchPlan();
 				await refetchCurrency();
-				await refetchWishLists();
 				toast({
 					title: 'Plan updated',
 					description: `Your plan has been updated`,
@@ -96,8 +95,8 @@ export const PlanScreen = () => {
 	};
 
 	useEffect(() => {
-		setWishes(wishes ?? []);
-	}, [wishes]);
+		setWishes(plan?.wishes ?? []);
+	}, [plan?.wishes]);
 
 	const onSubmit = async (
 		title: string,
@@ -108,6 +107,7 @@ export const PlanScreen = () => {
 	) => {
 		await createAndAddWish
 			.mutateAsync({
+				planId,
 				wishTitle: title,
 				wishDescription: description ?? '',
 				wishPrice: price,
@@ -115,7 +115,7 @@ export const PlanScreen = () => {
 				wishImageUrl: imageUrl,
 			})
 			.then(async () => {
-				await refetchWishLists();
+				await refetchPlan();
 				await refetchCurrency();
 				toast({
 					title: 'Wish created',
@@ -149,6 +149,7 @@ export const PlanScreen = () => {
 	) => {
 		await editWish
 			.mutateAsync({
+				planId,
 				wishId,
 				wishTitle: title,
 				wishDescription: description ?? '',
@@ -158,7 +159,7 @@ export const PlanScreen = () => {
 				placement: placement,
 			})
 			.then(async () => {
-				await refetchWishLists();
+				await refetchPlan();
 				await refetchCurrency();
 				toast({
 					title: 'Wish updated',
@@ -184,10 +185,11 @@ export const PlanScreen = () => {
 	const onWishDelete = async (wishId: string) => {
 		await deleteWish
 			.mutateAsync({
+				planId,
 				wishId,
 			})
 			.then(async () => {
-				await refetchWishLists();
+				await refetchPlan();
 				await refetchCurrency();
 				toast({
 					title: 'Wish deleted',
@@ -223,13 +225,13 @@ export const PlanScreen = () => {
 						EmptyComponent={
 							<Center>
 								<Tag size={'lg'} variant="solid" colorScheme="teal">
-									No Plan
+									Sign out and sign in again to get plan back
 								</Tag>
 							</Center>
 						}
 						NonEmptyComponent={
 							<PlanSidebar
-								plan={plan ?? undefined}
+								plan={plan?.plan ?? undefined}
 								currency={currency ?? undefined}
 								onPlanSettingsChange={onPlanSettingsChange}
 							/>
@@ -242,12 +244,12 @@ export const PlanScreen = () => {
 						maxW={{ lg: 'calc(100% - 16rem)' }}
 					>
 						<EmptyStateWrapper
-							isLoading={isLoading || isLoadingCurrency || isLoadingWishes}
+							isLoading={isLoading || isLoadingCurrency}
 							data={plan}
 							EmptyComponent={
 								<Center>
 									<Tag size={'lg'} variant="solid" colorScheme="teal">
-										No Plan
+										Sign out and sign in again to get plan back
 									</Tag>
 								</Center>
 							}
@@ -281,7 +283,7 @@ export const PlanScreen = () => {
 															<PlanWishComponent
 																key={wish.id}
 																wish={addTimeLeftAndPercentage(
-																	plan ?? undefined,
+																	plan?.plan ?? undefined,
 																	wish,
 																)}
 																currency={currency ?? ''}
@@ -311,12 +313,13 @@ export const PlanScreen = () => {
 	) {
 		relocateWish
 			.mutateAsync({
+				planId,
 				wishId: wishId,
 				oldIndex: newIndex,
 				newIndex: oldIndex,
 			})
 			.then(async () => {
-				await refetchWishLists();
+				await refetchPlan();
 				await refetchCurrency();
 				toast({
 					title: 'Wish moved from ' + oldIndex + ' to ' + newIndex + '.',
@@ -346,12 +349,13 @@ export const PlanScreen = () => {
 
 				relocateWish
 					.mutateAsync({
+						planId,
 						wishId: active.id.toString(),
 						oldIndex: newWish?.placement ?? 0,
 						newIndex: oldWish?.placement ?? 0,
 					})
 					.then(async () => {
-						await refetchWishLists();
+						await refetchPlan();
 						await refetchCurrency();
 					});
 

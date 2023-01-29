@@ -148,8 +148,8 @@ function FullMenu({ path }: { path: string }) {
 					<LinkItem href="/plan" path={path}>
 						Plan
 					</LinkItem>
-					<LinkItem href="/shared-plan" path={path}>
-						Shared Plan (Coming Soon)
+					<LinkItem href="/shared-plans" path={path}>
+						Shared Plans
 					</LinkItem>
 				</>
 			)}
@@ -178,8 +178,8 @@ function CollapsedMenu() {
 							<MenuItem as={NextLink} href="/plan">
 								Plan
 							</MenuItem>
-							<MenuItem as={Link} disabled>
-								Shared Plan (Coming Soon)
+							<MenuItem as={Link} href="shared-plans">
+								Shared Plans
 							</MenuItem>
 						</>
 					)) || (

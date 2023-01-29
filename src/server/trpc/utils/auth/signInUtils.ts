@@ -1,4 +1,5 @@
 import { SavingsFrequency } from '@components/screens/Plan/planUtils';
+import { Plan } from '@prisma/client';
 import { prisma } from '@server/db/client';
 import type { User } from 'next-auth';
 import type { AdapterUser } from 'next-auth/adapters';
@@ -30,17 +31,46 @@ async function hasSettingsCheck(user: User | AdapterUser) {
 }
 
 async function hasPlanCheck(user: User | AdapterUser) {
-	const plan = await prisma.plan.findFirst({
+	const plan = await prisma.user
+		.findUnique({ where: { id: user.id } })
+		.mainPlan();
+	
+	// transition from old plan to new plan ------------------------------
+	const count = await prisma.plan.count({
 		where: {
 			userId: user.id,
 		},
 	});
+	let oldPlan: Plan | null = null;
+	if (count <= 1) {
+		oldPlan = await prisma.plan.findFirst({
+			where: {
+				userId: user.id,
+			},
+		});
+	}
 
-	if (!plan) {
+	if (oldPlan) {
+		await prisma.plan.update({
+			where: {
+				id: oldPlan.id,
+			},
+			data: {
+				mainUser: {
+					connect: {
+						id: user.id,
+					},
+				},
+			},
+		});
+	}
+	// transition from old plan to new plan ------------------------------
+
+	if (!plan && !oldPlan) {
 		// create plan in prisma
 		await prisma.plan.create({
 			data: {
-				user: {
+				mainUser: {
 					connect: {
 						id: user.id,
 					},

@@ -2,6 +2,7 @@ import {
 	Center,
 	Container,
 	Flex,
+	Heading,
 	Stack,
 	Tag,
 	useToast,
@@ -32,6 +33,7 @@ type PlanScreenProps = {
 export const PlanScreen = (props: PlanScreenProps) => {
 	const toast = useToast();
 	const planId = props.planId !== undefined ? props.planId : null;
+	const isSharedPlan = planId !== null;
 	const {
 		data: plan,
 		isLoading,
@@ -212,9 +214,14 @@ export const PlanScreen = (props: PlanScreenProps) => {
 			});
 	};
 
+	const heading = isSharedPlan ? `Plan: ${plan?.plan.name}` : 'Main Plan';
+
 	return (
 		<Content>
 			<Container maxW={'7xl'} flex={'1 0 auto'} py={8}>
+				<Center mb={6}>
+					<Heading size={'lg'}>{heading}</Heading>
+				</Center>
 				<Stack
 					direction={{ base: 'column', lg: 'row' }}
 					spacing={{ base: 0, lg: 8 }}
@@ -232,6 +239,7 @@ export const PlanScreen = (props: PlanScreenProps) => {
 						NonEmptyComponent={
 							<PlanSidebar
 								plan={plan?.plan ?? undefined}
+								sharedWith={plan?.sharedWith ?? []}
 								currency={currency ?? undefined}
 								onPlanSettingsChange={onPlanSettingsChange}
 							/>

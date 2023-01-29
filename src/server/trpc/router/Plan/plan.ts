@@ -3,7 +3,7 @@ import {
 	SavingsFrequency,
 	updatePlacement,
 } from '@components/screens/Plan/planUtils';
-import type { Plan, PlanWish, Wish } from '@prisma/client';
+import type { Plan, PlanWish, User, Wish } from '@prisma/client';
 import type { Context } from '@server/trpc/context';
 import { assertHasAccessToPlan } from '@server/trpc/utils/assertHasAccessToPlan';
 import { TRPCError } from '@trpc/server';
@@ -65,6 +65,44 @@ export const planRouter = router({
 					firstSaving: new Date(),
 					frequency: SavingsFrequency.SOM,
 				},
+			});
+
+			return plan;
+		}),
+	edit: protectedProcedure
+		.input(
+			z.object({
+				planId: z.string(),
+				name: z.string(),
+				description: z.string().nullish(),
+			}),
+		)
+		.mutation(async ({ input, ctx }) => {
+			const planId = input.planId;
+			assertHasAccessToPlan(ctx, planId);
+
+			const plan = await ctx.prisma.plan.update({
+				where: { id: planId },
+				data: {
+					name: input.name,
+					description: input.description,
+				},
+			});
+
+			return plan;
+		}),
+	delete: protectedProcedure
+		.input(
+			z.object({
+				planId: z.string(),
+			}),
+		)
+		.mutation(async ({ input, ctx }) => {
+			const planId = input.planId;
+			assertHasAccessToPlan(ctx, planId);
+
+			const plan = await ctx.prisma.plan.delete({
+				where: { id: planId },
 			});
 
 			return plan;
@@ -294,24 +332,37 @@ export const planRouter = router({
 		}),
 });
 
-function getMainPlan(ctx: Context) {
+async function getMainPlan(ctx: Context) {
 	const userId = ctx.session?.user?.id;
 
-	return ctx.prisma.user
+	const planPromise = ctx.prisma.user
 		.findUnique({ where: { id: userId } })
-		.mainPlan()
-		.then((plan) => {
-			return modifyPlan(plan, ctx);
-		});
+		.mainPlan();
+
+	const sharedWith = await planPromise.sharedWith();
+
+	const plan = await planPromise;
+
+	return modifyPlan(plan, sharedWith, ctx);
 }
 
-function getPlan(ctx: Context, planId: string) {
-	return ctx.prisma.plan.findUnique({ where: { id: planId } }).then((plan) => {
-		return modifyPlan(plan, ctx);
+async function getPlan(ctx: Context, planId: string) {
+	const planPromise = ctx.prisma.plan.findUnique({
+		where: { id: planId },
 	});
+
+	const sharedWith = await planPromise.sharedWith();
+
+	const plan = await planPromise;
+
+	return modifyPlan(plan, sharedWith, ctx);
 }
 
-function modifyPlan(plan: Plan | null, ctx: Context) {
+function modifyPlan(
+	plan: Plan | null,
+	sharedWith: User[] | null,
+	ctx: Context,
+) {
 	if (!plan) {
 		throw new TRPCError({
 			code: 'NOT_FOUND',
@@ -332,6 +383,7 @@ function modifyPlan(plan: Plan | null, ctx: Context) {
 		.then((wishes) => {
 			return {
 				plan: { ...plan },
+				sharedWith: sharedWith ?? [],
 				wishes,
 			};
 		});

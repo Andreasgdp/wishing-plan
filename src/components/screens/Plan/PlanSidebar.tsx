@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import type { ChangeEvent } from 'react';
 import {
+	Avatar,
+	AvatarGroup,
 	Button,
+	Center,
 	Input,
 	InputGroup,
 	InputRightAddon,
@@ -16,10 +17,15 @@ import {
 	Tooltip,
 	useColorModeValue,
 } from '@chakra-ui/react';
-import type { Plan } from '@prisma/client';
+import type { Plan, User } from '@prisma/client';
+import { useSession } from 'next-auth/react';
+import type { ChangeEvent } from 'react';
+import React, { useEffect, useState } from 'react';
+import { SharePlanModal } from './SharePlanModal';
 
 type PlanSidebarProps = {
 	plan?: Plan;
+	sharedWith: User[];
 	currency?: string;
 	onPlanSettingsChange: (
 		amountToSave: number,
@@ -30,6 +36,8 @@ type PlanSidebarProps = {
 };
 
 export const PlanSidebar = (props: PlanSidebarProps) => {
+	const { data: sessionData } = useSession();
+
 	const categoryColor = useColorModeValue('gray.800', 'gray.200');
 
 	const [savedAmount, setSavedAmount] = useState(0);
@@ -81,6 +89,10 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 			);
 		}
 	};
+
+	function handleSharePlan(emails: string[]): void {
+		throw new Error('Function not implemented.');
+	}
 
 	return (
 		<Stack
@@ -203,6 +215,41 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 							</Tooltip>
 						</>
 					)}
+					<Text
+						align={'center'}
+						textTransform={'uppercase'}
+						color={categoryColor}
+						fontWeight={700}
+						fontSize={'sm'}
+						letterSpacing={1}
+						pt={0.5}
+					>
+						Shared with
+					</Text>
+					<Center>
+						<AvatarGroup size="md" max={5}>
+							<Avatar
+								name={sessionData?.user?.name ?? ''}
+								src={sessionData?.user?.image ?? ''}
+							/>
+							{props.sharedWith.map((user) => (
+								<Avatar
+									key={user.id}
+									name={user.name ?? ''}
+									src={user.image ?? ''}
+								/>
+							))}
+						</AvatarGroup>
+					</Center>
+					<SharePlanModal
+						sharedWith={props.sharedWith}
+						buttonName="Share Plan"
+						buttonProps={{
+							colorScheme: 'purple',
+							variant: 'outline',
+						}}
+						onSubmit={handleSharePlan}
+					></SharePlanModal>
 				</Stack>
 			</form>
 		</Stack>

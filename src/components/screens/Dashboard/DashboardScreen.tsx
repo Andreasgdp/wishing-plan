@@ -1,4 +1,11 @@
-import { Center, Container, FormErrorMessage, Tag } from '@chakra-ui/react';
+import {
+	Center,
+	Container,
+	Flex,
+	FormErrorMessage,
+	Heading,
+	Tag,
+} from '@chakra-ui/react';
 import { EmptyStateWrapper } from '@components/EmptyStateWrapper';
 import { Content } from '@components/layouts/Content';
 import { trpc } from '@utils/trpc';
@@ -31,15 +38,18 @@ export const DashboardScreen = () => {
 		<>
 			<Content>
 				<Container maxW="container.xl">
-					<Center h="100px">
-						<WishListModal
-							buttonProps={{
-								variant: 'solid',
-								colorScheme: 'green',
-							}}
-							buttonName="Create a new WishList"
-							onSubmit={onSubmit}
-						/>
+					<Center h="100px" mb={6} mt={4}>
+						<Flex direction="column" gap={4}>
+							<Heading>Wish Lists</Heading>
+							<WishListModal
+								buttonProps={{
+									variant: 'solid',
+									colorScheme: 'green',
+								}}
+								buttonName="Create a new Wish List"
+								onSubmit={onSubmit}
+							/>
+						</Flex>
 					</Center>
 					{/* TODO: replace with skeleton setup in future */}
 					<EmptyStateWrapper
@@ -48,7 +58,7 @@ export const DashboardScreen = () => {
 						EmptyComponent={
 							<Center>
 								<Tag size={'lg'} variant="solid" colorScheme="teal">
-									No WishLists
+									No Wish Lists
 								</Tag>
 							</Center>
 						}

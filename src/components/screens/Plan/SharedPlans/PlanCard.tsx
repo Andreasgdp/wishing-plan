@@ -22,18 +22,18 @@ export const PlanCard = ({
 	plan: Plan;
 	refreshListFunc?: () => void;
 }) => {
-	const deleteWishList = trpc.wishList.delete.useMutation();
+	const deleteWishList = trpc.plan.delete.useMutation();
 
 	const onDelete = async () => {
-		await deleteWishList.mutateAsync({ id: plan.id });
+		await deleteWishList.mutateAsync({ planId: plan.id });
 		if (refreshListFunc) refreshListFunc();
 	};
 
-	const editWishList = trpc.wishList.update.useMutation();
+	const editWishList = trpc.plan.edit.useMutation();
 
 	const onSubmit = async (name: string, description: string) => {
 		await editWishList.mutateAsync({
-			id: plan.id,
+			planId: plan.id,
 			name: name,
 			description: description,
 		});

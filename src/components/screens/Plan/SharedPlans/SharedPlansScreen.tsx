@@ -1,4 +1,11 @@
-import { Center, Container, FormErrorMessage, Tag } from '@chakra-ui/react';
+import {
+	Center,
+	Container,
+	Flex,
+	FormErrorMessage,
+	Heading,
+	Tag,
+} from '@chakra-ui/react';
 import { EmptyStateWrapper } from '@components/EmptyStateWrapper';
 import { Content } from '@components/layouts/Content';
 import { trpc } from '@utils/trpc';
@@ -31,15 +38,18 @@ export const SharedPlansScreen = () => {
 		<>
 			<Content>
 				<Container maxW="container.xl">
-					<Center h="100px">
-						<SharedPlanModal
-							buttonProps={{
-								variant: 'solid',
-								colorScheme: 'green',
-							}}
-							buttonName="Create a New Plan"
-							onSubmit={onSubmit}
-						/>
+					<Center h="100px" mb={6} mt={4}>
+						<Flex direction="column" gap={4}>
+							<Heading>Shared Plans</Heading>
+							<SharedPlanModal
+								buttonProps={{
+									variant: 'solid',
+									colorScheme: 'green',
+								}}
+								buttonName="Create a New Plan"
+								onSubmit={onSubmit}
+							/>
+						</Flex>
 					</Center>
 					{/* TODO: replace with skeleton setup in future */}
 					<EmptyStateWrapper

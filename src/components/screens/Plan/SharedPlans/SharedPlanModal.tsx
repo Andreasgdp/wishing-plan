@@ -27,6 +27,7 @@ type SharedPlanModalProps = {
 	buttonName: string;
 	buttonProps: ButtonProps;
 	onSubmit: (name: string, description: string) => void;
+	existingSharedPlan?: Plan;
 };
 
 export const SharedPlanModal = (props: SharedPlanModalProps) => {
@@ -44,7 +45,10 @@ export const SharedPlanModal = (props: SharedPlanModalProps) => {
 	});
 
 	const openModal = () => {
-		
+		if (props.existingSharedPlan) {
+			setValue('name', props.existingSharedPlan.name ?? '');
+			setDescriptionValue(props.existingSharedPlan.description ?? '');
+		}
 		onOpen();
 	};
 

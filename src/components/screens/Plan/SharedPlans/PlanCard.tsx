@@ -37,7 +37,7 @@ export const PlanCard = ({
 			name: name,
 			description: description,
 		});
-		if (refreshListFunc) await refreshListFunc();
+		if (refreshListFunc) refreshListFunc();
 	};
 
 	return (
@@ -82,6 +82,7 @@ export const PlanCard = ({
 						}}
 						buttonName="Edit"
 						onSubmit={onSubmit}
+						existingSharedPlan={plan}
 					/>
 
 					<DeleteAlert

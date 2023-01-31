@@ -51,7 +51,6 @@ export const SharedPlansScreen = () => {
 							/>
 						</Flex>
 					</Center>
-					{/* TODO: replace with skeleton setup in future */}
 					<EmptyStateWrapper
 						isLoading={isLoading}
 						data={plans}

@@ -1,3 +1,4 @@
+import type { Plan, User } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 import type { Context } from '../router/context';
 
@@ -10,14 +11,30 @@ export const assertHasAccessToPlan = async (ctx: Context, planId: string) => {
 	// Get the authenticated user's ID
 	const userId = ctx.session?.user?.id;
 
-	const plan = await ctx.prisma.plan.findFirst({
+	if (!userId) {
+		throw new TRPCError({ code: 'FORBIDDEN' });
+	}
+
+	const planPromise = ctx.prisma.plan.findFirst({
 		where: { id: planId },
 	});
+
+	const plan = await planPromise;
+
 	if (!plan) {
 		throw new TRPCError({ code: 'NOT_FOUND' });
 	}
 
-	if (plan.userId !== userId) {
+	const sharedWith = await planPromise.sharedWith();
+
+	checkAuthority(plan, userId, sharedWith);
+};
+
+function checkAuthority(plan: Plan, userId: string, sharedWith: User[] | null) {
+	const isPlanOwner = plan.userId === userId;
+	const isSharedWith = sharedWith?.map((user) => user.id).includes(userId);
+
+	if (!isPlanOwner && !isSharedWith) {
 		throw new TRPCError({ code: 'UNAUTHORIZED' });
 	}
-};
+}

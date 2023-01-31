@@ -13,8 +13,8 @@ export const wishRouter = router({
 	}),
 	getById: protectedProcedure
 		.input(z.object({ id: z.string() }))
-		.query(({ input, ctx }) => {
-			assertIsWishCreator(ctx, input.id);
+		.query(async ({ input, ctx }) => {
+			await assertIsWishCreator(ctx, input.id);
 
 			return ctx.prisma.wish.findFirst({ where: { id: input.id } });
 		}),
@@ -60,12 +60,12 @@ export const wishRouter = router({
 				wishListId: z.string().nullish(),
 			}),
 		)
-		.mutation(({ input, ctx }) => {
+		.mutation(async ({ input, ctx }) => {
 			if (!input.wishListId) {
 				throw new Error('wishListId is required');
 			}
 
-			assertIsWishCreator(ctx, input.id);
+			await assertIsWishCreator(ctx, input.id);
 
 			return ctx.prisma.wish.update({
 				where: { id: input.id },
@@ -83,8 +83,8 @@ export const wishRouter = router({
 		}),
 	delete: protectedProcedure
 		.input(z.object({ id: z.string() }))
-		.mutation(({ input, ctx }) => {
-			assertIsWishCreator(ctx, input.id);
+		.mutation(async ({ input, ctx }) => {
+			await assertIsWishCreator(ctx, input.id);
 
 			return ctx.prisma.wish.delete({ where: { id: input.id } });
 		}),

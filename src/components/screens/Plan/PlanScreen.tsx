@@ -240,6 +240,7 @@ export const PlanScreen = (props: PlanScreenProps) => {
 							<PlanSidebar
 								plan={plan?.plan ?? undefined}
 								sharedWith={plan?.sharedWith ?? []}
+								owner={plan?.owner ?? undefined}
 								currency={currency ?? undefined}
 								onPlanSettingsChange={onPlanSettingsChange}
 							/>

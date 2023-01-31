@@ -14,17 +14,17 @@ export const wishListRouter = router({
 	}),
 	getById: protectedProcedure
 		.input(z.object({ id: z.string() }))
-		.query(({ input, ctx }) => {
-			assertIsWishListCreator(ctx, input.id);
+		.query(async ({ input, ctx }) => {
+			await assertIsWishListCreator(ctx, input.id);
 			return ctx.prisma.wishList.findFirst({ where: { id: input.id } });
 		}),
 	getWishes: protectedProcedure
 		.input(z.object({ id: z.string().nullish() }))
-		.query(({ input, ctx }) => {
+		.query(async ({ input, ctx }) => {
 			if (!input.id) {
 				throw new TRPCError({ code: 'NOT_FOUND' });
 			}
-			assertIsWishListCreator(ctx, input.id);
+			await assertIsWishListCreator(ctx, input.id);
 
 			return ctx.prisma.wish.findMany({
 				where: { wishListId: input.id },
@@ -38,9 +38,9 @@ export const wishListRouter = router({
 				toWishListId: z.string(),
 			}),
 		)
-		.mutation(({ input, ctx }) => {
-			assertIsWishListCreator(ctx, input.fromWishListId);
-			assertIsWishListCreator(ctx, input.toWishListId);
+		.mutation(async ({ input, ctx }) => {
+			await assertIsWishListCreator(ctx, input.fromWishListId);
+			await assertIsWishListCreator(ctx, input.toWishListId);
 
 			return ctx.prisma.wish.update({
 				where: { id: input.wishId },
@@ -79,8 +79,8 @@ export const wishListRouter = router({
 				description: z.string(),
 			}),
 		)
-		.mutation(({ input, ctx }) => {
-			assertIsWishListCreator(ctx, input.id);
+		.mutation(async ({ input, ctx }) => {
+			await assertIsWishListCreator(ctx, input.id);
 			return ctx.prisma.wishList.update({
 				where: { id: input.id },
 				data: {
@@ -91,8 +91,8 @@ export const wishListRouter = router({
 		}),
 	delete: protectedProcedure
 		.input(z.object({ id: z.string() }))
-		.mutation(({ input, ctx }) => {
-			assertIsWishListCreator(ctx, input.id);
+		.mutation(async ({ input, ctx }) => {
+			await assertIsWishListCreator(ctx, input.id);
 			return ctx.prisma.wishList.delete({ where: { id: input.id } });
 		}),
 });

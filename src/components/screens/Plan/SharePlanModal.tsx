@@ -64,14 +64,10 @@ export const SharePlanModal = (props: SharePlanModalProps) => {
 		onClose();
 	}
 
-
-
 	const openModal = () => {
 		onOpen();
 	};
-	function removeEmail(
-		email: string,
-	) {
+	function removeEmail(email: string) {
 		setSharedWithEmails(sharedWithEmails.filter((e) => e !== email));
 	}
 
@@ -138,7 +134,6 @@ const UserTag = (props: {
 	email: string;
 	removeEmail: (email: string) => void;
 }) => {
-
 	function onRemove() {
 		props.removeEmail(props.email);
 	}

@@ -1,5 +1,5 @@
 import { SavingsFrequency } from '@components/screens/Plan/planUtils';
-import { Plan } from '@prisma/client';
+import type { Plan } from '@prisma/client';
 import { prisma } from '@server/db/client';
 import type { User } from 'next-auth';
 import type { AdapterUser } from 'next-auth/adapters';
@@ -34,7 +34,7 @@ async function hasPlanCheck(user: User | AdapterUser) {
 	const plan = await prisma.user
 		.findUnique({ where: { id: user.id } })
 		.mainPlan();
-	
+
 	// transition from old plan to new plan ------------------------------
 	const count = await prisma.plan.count({
 		where: {

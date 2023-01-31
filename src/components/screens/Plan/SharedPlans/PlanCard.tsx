@@ -13,7 +13,7 @@ import { DeleteAlert } from '@components/common/Alert/DeleteAlert';
 import type { Plan } from '@prisma/client';
 import { trpc } from '@utils/trpc';
 import router from 'next/router';
-import { SharedPlanModal } from './SharedPlanModal';
+import { GenericListModal } from '../../../common/Modal/GenericListModal';
 
 export const PlanCard = ({
 	plan,
@@ -73,7 +73,7 @@ export const PlanCard = ({
 						View here
 					</Button>
 
-					<SharedPlanModal
+					<GenericListModal
 						buttonProps={{
 							mr: 2,
 							mb: 2,
@@ -82,7 +82,18 @@ export const PlanCard = ({
 						}}
 						buttonName="Edit"
 						onSubmit={onSubmit}
-						existingSharedPlan={plan}
+						labels={{
+							name: 'Name',
+							description: 'Description',
+						}}
+						placeholders={{
+							name: 'Name of the Plan',
+							description: 'Description of the Plan',
+						}}
+						existingSharedItem={{
+							name: plan.name ?? '',
+							description: plan.description ?? '',
+						}}
 					/>
 
 					<DeleteAlert

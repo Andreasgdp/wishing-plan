@@ -9,7 +9,7 @@ import {
 import { EmptyStateWrapper } from '@components/EmptyStateWrapper';
 import { Content } from '@components/layouts/Content';
 import { trpc } from '@utils/trpc';
-import { WishListModal } from './WishListModal';
+import { GenericListModal } from '../../common/Modal/GenericListModal';
 import { WishListsList } from './WishListsList';
 
 export type WishListForm = {
@@ -41,12 +41,20 @@ export const DashboardScreen = () => {
 					<Center h="100px" mb={6} mt={4}>
 						<Flex direction="column" gap={4}>
 							<Heading>Wish Lists</Heading>
-							<WishListModal
+							<GenericListModal
 								buttonProps={{
 									variant: 'solid',
 									colorScheme: 'green',
 								}}
 								buttonName="Create a new Wish List"
+								labels={{
+									name: 'Name',
+									description: 'Description',
+								}}
+								placeholders={{
+									name: 'Name of the Wish List',
+									description: 'Description of the Wish List',
+								}}
 								onSubmit={onSubmit}
 							/>
 						</Flex>

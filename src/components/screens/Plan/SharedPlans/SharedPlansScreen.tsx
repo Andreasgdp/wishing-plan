@@ -9,7 +9,7 @@ import {
 import { EmptyStateWrapper } from '@components/EmptyStateWrapper';
 import { Content } from '@components/layouts/Content';
 import { trpc } from '@utils/trpc';
-import { SharedPlanModal } from './SharedPlanModal';
+import { GenericListModal } from '../../../common/Modal/GenericListModal';
 import { SharedPlansList } from './SharedPlansList';
 
 export type WishListForm = {
@@ -41,12 +41,20 @@ export const SharedPlansScreen = () => {
 					<Center h="100px" mb={6} mt={4}>
 						<Flex direction="column" gap={4}>
 							<Heading>Shared Plans</Heading>
-							<SharedPlanModal
+							<GenericListModal
 								buttonProps={{
 									variant: 'solid',
 									colorScheme: 'green',
 								}}
 								buttonName="Create a New Plan"
+								labels={{
+									name: 'Name',
+									description: 'Description',
+								}}
+								placeholders={{
+									name: 'Name of the Plan',
+									description: 'Description of the Plan',
+								}}
 								onSubmit={onSubmit}
 							/>
 						</Flex>

@@ -14,7 +14,6 @@ import {
 	Textarea,
 	useDisclosure,
 } from '@chakra-ui/react';
-import type { Plan } from '@prisma/client';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -26,16 +25,39 @@ export type SharedPlanForm = {
 type SharedPlanModalProps = {
 	buttonName: string;
 	buttonProps: ButtonProps;
+	labels?: {
+		name?: string;
+		description?: string;
+	};
+	placeholders?: {
+		name?: string;
+		description?: string;
+	};
 	onSubmit: (name: string, description: string) => void;
-	existingSharedPlan?: Plan;
+	existingSharedItem?: {
+		name: string;
+		description: string;
+	};
 };
 
-export const SharedPlanModal = (props: SharedPlanModalProps) => {
+export const GenericListModal = (props: SharedPlanModalProps) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	const { register, handleSubmit, reset, setValue } = useForm<SharedPlanForm>();
 
 	const [descriptionValue, setDescriptionValue] = useState('');
+
+	const labels = {
+		name: 'Name of Item',
+		description: 'Describe your Item',
+		...props.labels,
+	};
+
+	const placeholders = {
+		name: 'Name of Item',
+		description: 'Describe your Item',
+		...props.placeholders,
+	};
 
 	const onSubmit = handleSubmit(async (data) => {
 		props.onSubmit(data.name, descriptionValue);
@@ -45,9 +67,9 @@ export const SharedPlanModal = (props: SharedPlanModalProps) => {
 	});
 
 	const openModal = () => {
-		if (props.existingSharedPlan) {
-			setValue('name', props.existingSharedPlan.name ?? '');
-			setDescriptionValue(props.existingSharedPlan.description ?? '');
+		if (props.existingSharedItem) {
+			setValue('name', props.existingSharedItem.name ?? '');
+			setDescriptionValue(props.existingSharedItem.description ?? '');
 		}
 		onOpen();
 	};
@@ -74,22 +96,22 @@ export const SharedPlanModal = (props: SharedPlanModalProps) => {
 					<ModalBody>
 						<form id="new-note" onSubmit={onSubmit}>
 							<FormControl isRequired>
-								<FormLabel>Name of WishList</FormLabel>
+								<FormLabel>{labels.name}</FormLabel>
 								<Input
 									id="name"
 									type="text"
-									placeholder="Name of WishList"
+									placeholder={placeholders.name}
 									{...register('name', {
 										required: true,
 									})}
 								/>
 							</FormControl>
 							<FormControl>
-								<FormLabel>Describe your WishList</FormLabel>
+								<FormLabel>{labels.description}</FormLabel>
 								<Textarea
 									value={descriptionValue}
 									onChange={handleDescriptionChange}
-									placeholder="Here is a sample placeholder"
+									placeholder={placeholders.description}
 									size="sm"
 								/>
 							</FormControl>

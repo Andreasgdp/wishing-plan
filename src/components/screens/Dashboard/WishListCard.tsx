@@ -13,7 +13,7 @@ import { DeleteAlert } from '@components/common/Alert/DeleteAlert';
 import type { WishList } from '@prisma/client';
 import { trpc } from '@utils/trpc';
 import router from 'next/router';
-import { WishListModal } from './WishListModal';
+import { GenericListModal } from '../../common/Modal/GenericListModal';
 
 export const WishListCard = ({
 	wishList,
@@ -72,8 +72,7 @@ export const WishListCard = ({
 					>
 						View here
 					</Button>
-
-					<WishListModal
+					<GenericListModal
 						buttonProps={{
 							mr: 2,
 							mb: 2,
@@ -82,7 +81,18 @@ export const WishListCard = ({
 						}}
 						buttonName="Edit"
 						onSubmit={onSubmit}
-						existingWishList={wishList}
+						labels={{
+							name: 'Name',
+							description: 'Description',
+						}}
+						placeholders={{
+							name: 'Name of the Wish List',
+							description: 'Description of the Wish List',
+						}}
+						existingSharedItem={{
+							name: wishList.name ?? '',
+							description: wishList.description ?? '',
+						}}
 					/>
 
 					<DeleteAlert

@@ -139,7 +139,7 @@ export const planRouter = router({
 				where: { url: input.wishUrl },
 			});
 
-			if (existingWish) {
+			if (existingWish && input.wishUrl) {
 				// check if wish is already in plan
 				const existingPlanWish = await ctx.prisma.planWish.findFirst({
 					where: { planId: planId, wishId: existingWish.id },

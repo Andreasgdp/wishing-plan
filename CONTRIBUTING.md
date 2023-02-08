@@ -17,12 +17,14 @@ We use github to host code, to track issues and feature requests, as well as acc
 Pull requests are the best way to propose changes to the codebase (We use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
 
 1. Create an issue, if you'd like a new feature or find a bug.
-2. Fork the repo and create your branch from `master`.
-3. If you've added code that should be tested, add tests.
-4. If you've changed APIs, update the documentation.
-5. Ensure the test suite passes.
-6. [Create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) from your forked repo to the `master` branch of the main repo
-7. Remember to link issues to pull requests, if one is relevant.
+2. If you like to work on an issue, you can leave a comment on the issue to let us know.
+    - We will then be able to assign you to the issue to let others know what is being worked on.
+3. Fork the repo and create your branch from `master`.
+4. If you've added code that should be tested, add tests.
+5. If you've changed APIs, update the documentation.
+6. Ensure the test suite passes.
+7. [Create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) from your forked repo to the `master` branch of the main repo
+8. Remember to link issues to pull requests, if one is relevant.
 
 ## Report bugs using Github's [issues](https://github.com/Andreasgdp/Wishing-Plan/issues)
 

@@ -18,7 +18,7 @@ Pull requests are the best way to propose changes to the codebase (We use [Githu
 
 1. Create an issue, if you'd like a new feature or find a bug.
 2. If you like to work on an issue, you can leave a comment on the issue to let us know.
-    - We will then be able to assign you to the issue to let others know what is being worked on.
+   - We will then be able to assign you to the issue to let others know what is being worked on.
 3. Fork the repo and create your branch from `master`.
 4. If you've added code that should be tested, add tests.
 5. If you've changed APIs, update the documentation.

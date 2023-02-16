@@ -45,9 +45,16 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 	const categoryColor = useColorModeValue('gray.800', 'gray.200');
 
 	const [savedAmount, setSavedAmount] = useState(0);
-	const handleSavedAmountChange = (value: string) =>
-		setSavedAmount(Number(value));
-
+	const [savedAmountText, setSavedAmountText] = useState("0");
+	const handleSavedAmountChange = (value: string) =>{
+		if(value === "-" || value === "0-"){
+			setSavedAmountText("-");
+		}else {
+			setSavedAmountText(Number(value).toString());
+			setSavedAmount(Number(value));
+		}
+	}
+		
 	const [amountToSave, setAmountToSave] = useState(0);
 	const handleAmountToSaveChange = (value: string) =>
 		setAmountToSave(Number(value));
@@ -131,7 +138,7 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 							<NumberInput
 								allowMouseWheel
 								defaultValue={props.plan?.currentAmountSaved}
-								value={savedAmount}
+								value={savedAmountText}
 								onChange={handleSavedAmountChange}
 							>
 								<NumberInputField />

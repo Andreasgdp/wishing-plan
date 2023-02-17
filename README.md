@@ -55,13 +55,9 @@ Wishting Plan is an open source project. We welcome contributions from the commu
 - Run `yarn db-seed` to seed the database with test data
 - Run the development server `yarn dev`
 
-## [Project Board](https://app.zenhub.com/workspaces/wishing-plan-637b3ad68b9646001dfac86a/board)
+## [Project Board](https://github.com/users/Andreasgdp/projects/2/views/1)
 
-**IMPORTANT**: In order to see our project board on ZenHub, you need to have an account and have connected it with your GitHub account.
-
-For development management we are using [ZenHub Board](https://app.zenhub.com/workspaces/wishing-plan-637b3ad68b9646001dfac86a/board). It is recommended to install the browser [extension for ZenHub](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd?hl=en), to be able to view information from our ZenHub board within GitHub.
-
-**NOTE:** ZenHub is not required however, as the issues we are working on are shared between GitHub and ZenHub.
+For development management we are using [GitHub Projects](https://github.com/users/Andreasgdp/projects/2/views/1). In there you can see our backlog, issues sorted by priority and size. We are also working on creating a roadmap in there.
 
 ## Repo health information
 

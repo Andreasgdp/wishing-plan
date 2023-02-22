@@ -44,20 +44,18 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 
 	const categoryColor = useColorModeValue('gray.800', 'gray.200');
 
-	const [savedAmount, setSavedAmount] = useState(0);
-	const [savedAmountText, setSavedAmountText] = useState("0");
+	const [savedAmount, setSavedAmount] = useState("0");
 	const handleSavedAmountChange = (value: string) =>{
 		if(value === "-" || value === "0-"){
-			setSavedAmountText("-");
+			setSavedAmount("-");
 		}else {
-			setSavedAmountText(Number(value).toString());
-			setSavedAmount(Number(value));
+			setSavedAmount(value.replace(/(?!^)-/, ''));
 		}
 	}
-		
-	const [amountToSave, setAmountToSave] = useState(0);
+	
+	const [amountToSave, setAmountToSave] = useState("0");
 	const handleAmountToSaveChange = (value: string) =>
-		setAmountToSave(Number(value));
+		setAmountToSave(value.replace('-', ''));
 
 	const [firstSaving, setFirstSaving] = useState(new Date());
 	const handleFirstSavingChange = (event: ChangeEvent<HTMLInputElement>) =>
@@ -69,11 +67,11 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 	};
 
 	useEffect(() => {
-		setSavedAmount(props.plan?.currentAmountSaved ?? 0);
+		setSavedAmount(props.plan?.currentAmountSaved.toString() ?? "0");
 	}, [props.plan?.currentAmountSaved]);
 
 	useEffect(() => {
-		setAmountToSave(props.plan?.amountToSave ?? 0);
+		setAmountToSave(props.plan?.amountToSave.toString() ?? "0");
 	}, [props.plan?.amountToSave]);
 
 	useEffect(() => {
@@ -87,14 +85,14 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 	const submitPlanSettingsChange = (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		if (
-			amountToSave !== props.plan?.amountToSave ||
-			savedAmount !== props.plan?.currentAmountSaved ||
+			amountToSave !== props.plan?.amountToSave.toString() ||
+			savedAmount !== props.plan?.currentAmountSaved.toString()  ||
 			firstSaving !== props.plan?.firstSaving ||
 			frequency !== props.plan?.frequency
 		) {
 			props.onPlanSettingsChange(
-				amountToSave,
-				savedAmount,
+				Number(amountToSave),
+				Number(savedAmount),
 				firstSaving,
 				frequency,
 			);
@@ -138,7 +136,7 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 							<NumberInput
 								allowMouseWheel
 								defaultValue={props.plan?.currentAmountSaved}
-								value={savedAmountText}
+								value={savedAmount.toString()}
 								onChange={handleSavedAmountChange}
 							>
 								<NumberInputField />

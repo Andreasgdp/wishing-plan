@@ -14,7 +14,7 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
-	// const status = useSession().status;
+	const status = useSession().status;
 	const router = useRouter();
 
 	// if (status === 'loading') {
@@ -38,7 +38,7 @@ const Layout = ({ children }: LayoutProps) => {
 				<title>Wishing Plan</title>
 			</Head>
 
-			{/* <Navbar path={router.asPath} /> */}
+			<Navbar path={router.asPath} />
 
 			<div style={{ paddingTop: '3.5rem', minHeight: '100vh' }}>{children}</div>
 

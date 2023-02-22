@@ -73,7 +73,7 @@ export default function SmallCentered() {
 				justify={'center'}
 				align={'center'}
 			>
-				<Logo />
+				<Logo showVersion />
 				<Stack direction={['column', 'row']} spacing={6}>
 					<Link as={NextLink} href="/product">
 						<Center>Product</Center>

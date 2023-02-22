@@ -20,7 +20,11 @@ const LogoBox = styled.span`
 	}
 `;
 
-const Logo = () => {
+type LogoProps = {
+	showVersion?: boolean;
+};
+
+const Logo = (props: LogoProps) => {
 	const { data: sessionData } = useSession();
 
 	const url = sessionData ? '/' : '/product';
@@ -38,15 +42,18 @@ const Logo = () => {
 				>
 					Wishing Plan
 				</Text>
-				<Tag
-					size="md"
-					ml={2}
-					colorScheme="purple"
-					letterSpacing={'tight'}
-					fontWeight="bold"
-				>
-					Alpha
-				</Tag>
+
+				{props.showVersion && (
+					<Tag
+						size="md"
+						ml={2}
+						colorScheme="purple"
+						letterSpacing={'tight'}
+						fontWeight="bold"
+					>
+						Alpha
+					</Tag>
+				)}
 			</LogoBox>
 		</Link>
 	);

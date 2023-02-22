@@ -38,7 +38,7 @@ const Profile = () => {
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-	const session = getAuthSession(context);
+	const session = await getAuthSession(context);
 
 	if (!session) {
 		return {

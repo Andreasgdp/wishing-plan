@@ -23,10 +23,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 	pageProps: { session, ...pageProps },
 	router,
 }) => {
-	const activeColor = useColorModeValue(
-		'#3fba73',
-		'#9ee871',
-	);
+	const activeColor = useColorModeValue('#3fba73', '#9ee871');
 	return (
 		<SessionProvider session={session}>
 			<Head>

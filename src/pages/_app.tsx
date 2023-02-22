@@ -8,6 +8,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { Analytics } from '@vercel/analytics/react';
 import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
+import NextProgress from 'nextjs-progressbar';
 import Fonts from '../components/common/Theme/Fonts';
 import Layout from '../components/layouts/Layout';
 import theme from '../libs/theme';
@@ -83,6 +84,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 							}
 						}}
 					>
+						<NextProgress color={'blue'} options={{ showSpinner: false }} />
 						<Component {...pageProps} key={router.route} />
 						<Analytics />
 					</AnimatePresence>

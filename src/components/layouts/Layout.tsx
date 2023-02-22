@@ -14,23 +14,23 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
-	const status = useSession().status;
+	// const status = useSession().status;
 	const router = useRouter();
 
-	if (status === 'loading') {
-		return (
-			<Center height="100vh" width="100vw">
-				<Triangle
-					height="50vh"
-					width="50vw"
-					color="#ba3f86"
-					ariaLabel="triangle-loading"
-					wrapperStyle={{}}
-					visible={true}
-				/>
-			</Center>
-		);
-	}
+	// if (status === 'loading') {
+	// 	return (
+	// 		<Center height="100vh" width="100vw">
+	// 			<Triangle
+	// 				height="50vh"
+	// 				width="50vw"
+	// 				color="#ba3f86"
+	// 				ariaLabel="triangle-loading"
+	// 				wrapperStyle={{}}
+	// 				visible={true}
+	// 			/>
+	// 		</Center>
+	// 	);
+	// }
 	return (
 		<Box as="main">
 			<Head>
@@ -38,7 +38,7 @@ const Layout = ({ children }: LayoutProps) => {
 				<title>Wishing Plan</title>
 			</Head>
 
-			<Navbar path={router.asPath} />
+			{/* <Navbar path={router.asPath} /> */}
 
 			<div style={{ paddingTop: '3.5rem', minHeight: '100vh' }}>{children}</div>
 

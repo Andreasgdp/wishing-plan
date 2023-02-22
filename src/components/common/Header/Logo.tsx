@@ -21,13 +21,13 @@ const LogoBox = styled.span`
 `;
 
 const Logo = () => {
-	const { data: sessionData } = useSession();
+	// const { data: sessionData } = useSession();
 
-	const url = sessionData ? '/' : '/product';
+	// const url = sessionData ? '/' : '/product';
 
 	const logoImg = `/logo${useColorModeValue('-light', '-dark')}.svg`;
 	return (
-		<Link href={url} style={{ display: 'flex' }}>
+		<Link href={"/"} style={{ display: 'flex' }}>
 			<LogoBox>
 				{/* The with is set to 25.68 to medigate warning of inproper scaling based on the ratio of the svg file. */}
 				<Image src={logoImg} width={25.68} height={25} alt="logo" />

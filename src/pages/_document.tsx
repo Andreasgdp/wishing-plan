@@ -25,11 +25,6 @@ export default class Document extends NextDocument {
 					content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
 				/>
 
-				<link
-					rel="stylesheet"
-					href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
-				/>
-
 				<body>
 					<ColorModeScript initialColorMode={theme.config.initialColorMode} />
 					<Main />

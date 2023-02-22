@@ -1,5 +1,4 @@
-import { requireAuthentication } from '@utils/requireAuthentication';
-import type { GetServerSideProps } from 'next';
+import type { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 
 import {
@@ -15,6 +14,7 @@ import { Navigation } from '@components/common/Navigation/Navigation';
 import { EmptyStateWrapper } from '@components/EmptyStateWrapper';
 import { Content } from '@components/layouts/Content';
 import { settingsNavigationData } from '@lib/constants';
+import { getAuthSession } from '@utils/getServerSession';
 import { trpc } from '@utils/trpc';
 
 // TODO: implement something like this to get rid of duplicate code when creating new pages in the settings section
@@ -117,12 +117,19 @@ const Wish = () => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = requireAuthentication(
-	async () => {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+	const session = getAuthSession(context);
+
+	if (!session) {
 		return {
-			props: {},
+			redirect: {
+				destination: '/auth/signin',
+				permanent: false,
+			},
 		};
-	},
-);
+	} else {
+		return { props: {} };
+	}
+}
 
 export default Wish;

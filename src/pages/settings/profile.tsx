@@ -1,5 +1,4 @@
-import { requireAuthentication } from '@utils/requireAuthentication';
-import type { GetServerSideProps } from 'next';
+import type { GetServerSidePropsContext } from 'next';
 import { signOut, useSession } from 'next-auth/react';
 import Head from 'next/head';
 
@@ -7,6 +6,7 @@ import { Button, Container, Stack } from '@chakra-ui/react';
 import { Navigation } from '@components/common/Navigation/Navigation';
 import { Content } from '@components/layouts/Content';
 import { settingsNavigationData } from '@lib/constants';
+import { getAuthSession } from '@utils/getServerSession';
 
 // TODO: implement something like this to get rid of duplicate code when creating new pages in the settings section
 // https://github.com/hauptrolle/chakra-templates/blob/main/src/pages/%5B...slug%5D.tsx
@@ -37,12 +37,19 @@ const Profile = () => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = requireAuthentication(
-	async () => {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+	const session = getAuthSession(context);
+
+	if (!session) {
 		return {
-			props: {},
+			redirect: {
+				destination: '/auth/signin',
+				permanent: false,
+			},
 		};
-	},
-);
+	} else {
+		return { props: {} };
+	}
+}
 
 export default Profile;

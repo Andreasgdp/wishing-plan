@@ -11,9 +11,10 @@ import {
 	Text,
 	useColorModeValue,
 } from '@chakra-ui/react';
+import { getAuthSession } from '@utils/getServerSession';
 import type { GetServerSidePropsContext } from 'next';
 import type { ClientSafeProvider } from 'next-auth/react';
-import { getProviders, getSession, signIn } from 'next-auth/react';
+import { getProviders, signIn } from 'next-auth/react';
 import NextLink from 'next/link';
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
@@ -156,7 +157,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 		'public, s-maxage=1000, stale-while-revalidate=604800',
 	);
 
-	const session = await getSession(ctx);
+	const session = await getAuthSession(ctx);
 
 	if (session) {
 		return {

@@ -4,7 +4,7 @@ import { type AppType } from 'next/app';
 
 import { trpc } from '../utils/trpc';
 
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, useColorModeValue } from '@chakra-ui/react';
 import { Analytics } from '@vercel/analytics/react';
 import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
@@ -23,6 +23,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
 	pageProps: { session, ...pageProps },
 	router,
 }) => {
+	const activeColor = useColorModeValue(
+		'#3fba73',
+		'#9ee871',
+	);
 	return (
 		<SessionProvider session={session}>
 			<Head>
@@ -84,7 +88,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
 							}
 						}}
 					>
-						<NextProgress color={'blue'} options={{ showSpinner: false }} />
+						<NextProgress
+							color={activeColor}
+							options={{ showSpinner: false }}
+						/>
 						<Component {...pageProps} key={router.route} />
 						<Analytics />
 					</AnimatePresence>

@@ -1,6 +1,6 @@
 import { PlanScreen } from '@components/screens/Plan/PlanScreen';
-import { requireAuthentication } from '@utils/requireAuthentication';
-import type { GetServerSideProps, NextPage } from 'next';
+import { getAuthSession } from '@utils/getServerSession';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -23,12 +23,19 @@ const ClassroomPage: NextPage = () => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = requireAuthentication(
-	async () => {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+	const session = getAuthSession(context);
+
+	if (!session) {
 		return {
-			props: {},
+			redirect: {
+				destination: '/auth/signin',
+				permanent: false,
+			},
 		};
-	},
-);
+	} else {
+		return { props: {} };
+	}
+}
 
 export default ClassroomPage;

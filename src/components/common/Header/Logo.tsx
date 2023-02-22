@@ -1,4 +1,4 @@
-import { Text, useColorModeValue } from '@chakra-ui/react';
+import { Tag, Text, useColorModeValue } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -38,6 +38,15 @@ const Logo = () => {
 				>
 					Wishing Plan
 				</Text>
+				<Tag
+					size="md"
+					ml={2}
+					colorScheme="purple"
+					letterSpacing={'tight'}
+					fontWeight="bold"
+				>
+					Alpha
+				</Tag>
 			</LogoBox>
 		</Link>
 	);

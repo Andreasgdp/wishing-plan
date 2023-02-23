@@ -44,16 +44,11 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 
 	const categoryColor = useColorModeValue('gray.800', 'gray.200');
 
-	const [savedAmount, setSavedAmount] = useState("0");
-	const handleSavedAmountChange = (value: string) =>{
-		if(value.includes("NaN")){
-			return;
-		}
+	const [savedAmount, setSavedAmount] = useState('0');
+	const handleSavedAmountChange = (value: string) =>
+		setSavedAmount(value.replace(/(?!^)-/, ''));
 
-		setSavedAmount(value.replace(/(?!^)-/, ''));		
-	}
-	
-	const [amountToSave, setAmountToSave] = useState("0");
+	const [amountToSave, setAmountToSave] = useState('0');
 	const handleAmountToSaveChange = (value: string) =>
 		setAmountToSave(value.replace('-', ''));
 
@@ -67,11 +62,11 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 	};
 
 	useEffect(() => {
-		setSavedAmount(props.plan?.currentAmountSaved.toString() ?? "0");
+		setSavedAmount(props.plan?.currentAmountSaved.toString() ?? '0');
 	}, [props.plan?.currentAmountSaved]);
 
 	useEffect(() => {
-		setAmountToSave(props.plan?.amountToSave.toString() ?? "0");
+		setAmountToSave(props.plan?.amountToSave.toString() ?? '0');
 	}, [props.plan?.amountToSave]);
 
 	useEffect(() => {
@@ -86,7 +81,7 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 		e.preventDefault();
 		if (
 			amountToSave !== props.plan?.amountToSave.toString() ||
-			savedAmount !== props.plan?.currentAmountSaved.toString()  ||
+			savedAmount !== props.plan?.currentAmountSaved.toString() ||
 			firstSaving !== props.plan?.firstSaving ||
 			frequency !== props.plan?.frequency
 		) {

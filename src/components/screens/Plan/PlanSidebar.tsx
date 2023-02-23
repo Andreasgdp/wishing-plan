@@ -46,11 +46,11 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 
 	const [savedAmount, setSavedAmount] = useState("0");
 	const handleSavedAmountChange = (value: string) =>{
-		if(value === "-" || value === "0-"){
-			setSavedAmount("-");
-		}else {
-			setSavedAmount(value.replace(/(?!^)-/, ''));
+		if(value.includes("NaN")){
+			return;
 		}
+
+		setSavedAmount(value.replace(/(?!^)-/, ''));		
 	}
 	
 	const [amountToSave, setAmountToSave] = useState("0");

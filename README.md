@@ -1,4 +1,3 @@
-<a href="https://app.zenhub.com/workspaces/wishing-plan-637b3ad68b9646001dfac86a/board"><img src="https://dxssrr2j0sq4w.cloudfront.net/3.2.0/img/external/zenhub-badge.png" alt="ZenHub logo"></a>
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Andreasgdp_Wishing-Plan&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Andreasgdp_Wishing-Plan)
 [![CodeQL](https://github.com/Andreasgdp/Wishing-Plan/actions/workflows/codeql.yml/badge.svg)](https://github.com/Andreasgdp/Wishing-Plan/actions/workflows/codeql.yml)
 [![CodeScene Code Health](https://codescene.io/projects/33413/status-badges/code-health)](https://codescene.io/projects/33413)

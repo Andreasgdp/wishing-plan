@@ -48,6 +48,8 @@ Wishting Plan is an open source project. We welcome contributions from the commu
 
 - Clone the repository
 - Create local .env `cp .env.example .env` and fill in the values
+- Setup provider ([Example](https://create.t3.gg/en/usage/next-auth#setting-up-the-default-discordprovider))
+  - For now you will need to setup a provider to be able to sign in locally; however, we are looking into simplifying the process by implementing Mock users/providers.
 - Install dependencies `yarn install` or just `yarn`
 - Start the database `docker-compose up -d`
 - Run `yarn db-push` to migrate the database

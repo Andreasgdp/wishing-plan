@@ -105,8 +105,8 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 	}
 
 	const calcTotalCost = (): number => {
-		return props.wishes?.reduce((sum, wish) => sum + wish.price, 0)
-	}
+		return props.wishes?.reduce((sum, wish) => sum + wish.price, 0);
+	};
 
 	return (
 		<Stack
@@ -223,12 +223,8 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 						label="Sum of prices of all the wishes in a Plan"
 						placement="auto"
 					>
-						<Tag
-						>
-							<Text
-								align={'center'}
-								textTransform={'uppercase'}
-							>
+						<Tag>
+							<Text align={'center'} textTransform={'uppercase'}>
 								{calcTotalCost()} {props.currency}
 							</Text>
 						</Tag>

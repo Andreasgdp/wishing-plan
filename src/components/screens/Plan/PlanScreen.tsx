@@ -242,6 +242,7 @@ export const PlanScreen = (props: PlanScreenProps) => {
 								sharedWith={plan?.sharedWith ?? []}
 								owner={plan?.owner ?? undefined}
 								currency={currency ?? undefined}
+								wishes={plan?.wishes ?? []}
 								onPlanSettingsChange={onPlanSettingsChange}
 							/>
 						}

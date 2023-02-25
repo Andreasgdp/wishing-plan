@@ -3,6 +3,7 @@ import {
 	AvatarGroup,
 	Button,
 	Center,
+	Divider,
 	Input,
 	InputGroup,
 	InputRightAddon,
@@ -13,11 +14,12 @@ import {
 	NumberInputStepper,
 	Select,
 	Stack,
+	Tag,
 	Text,
 	Tooltip,
 	useColorModeValue,
 } from '@chakra-ui/react';
-import type { Plan, User } from '@prisma/client';
+import type { Plan, User, Wish } from '@prisma/client';
 import { trpc } from '@utils/trpc';
 import { useSession } from 'next-auth/react';
 import type { ChangeEvent } from 'react';
@@ -29,6 +31,7 @@ type PlanSidebarProps = {
 	sharedWith: User[];
 	owner?: User;
 	currency?: string;
+	wishes: Wish[];
 	onPlanSettingsChange: (
 		amountToSave: number,
 		currentAmountSaved: number,
@@ -99,6 +102,10 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 			planId: props.plan?.id,
 			emails: emails,
 		});
+	}
+
+	const calcTotalCost = (): number => {
+		return props.wishes?.reduce((sum, wish) => sum + wish.price, 0)
 	}
 
 	return (
@@ -200,6 +207,33 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
 							<option value="e14d">Every 14th day</option>
 						</Select>
 					</Tooltip>
+					<Divider />
+					<Text
+						align={'center'}
+						textTransform={'uppercase'}
+						color={categoryColor}
+						fontWeight={700}
+						fontSize={'sm'}
+						letterSpacing={1}
+					>
+						Total Cost
+					</Text>
+					<Tooltip
+						hasArrow
+						label="Sum of prices of all the wishes in a Plan"
+						placement="auto"
+					>
+						<Tag
+						>
+							<Text
+								align={'center'}
+								textTransform={'uppercase'}
+							>
+								{calcTotalCost()} {props.currency}
+							</Text>
+						</Tag>
+					</Tooltip>
+					<Divider />
 					{frequency !== 'som' && frequency !== 'eom' && (
 						<>
 							<Text

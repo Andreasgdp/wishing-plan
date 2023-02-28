@@ -11,8 +11,8 @@ import {
 	Text,
 	useColorModeValue,
 } from '@chakra-ui/react';
-import { getAuthSession } from '@utils/getServerSession';
 import type { GetServerSidePropsContext } from 'next';
+import { getToken } from 'next-auth/jwt';
 import type { ClientSafeProvider } from 'next-auth/react';
 import { getProviders, signIn } from 'next-auth/react';
 import NextLink from 'next/link';
@@ -24,7 +24,6 @@ import { FaDiscord, FaGoogle } from 'react-icons/fa';
 import { Content } from '../../components/layouts/Content';
 
 type formButtonProps = {
-	// return type of getProviders()
 	provider: ClientSafeProvider;
 };
 
@@ -152,12 +151,7 @@ export default function SimpleCard({
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-	ctx.res.setHeader(
-		'Cache-Control',
-		'public, s-maxage=1000, stale-while-revalidate=604800',
-	);
-
-	const session = await getAuthSession(ctx);
+	const session = await getToken({ req: ctx.req });
 
 	if (session) {
 		return {

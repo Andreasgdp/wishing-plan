@@ -1,6 +1,5 @@
 import { PlanScreen } from '@components/screens/Plan/PlanScreen';
-import { getAuthSession } from '@utils/getServerSession';
-import type { GetServerSidePropsContext, NextPage } from 'next';
+import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -22,20 +21,5 @@ const ClassroomPage: NextPage = () => {
 		</>
 	);
 };
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-	const session = await getAuthSession(context);
-
-	if (!session) {
-		return {
-			redirect: {
-				destination: '/auth/signin',
-				permanent: false,
-			},
-		};
-	} else {
-		return { props: {} };
-	}
-}
 
 export default ClassroomPage;

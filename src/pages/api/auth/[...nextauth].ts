@@ -9,9 +9,18 @@ import { env } from '@env/server.mjs';
 import { prisma } from '@server/db/client';
 import { signInChecks } from '@server/trpc/utils/auth/signInUtils';
 
+const secret = process.env.NEXTAUTH_SECRET;
+
 export const authOptions: NextAuthOptions = {
-	// Include user.id on session
 	callbacks: {
+		jwt: async ({ token, user }) => {
+			if (user) {
+				token.id = user.id;
+				token.user = user;
+			}
+
+			return token;
+		},
 		async signIn({ user }) {
 			if (user.name) {
 				return true;
@@ -20,13 +29,21 @@ export const authOptions: NextAuthOptions = {
 				return '/userInfo';
 			}
 		},
-		async session({ session, user }) {
-			if (session.user) {
-				session.user.id = user.id;
-				await signInChecks(session.user);
+		session: async ({ session, token }) => {
+			if (token && token.user) {
+				session.user = token.user;
+				await signInChecks(token.user);
 			}
+
 			return session;
 		},
+	},
+	jwt: {
+		maxAge: 15 * 24 * 30 * 60, // 15 days
+	},
+	secret: secret,
+	session: {
+		strategy: 'jwt',
 	},
 	// Configure one or more authentication providers
 	adapter: PrismaAdapter(prisma),

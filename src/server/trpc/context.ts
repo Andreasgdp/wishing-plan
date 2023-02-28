@@ -1,12 +1,12 @@
 import { type inferAsyncReturnType } from '@trpc/server';
 import { type CreateNextContextOptions } from '@trpc/server/adapters/next';
-import type { JWT } from 'next-auth/jwt';
-import { getToken } from 'next-auth/jwt';
+import { type Session } from 'next-auth';
 
+import { getServerAuthSession } from '../common/get-server-auth-session';
 import { prisma } from '../db/client';
 
 type CreateContextOptions = {
-	session: JWT | null;
+	session: Session | null;
 };
 
 /** Use this helper for:
@@ -26,10 +26,10 @@ export const createContextInner = async (opts: CreateContextOptions) => {
  * @link https://trpc.io/docs/context
  **/
 export const createContext = async (opts: CreateNextContextOptions) => {
-	const { req } = opts;
+	const { req, res } = opts;
 
 	// Get the session from the server using the unstable_getServerSession wrapper function
-	const session = await getToken({ req });
+	const session = await getServerAuthSession({ req, res });
 
 	return await createContextInner({
 		session,

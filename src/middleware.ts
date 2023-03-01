@@ -19,26 +19,25 @@ export async function middleware(req: NextRequest) {
 
 	const session = await getToken({ req });
 	if (!session) {
-		return routeProtectionRedirect(req.nextUrl.pathname, req.nextUrl.origin)
+		return routeProtectionRedirect(req.nextUrl.pathname, req.nextUrl.origin);
 	}
 
 	return NextResponse.next();
 }
 
-
 function routeProtectionRedirect(routeToCheck: string, origin: string) {
 	if (routeToCheck === '/') {
 		return NextResponse.redirect(`${origin}/product`);
 	}
-	
+
 	if (routeToCheck === '/plan') {
 		return NextResponse.redirect(`${origin}/auth/signin`);
 	}
-	
+
 	if (routeToCheck.startsWith('/shared-plans')) {
 		return NextResponse.redirect(`${origin}/auth/signin`);
 	}
-	
+
 	if (routeToCheck.startsWith('/wishlists')) {
 		return NextResponse.redirect(`${origin}/auth/signin`);
 	}

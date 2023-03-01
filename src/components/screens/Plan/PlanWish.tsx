@@ -193,7 +193,8 @@ export function PlanWishComponent(props: SortableItemProps) {
 			animate="enter"
 			variants={variants}
 			transition={{
-				duration: 0.1 * props.wish.placement,
+				duration: 0.05,
+				delay: 0.05 * props.wish.placement,
 				type: 'easeInOut',
 			}}
 			style={{ position: 'relative' }}

@@ -76,7 +76,8 @@ export const WishCard = ({
 			animate="enter"
 			variants={variants}
 			transition={{
-				duration: 0.1 * index,
+				duration: 0.05,
+				delay: 0.05 * index,
 				type: 'easeInOut',
 			}}
 			style={{ position: 'relative' }}

@@ -17,29 +17,34 @@ export async function middleware(req: NextRequest) {
 		}
 	}
 
-	// !Route protection
 	const session = await getToken({ req });
 	if (!session) {
-		// Write the above using if
-		if (req.nextUrl.pathname === '/') {
-			return NextResponse.redirect(`${req.nextUrl.origin}/product`);
-		}
+		return routeProtectionRedirect(req.nextUrl.pathname, req.nextUrl.origin)
+	}
 
-		if (req.nextUrl.pathname.startsWith('/wishlists')) {
-			return NextResponse.redirect(`${req.nextUrl.origin}/auth/signin`);
-		}
+	return NextResponse.next();
+}
 
-		if (req.nextUrl.pathname === '/plan') {
-			return NextResponse.redirect(`${req.nextUrl.origin}/auth/signin`);
-		}
 
-		if (req.nextUrl.pathname.startsWith('/shared-plans')) {
-			return NextResponse.redirect(`${req.nextUrl.origin}/auth/signin`);
-		}
+function routeProtectionRedirect(routeToCheck: string, origin: string) {
+	if (routeToCheck === '/') {
+		return NextResponse.redirect(`${origin}/product`);
+	}
+	
+	if (routeToCheck === '/plan') {
+		return NextResponse.redirect(`${origin}/auth/signin`);
+	}
+	
+	if (routeToCheck.startsWith('/shared-plans')) {
+		return NextResponse.redirect(`${origin}/auth/signin`);
+	}
+	
+	if (routeToCheck.startsWith('/wishlists')) {
+		return NextResponse.redirect(`${origin}/auth/signin`);
+	}
 
-		if (req.nextUrl.pathname.startsWith('/settings')) {
-			return NextResponse.redirect(`${req.nextUrl.origin}/auth/signin`);
-		}
+	if (routeToCheck.startsWith('/settings')) {
+		return NextResponse.redirect(`${origin}/auth/signin`);
 	}
 
 	return NextResponse.next();

@@ -1,0 +1,4 @@
+--target master +title+ **Pull Request Checklist** :rocket:
+--target master +task+ [ ] Squash commits (where applicable)
+--target master +task+ [ ] Link Pull Request to issue(s) (where applicable)
+--target master +comment+ All done? merge PR.

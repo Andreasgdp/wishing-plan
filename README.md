@@ -42,7 +42,7 @@ Wishting Plan is an open source project. We welcome contributions from the commu
 
 #### Windows
 
-- Install win-node-env globally `npm install -g win-node-env` to be able to run e.g., `yarn db-seed` on Windows.
+- Install win-node-env globally `npm install -g win-node-env` to be able to run e.g., `yarn db:seed` on Windows.
 
 ### Installation and setup
 
@@ -52,8 +52,8 @@ Wishting Plan is an open source project. We welcome contributions from the commu
   - For now you will need to setup a provider to be able to sign in locally; however, we are looking into simplifying the process by implementing Mock users/providers.
 - Install dependencies `yarn install` or just `yarn`
 - Start the database `docker-compose up -d`
-- Run `yarn db-push` to migrate the database
-- Run `yarn db-seed` to seed the database with test data
+- Run `yarn db:push` to migrate the database
+- Run `yarn db:seed` to seed the database with test data
 - Run the development server `yarn dev`
 
 ## [Project Board](https://github.com/users/Andreasgdp/projects/2/views/1)

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import { hostnamesConfig } from './hostnamesConfig';
 
 export const siteScraper = async (
 	url: string,
@@ -8,6 +9,16 @@ export const siteScraper = async (
 	imageUrlSelector: string,
 ) => {
 	try {
+		const { hostname } = new URL(url);
+
+		if (!hostnamesConfig.hasOwnProperty(hostname)) {
+			return {
+				title: '',
+				price: 0,
+				imageUrl: '',
+			};
+		}
+
 		const { data } = await axios.get(url);
 		const $ = cheerio.load(data);
 
@@ -35,22 +46,20 @@ export const siteScraper = async (
 export const getProductInfo = async (url: string) => {
 	const { hostname } = new URL(url);
 
-	switch (hostname) {
-		case 'www.pricerunner.com':
-		case 'www.pricerunner.dk':
-			return siteScraper(
-				url,
-				'h1',
-				'span[data-testid="priceComponent"]',
-				'div > div > img',
-			);
-		case 'www.mukama.com':
-			return siteScraper(url, 'h1', 'span#our_price_display', 'img#bigpic');
-		default:
-			return {
-				title: '',
-				price: 0,
-				imageUrl: '',
-			};
+	const currentHostnamesConfig = hostnamesConfig[hostname];
+
+	if (!currentHostnamesConfig) {
+		return {
+			title: '',
+			price: 0,
+			imageUrl: '',
+		};
 	}
+
+	return await siteScraper(
+		url,
+		currentHostnamesConfig.titleSelector,
+		currentHostnamesConfig.priceSelector,
+		currentHostnamesConfig.imageUrlSelector,
+	);
 };

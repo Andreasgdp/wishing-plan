@@ -10,7 +10,7 @@
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"test:coverage": "jest --coverage",
-		"test:ci": "SKIP_ENV_VALIDATION=1 yarn test:coverage",
+		"test:ci": "yarn test:coverage",
 		"test:prod": "NODE_ENV=production jest",
 		"test:prod:ci": "NODE_ENV=production yarn test:coverage",
 		"db:dev": "docker-compose up -d",

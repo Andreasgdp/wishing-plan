@@ -23,3 +23,5 @@ jobs:
         run: yarn
       - name: Run Unit Tests
         run: yarn test:ci
+        env:
+          SKIP_ENV_VALIDATION: true

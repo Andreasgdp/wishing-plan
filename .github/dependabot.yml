@@ -8,12 +8,15 @@ updates:
   - package-ecosystem: 'npm' # See documentation for possible values
     directory: '/' # Location of package manifests
     # for npm, yarn, and pnpm, ignore all patch updates
-    update-types: ['version-update:semver-patch']
     schedule:
       interval: 'monthly'
+    ignore:
+      - update-types: ['version-update:semver-patch']
+
   - package-ecosystem: 'github-actions'
     directory: '/'
     # for github-actions, ignore all patch updates
-    update-types: ['version-update:semver-patch']
     schedule:
       interval: 'monthly'
+    ignore:
+      - update-types: ['version-update:semver-patch']

@@ -1,84 +1,203 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Andreasgdp_Wishing-Plan&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Andreasgdp_Wishing-Plan)
-[![CodeQL](https://github.com/Andreasgdp/Wishing-Plan/actions/workflows/codeql.yml/badge.svg)](https://github.com/Andreasgdp/Wishing-Plan/actions/workflows/codeql.yml)
-[![CodeScene Code Health](https://codescene.io/projects/33413/status-badges/code-health)](https://codescene.io/projects/33413)
-[![CodeScene System Mastery](https://codescene.io/projects/33413/status-badges/system-mastery)](https://codescene.io/projects/33413)
+[![CI](https://github.com/perkinsjr/t3-turbo-and-clerk/actions/workflows/ci.yml/badge.svg)](https://github.com/perkinsjr/t3-turbo-and-clerk/actions/workflows/ci.yml)
 
-# Wishing Plan
+# Create T3 Turbo with Clerk Authentication
 
-Wishing Plan allows the user to tracks savings and calculates purchase feasibility of the user's wishes. It will also become a hub for planning bigger purchases with others, creating individual or collective wish lists to share on occasions like birthdays, Christmas and more.
+## Clerk Dashboard Setup
 
-<div align="center">
-    <img align="center" width="600" alt="" src="https://user-images.githubusercontent.com/39928082/213713001-b72c08f2-e861-4851-b58a-4fcf727ffeff.gif" />
-</div>
+For this template to work you need to enable Discord as an OAuth provider. You can find the social options under `User & Authentication / Social Providers` in the [Clerk Dashboard](https://dashboard.clerk.dev)
 
-</br>
+> If you change any setting here outside of adding Discord, you may need to update your Expo code to handle any requirements you change.
 
-<div align="center">
-    <a href="https://discord.gg/uud4thzzY2">Join our Discord server</a> for faster responses and easier discussions about Wishing Plan.
-</div>
+It uses [Turborepo](https://turborepo.org/) and contains:
 
-# Open Source
+## Code Layout
 
-Wishting Plan is an open source project. We welcome contributions from the community. There are many ways to contribute to the project, from writing tutorials or blog posts, submitting bug reports and feature requests or writing code which can be incorporated into Wishing Plan itself. Here is a list of some of the ways you can contribute to the project:
+```
+.github
+  └─ workflows
+        └─ CI with pnpm cache setup
+.vscode
+  └─ Recommended extensions and settings for VSCode users
+apps
+  ├─ expo
+  └─ next.js
+      ├─ Next.js 13
+      ├─ React 18
+      └─ E2E Typesafe API Server & Client
+packages
+ ├─ api
+ |   └─ tRPC v10 router definition
+ └─ db
+     └─ typesafe db-calls using Prisma
+```
 
-- [Report bugs](https://github.com/Andreasgdp/Wishing-Plan/issues/new/choose) - If you find a bug, please report it in the issue tracker.
-- [Suggest new features](https://github.com/Andreasgdp/Wishing-Plan/issues/new/choose) - If you have an idea for a new feature, please suggest it in the issue tracker.
-- [Implement new features](https://github.com/Andreasgdp/Wishing-Plan/issues/new/choose) - If you want to implement a new feature, please create an issue in the issue tracker and describe the feature you want to implement. This will allow us to discuss the feature and make sure it fits with the project.
-- [Improve code quality](https://github.com/Andreasgdp/Wishing-Plan#repo-health-information) - We use SonarCloud and CodeScene to measure the code quality of our project. You can help us improve the code quality by fixing bugs and vulnerabilities.
-- Improve documentation - If you find any errors in the documentation or want to improve it, please contribute with a pull request.
-- In the future, we will want to implement translations of the app. If you are interested in helping us with this, please contact us at [wishing.plan.com@gmail.com](mailto: 'wishing.plan.com@gmail.com').
+## Quick Start
 
-# Development
+To get it running, follow the steps below:
 
-## Getting started
+### Setup dependencies
 
-### Pre-requisites
+```diff
+# Install dependencies
+pnpm i
 
-- Use node version "^12.19.0 || ^14.15.0 || ^16.13.0 || ^18.12.0"
-  - This is because of the compatibility of next-auth@4.17.0
-- Install yarn globally `npm install -g yarn`
-- Insdall Docker e.g., Docker Desktop for Windows or Docker Engine for Linux. See [Docker installation](https://docs.docker.com/get-docker/) for more information.
-  - This is to have a local database for development.
 
-#### Windows
+# Configure environment variables.
+# There is an `.env.example` in the root directory you can use for reference
+cp .env.example .env
 
-- Install win-node-env globally `npm install -g win-node-env` to be able to run e.g., `yarn db:seed` on Windows.
+# Push the Prisma schema to your database
+pnpm db-push
+```
 
-### Installation and setup
+### Configure Expo app
 
-- Clone the repository
-- Create local .env `cp .env.example .env` and fill in the values
-- Setup provider ([Example](https://create.t3.gg/en/usage/next-auth#setting-up-the-default-discordprovider))
-  - For now you will need to setup a provider to be able to sign in locally; however, we are looking into simplifying the process by implementing Mock users/providers.
-- Install dependencies `yarn install` or just `yarn`
-- Start the database `docker-compose up -d`
-- Run `yarn db:push` to migrate the database
-- Run `yarn db:seed` to seed the database with test data
-- Run the development server `yarn dev`
+Expo doesn't use the .env for the publishable key, so you will need to go to `apps/expo/app.config.ts` and add it there.
 
-## [Project Board](https://github.com/users/Andreasgdp/projects/2/views/1)
+```
+const CLERK_PUBLISHABLE_KEY = "your-clerk-publishable-key";
 
-For development management we are using [GitHub Projects](https://github.com/users/Andreasgdp/projects/2/views/1). In there you can see our backlog, issues sorted by priority and size. We are also working on creating a roadmap in there.
+```
 
-## Repo health information
+### Configure Expo `dev`-script
 
-Here is the current overview of the code health of the repository measured by:
+> **Note:** If you want to use a physical phone with Expo Go, just run `pnpm dev` and scan the QR-code.
 
-- Sonarcloud: https://sonarcloud.io/summary/overall?id=Andreasgdp_Wishing-Plan
-- CodeScene: https://codescene.io/projects/33413/jobs/781250/results
+#### Use iOS Simulator
 
-### External links for development
+1. Make sure you have XCode and XCommand Line Tools installed [as shown on expo docs](https://docs.expo.dev/workflow/ios-simulator/).
+2. Change the `dev` script at `apps/expo/package.json` to open the iOS simulator.
 
-- Component library: https://chakra-ui.com/docs/components
+```diff
++  "dev": "expo start --ios",
+```
 
-## Web Info
+3. Run `pnpm dev` at the project root folder.
 
-The smallest width we will accomidate for the webpage is 240px.
+#### For Android
 
-# Learn More
+1. Install Android Studio tools [as shown on expo docs](https://docs.expo.dev/workflow/android-studio-emulator/).
+2. Change the `dev` script at `apps/expo/package.json` to open the Android emulator.
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+```diff
++  "dev": "expo start --android",
+```
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+3. Run `pnpm dev` at the project root folder.
+
+## Deployment
+
+### Next.js
+
+#### Prerequisites
+
+_We do not recommend deploying a SQLite database on serverless environments since the data wouldn't be persisted. I provisioned a quick Postgresql database on [Railway](https://railway.app), but you can of course use any other database provider. Make sure the prisma schema is updated to use the correct database._
+
+#### Deploy to Vercel
+
+Let's deploy the Next.js application to [Vercel](https://vercel.com/). If you have ever deployed a Turborepo app there, the steps are quite straightforward. You can also read the [official Turborepo guide](https://vercel.com/docs/concepts/monorepos/turborepo) on deploying to Vercel.
+
+1. Create a new project on Vercel, select the `apps/nextjs` folder as the root directory and apply the following build settings:
+
+<img width="927" alt="Vercel deployment settings" src="https://user-images.githubusercontent.com/11340449/201974887-b6403a32-5570-4ce6-b146-c486c0dbd244.png">
+
+> The install command filters out the expo package and saves a few second (and cache size) of dependency installation. The build command makes us build the application using Turbo.
+
+2. Add your `DATABASE_URL`,`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` environment variable.
+
+3. Done! Your app should successfully deploy. Assign your domain and use that instead of `localhost` for the `url` in the Expo app so that your Expo app can communicate with your backend when you are not in development.
+
+### Expo
+
+Deploying your Expo application works slightly differently compared to Next.js on the web. Instead of "deploying" your app online, you need to submit production builds of your app to the app stores, like [Apple App Store](https://www.apple.com/app-store/) and [Google Play](https://play.google.com/store/apps). You can read the full [Distributing your app](https://docs.expo.dev/distribution/introduction/), including best practices, in the Expo docs.
+
+1. Let's start by setting up [EAS Build](https://docs.expo.dev/build/introduction/), which is short for Expo Application Services. The build service helps you create builds of your app, without requiring a full native development setup. The commands below are a summary of [Creating your first build](https://docs.expo.dev/build/setup/).
+
+   ```bash
+   // Install the EAS CLI
+   $ pnpm add -g eas-cli
+
+   // Log in with your Expo account
+   $ eas login
+
+   // Configure your Expo app
+   $ cd apps/expo
+   $ eas build:configure
+   ```
+
+2. After the initial setup, you can create your first build. You can build for Android and iOS platforms and use different [**eas.json** build profiles](https://docs.expo.dev/build-reference/eas-json/) to create production builds or development, or test builds. Let's make a production build for iOS.
+
+   ```
+   $ eas build --platform ios --profile production
+   ```
+
+   > If you don't specify the `--profile` flag, EAS uses the `production` profile by default.
+
+3. Now that you have your first production build, you can submit this to the stores. [EAS Submit](https://docs.expo.dev/submit/introduction/) can help you send the build to the stores.
+
+   ```
+   $ eas submit --platform ios --latest
+   ```
+
+   > You can also combine build and submit in a single command, using `eas build ... --auto-submit`.
+
+4. Before you can get your app in the hands of your users, you'll have to provide additional information to the app stores. This includes screenshots, app information, privacy policies, etc. _While still in preview_, [EAS Metadata](https://docs.expo.dev/eas/metadata/) can help you with most of this information.
+
+5. If you're using OAuth social providers with Clerk, for instance Google, Apple, Facebook, etc..., you must whitelist your own OAuth redirect URL for the Expo application in the Clerk Dashboard.
+
+   In `apps/expo/app.config.ts`, add a `scheme` that will be used to identify your standalone app.
+
+   ```ts
+   import { ExpoConfig, ConfigContext } from "@expo/config";
+
+   const CLERK_PUBLISHABLE_KEY = "your-clerk-publishable-key";
+
+   const defineConfig = (_ctx: ConfigContext): ExpoConfig => ({
+      name: "expo",
+      slug: "expo",
+      scheme: "your-app-scheme",
+      // ...
+   });
+   ```
+
+   Then, in the [Clerk Dashboard](https://dashboard.clerk.dev/), go to **User & Authentication > Social Connections > Settings** and add your app's scheme and redirect URL to the **Redirect URLs** field:
+
+   ```txt
+   your-app-scheme://oauth-native-callback
+   ```
+
+   Here, `your-app-scheme` corresponds to the `scheme` defined in `app.config.ts`, and `oauth-native-callback` corresponds to the redirect URL defined when authenticating with social providers. See [SignInWithOAuth.tsx](/apps/expo/src/components/SignInWithOAuth.tsx) for reference.
+
+   > You can find more information about this in the [Expo documentation](https://docs.expo.dev/versions/latest/sdk/auth-session/#redirecting-to-your-app).
+
+   You should now be able to sign in with your social providers in the TestFlight application build.
+
+6. Once everything is approved, your users can finally enjoy your app. Let's say you spotted a small typo; you'll have to create a new build, submit it to the stores, and wait for approval before you can resolve this issue. In these cases, you can use EAS Update to quickly send a small bugfix to your users without going through this long process. Let's start by setting up EAS Update.
+
+   The steps below summarize the [Getting started with EAS Update](https://docs.expo.dev/eas-update/getting-started/#configure-your-project) guide.
+
+   ```bash
+   // Add the `expo-updates` library to your Expo app
+   $ cd apps/expo
+   $ pnpm expo install expo-updates
+
+   // Configure EAS Update
+   $ eas update:configure
+   ```
+
+6. Before we can send out updates to your app, you have to create a new build and submit it to the app stores. For every change that includes native APIs, you have to rebuild the app and submit the update to the app stores. See steps 2 and 3.
+
+7. Now that everything is ready for updates, let's create a new update for `production` builds. With the `--auto` flag, EAS Update uses your current git branch name and commit message for this update. See [How EAS Update works](https://docs.expo.dev/eas-update/how-eas-update-works/#publishing-an-update) for more information.
+
+   ```bash
+   $ cd apps/expo
+   $ eas update --auto
+   ```
+
+   > Your OTA (Over The Air) updates must always follow the app store's rules. You can't change your app's primary functionality without getting app store approval. But this is a fast way to update your app for minor changes and bug fixes.
+
+8. Done! Now that you have created your production build, submitted it to the stores, and installed EAS Update, you are ready for anything!
+
+## References
+
+The stack originates from [create-t3-turbo](https://github.com/t3-oss/create-t3-turbo).

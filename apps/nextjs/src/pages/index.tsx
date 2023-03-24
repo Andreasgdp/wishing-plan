@@ -23,7 +23,7 @@ const PostCard: React.FC<{
         className="text-red-500"
         onClick={async () => {
           await postDeleteMutation.mutate({ id: post.id });
-          refetch();
+          await refetch();
         }}
       >
         Delete
@@ -98,7 +98,7 @@ const AuthShowcase: React.FC = () => {
                 title: "Hello World",
                 content: "This is a post",
               });
-              refetch();
+              await refetch();
             }}
           >
             Create Post

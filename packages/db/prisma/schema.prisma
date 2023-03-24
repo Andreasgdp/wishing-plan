@@ -1,13 +1,191 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
     provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+    provider     = "mysql"
+    // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
+    // Further reading:
+    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
+    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
+}
+
+model Example {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+// Necessary for Next auth
+model Account {
+    id                String  @id @default(cuid())
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.Text
+    session_state     String?
+    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+    @@index([userId])
+}
+
+model Session {
+    id           String   @id @default(cuid())
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
+}
+
+model VerificationToken {
+    identifier String
+    token      String   @unique
+    expires    DateTime
+
+    @@unique([identifier, token])
+}
+
+model ShortLink {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    url       String   @db.VarChar(2000)
+    slug      String   @unique
+
+    @@index(slug)
+}
+
+model User {
+    id                String         @id @default(cuid())
+    name              String?
+    email             String?        @unique
+    password          String?
+    emailVerified     DateTime?
+    image             String?
+    accounts          Account[]
+    sessions          Session[]
+    settings          UserSettings?
+    wishes            Wish[]
+    wishLists         WishList[]     @relation("WishLists")
+    sharedWishLists   WishList[]     @relation("SharedWishLists")
+    mainPlan          Plan?          @relation("MainPlan")
+    plans             Plan[]         @relation("Plans")
+    sharedPlans       Plan[]         @relation("SharedPlans")
+    notifications     Notification[] @relation("toUser")
+    sentNotifications Notification[] @relation("fromUser")
+}
+
+model UserSettings {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId    String   @unique
+    currency  String
+
+    @@index([userId])
+}
+
+model Plan {
+    id                 String     @id @default(cuid())
+    createdAt          DateTime   @default(now())
+    updatedAt          DateTime   @updatedAt
+    name               String?
+    description        String?
+    currentAmountSaved Int
+    amountToSave       Int
+    firstSaving        DateTime
+    frequency          String
+    user               User?      @relation(name: "Plans", fields: [userId], references: [id], onDelete: Cascade)
+    userId             String?
+    mainUser           User?      @relation(name: "MainPlan", fields: [mainUserId], references: [id], onDelete: Cascade)
+    mainUserId         String?    @unique
+    sharedWith         User[]     @relation(name: "SharedPlans")
+    wishes             Wish[]
+    wishBridges        PlanWish[]
+
+    @@index([userId])
+}
+
+model PlanWish {
+    id        String @id @default(cuid())
+    plan      Plan   @relation(fields: [planId], references: [id], onDelete: Cascade)
+    planId    String
+    wish      Wish   @relation(fields: [wishId], references: [id], onDelete: Cascade)
+    wishId    String
+    placement Int
+
+    @@index([planId])
+    @@index([wishId])
+    @@map("PlanWishBridge")
+}
+
+model Notification {
+    id         String   @id @default(cuid())
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+    title      String
+    message    String
+    type       String
+    toUser     User     @relation(name: "toUser", fields: [toUserId], references: [id], onDelete: Cascade)
+    toUserId   String   @map("userId")
+    fromUser   User?    @relation(name: "fromUser", fields: [fromUserId], references: [id], onDelete: Cascade)
+    fromUserId String?
+
+    @@index([toUserId])
+    @@index([fromUserId])
+}
+
+model Wish {
+    id          String     @id @default(cuid())
+    createdAt   DateTime   @default(now())
+    updatedAt   DateTime   @updatedAt
+    title       String
+    description String?
+    price       Int
+    url         String
+    imageUrl    String?
+    creator     User       @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+    creatorId   String
+    wishList    WishList?  @relation(fields: [wishListId], references: [id], onDelete: Cascade)
+    wishListId  String?
+    plan        Plan?      @relation(fields: [planId], references: [id], onDelete: Cascade)
+    planId      String?
+    wishBridges PlanWish[]
+
+    @@index([creatorId])
+    @@index([wishListId])
+    @@index([planId])
+}
+
+model WishList {
+    id          String   @id @default(cuid())
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    creatorId   String
+    creator     User     @relation(name: "WishLists", fields: [creatorId], references: [id], onDelete: Cascade)
+    sharedWith  User[]   @relation(name: "SharedWishLists")
+    name        String
+    description String
+    wishes      Wish[]
+
+    @@index([creatorId])
 }
 
 model Post {

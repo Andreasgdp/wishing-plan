@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { trpc } from "../utils/trpc";
-import type { inferProcedureOutput } from "@trpc/server";
 import type { AppRouter } from "@acme/api";
 import { useAuth, UserButton } from "@clerk/nextjs";
+import type { inferProcedureOutput } from "@trpc/server";
+import type { NextPage } from "next";
+import Head from "next/head";
 import Link from "next/link";
+import { trpc } from "../utils/trpc";
 
 const PostCard: React.FC<{
   post: inferProcedureOutput<AppRouter["post"]["all"]>[number];
@@ -62,6 +62,8 @@ const AuthShowcase: React.FC = () => {
     { enabled: !!isSignedIn },
   );
 
+  const postCreateMutation = trpc.post.create.useMutation();
+
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       {isSignedIn && (
@@ -75,6 +77,18 @@ const AuthShowcase: React.FC = () => {
               </span>
             )}
           </p>
+          <button
+            className="px-4 py-2 text-white bg-[hsl(280,100%,70%)] rounded-lg"
+            onClick={() => {
+              postCreateMutation.mutate({
+                title: "Hello World",
+                content: "This is a post",
+              });
+            }}
+          >
+            Create Post
+          </button>
+          
           <div className="flex items-center justify-center">
             <UserButton
               appearance={{

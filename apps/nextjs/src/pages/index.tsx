@@ -9,12 +9,25 @@ import { trpc } from "../utils/trpc";
 const PostCard: React.FC<{
   post: inferProcedureOutput<AppRouter["post"]["all"]>[number];
 }> = ({ post }) => {
+  const {refetch} = trpc.post.all.useQuery();
+
+  const postDeleteMutation = trpc.post.delete.useMutation();
+
   return (
     <div className="max-w-2xl rounded-lg border-2 border-gray-500 p-4 transition-all hover:scale-[101%]">
       <h2 className="text-2xl font-bold text-[hsl(280,100%,70%)]">
         {post.title}
       </h2>
       <p>{post.content}</p>
+      <button
+        className="text-red-500"
+        onClick={async () => {
+          await postDeleteMutation.mutate({ id: post.id });
+          refetch();
+        }}
+      >
+        Delete
+      </button>
     </div>
   );
 };
@@ -62,6 +75,7 @@ const AuthShowcase: React.FC = () => {
     { enabled: !!isSignedIn },
   );
 
+  const { refetch } = trpc.post.all.useQuery();
   const postCreateMutation = trpc.post.create.useMutation();
 
   return (
@@ -78,17 +92,18 @@ const AuthShowcase: React.FC = () => {
             )}
           </p>
           <button
-            className="px-4 py-2 text-white bg-[hsl(280,100%,70%)] rounded-lg"
-            onClick={() => {
-              postCreateMutation.mutate({
+            className="rounded-lg bg-[hsl(280,100%,70%)] px-4 py-2 text-white transition-all hover:bg-[hsl(280,100%,60%)]"
+            onClick={async () => {
+              await postCreateMutation.mutate({
                 title: "Hello World",
                 content: "This is a post",
               });
+              refetch();
             }}
           >
             Create Post
           </button>
-          
+
           <div className="flex items-center justify-center">
             <UserButton
               appearance={{

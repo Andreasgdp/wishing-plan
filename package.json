@@ -42,7 +42,7 @@
 		"bcryptjs": "^2.4.3",
 		"cheerio": "^1.0.0-rc.12",
 		"classnames": "^2.3.2",
-		"framer-motion": "^7.6.19",
+		"framer-motion": "^10.8.5",
 		"lodash": "^4.17.21",
 		"moment": "^2.29.4",
 		"next": "13.0.2",

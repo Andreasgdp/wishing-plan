@@ -9,8 +9,6 @@ import { trpc } from "../utils/trpc";
 const PostCard: React.FC<{
   post: inferProcedureOutput<AppRouter["post"]["all"]>[number];
 }> = ({ post }) => {
-  const {refetch} = trpc.post.all.useQuery();
-
   const postDeleteMutation = trpc.post.delete.useMutation();
 
   return (
@@ -23,7 +21,6 @@ const PostCard: React.FC<{
         className="text-red-500"
         onClick={async () => {
           await postDeleteMutation.mutate({ id: post.id });
-          await refetch();
         }}
       >
         Delete
@@ -75,7 +72,6 @@ const AuthShowcase: React.FC = () => {
     { enabled: !!isSignedIn },
   );
 
-  const { refetch } = trpc.post.all.useQuery();
   const postCreateMutation = trpc.post.create.useMutation();
 
   return (
@@ -98,7 +94,6 @@ const AuthShowcase: React.FC = () => {
                 title: "Hello World",
                 content: "This is a post",
               });
-              await refetch();
             }}
           >
             Create Post

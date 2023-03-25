@@ -1,4 +1,4 @@
-import { prisma } from "@acme/db";
+import { prisma, PrismaClient } from "@acme/db";
 import type {
   SignedInAuthObject,
   SignedOutAuthObject,
@@ -12,6 +12,7 @@ import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
  */
 type AuthContextProps = {
   auth: SignedInAuthObject | SignedOutAuthObject;
+  prisma?: PrismaClient;
 };
 
 /** Use this helper for:
@@ -19,10 +20,10 @@ type AuthContextProps = {
  *  - trpc's `createSSGHelpers` where we don't have req/res
  * @see https://beta.create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
-export const createContextInner = async ({ auth }: AuthContextProps) => {
+export const createContextInner = async (opts: AuthContextProps) => {
   return {
-    auth,
-    prisma,
+    auth: opts.auth,
+    prisma: opts.prisma || prisma,
   };
 };
 

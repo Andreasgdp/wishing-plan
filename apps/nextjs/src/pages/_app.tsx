@@ -5,6 +5,7 @@ import "../styles/globals.css";
 import { trpc } from "../utils/trpc";
 
 import { ChakraProvider, useColorModeValue } from "@chakra-ui/react";
+import { dark } from "@clerk/themes";
 import { Analytics } from "@vercel/analytics/react";
 import { AnimatePresence } from "framer-motion";
 import Head from "next/head";
@@ -12,7 +13,6 @@ import NextProgress from "nextjs-progressbar";
 import Fonts from "../components/common/Theme/Fonts";
 import Layout from "../components/layouts/Layout";
 import theme from "../libs/theme";
-import "../styles/globals.css";
 
 const prefersDarkMode = () => {
   return globalThis?.window?.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -20,8 +20,18 @@ const prefersDarkMode = () => {
 
 const MyApp: AppType = ({ Component, pageProps: { ...pageProps }, router }) => {
   const activeColor = useColorModeValue("#3fba73", "#9ee871");
+  const colorBackground = useColorModeValue("#232a38", "#f9f9f9");
+
   return (
-    <ClerkProvider {...pageProps}>
+    <ClerkProvider
+      {...pageProps}
+      appearance={{
+        baseTheme: prefersDarkMode() ? dark : undefined,
+        variables: {
+          colorBackground: colorBackground,
+        },
+      }}
+    >
       <Head>
         {!prefersDarkMode() && (
           <>

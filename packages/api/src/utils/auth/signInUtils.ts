@@ -1,7 +1,5 @@
 import { SavingsFrequency } from '@components/screens/Plan/planUtils';
 import type { Plan } from '@prisma/client';
-import { prisma } from '@server/db/client';
-import type { User } from 'next-auth';
 import type { AdapterUser } from 'next-auth/adapters';
 
 export async function signInChecks(user: User | AdapterUser) {

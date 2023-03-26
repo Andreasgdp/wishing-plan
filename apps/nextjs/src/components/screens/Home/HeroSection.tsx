@@ -26,8 +26,8 @@ export function HeroSection() {
     ? `https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1`
     : `https://www.youtube.com/embed/dQw4w9WgXcQ`;
 
-  const { isLoaded, userId } = useAuth();
-  const getStartedURL = !isLoaded || !userId ? "/" : "/auth/signin";
+  const { userId } = useAuth();
+  const getStartedURL = userId ? "/" : "/sign-in";
 
   return (
     <Container maxW={"7xl"}>

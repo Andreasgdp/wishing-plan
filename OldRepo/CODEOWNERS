@@ -1,8 +1,0 @@
-# Global codeowners
-* @Andreasgdp
-
-/prisma @Andreasgdp
-
-.env.example @Andreasgdp
-
-/src/env @Andreasgdp

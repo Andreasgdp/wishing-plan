@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 
 import { HamburgerIcon } from "@chakra-ui/icons";
 import {
-  Avatar,
   Box,
   Button,
   Center,
@@ -20,7 +19,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useAuth, useUser } from "@clerk/nextjs";
+import { useAuth, UserButton, useUser } from "@clerk/nextjs";
 import NextLink from "next/link";
 import { IoLogoGithub } from "react-icons/io5";
 import ThemeToggleButton from "../Theme/ThemeToggleButton";
@@ -86,16 +85,21 @@ const Navbar = (props: NavbarProps) => {
           {(user && (
             <Center ml={2} display={{ base: "none", md: "flex" }}>
               <Link as={NextLink} href="/settings/profile">
-                <Avatar
-                  height={"2.5rem"}
-                  width={"2.5rem"}
-                  name={user?.username ?? "User"}
-                  src={user?.profileImageUrl ?? ""}
+                {/* use tailwind to style the userButton to mimic avatar */}
+                <UserButton
+                  appearance={{
+                    elements: {
+                      userButtonAvatarBox: {
+                        width: "2.6rem",
+                        height: "2.6rem",
+                      },
+                    },
+                  }}
                 />
               </Link>
             </Center>
           )) || (
-            <Link as={NextLink} href={"/auth/signin"}>
+            <Link as={NextLink} href={"/sign-in"}>
               <Button ml={2} colorScheme="green">
                 Sign In
               </Button>{" "}

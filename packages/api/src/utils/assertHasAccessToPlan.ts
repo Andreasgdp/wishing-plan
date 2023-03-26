@@ -1,6 +1,6 @@
-import type { Plan, User } from '@prisma/client';
-import { TRPCError } from '@trpc/server';
-import type { Context } from '../router/context';
+import type { Plan, User } from "@prisma/client";
+import { TRPCError } from "@trpc/server";
+import { Context } from "../context";
 
 /**
  *
@@ -8,33 +8,33 @@ import type { Context } from '../router/context';
  * @param planId The ID of the wish list
  */
 export const assertHasAccessToPlan = async (ctx: Context, planId: string) => {
-	// Get the authenticated user's ID
-	const userId = ctx.session?.user?.id;
+  // Get the authenticated user's ID
+  const userId = ctx.auth.userId;
 
-	if (!userId) {
-		throw new TRPCError({ code: 'FORBIDDEN' });
-	}
+  if (!userId) {
+    throw new TRPCError({ code: "FORBIDDEN" });
+  }
 
-	const planPromise = ctx.prisma.plan.findFirst({
-		where: { id: planId },
-	});
+  const planPromise = ctx.prisma.plan.findFirst({
+    where: { id: planId },
+  });
 
-	const plan = await planPromise;
+  const plan = await planPromise;
 
-	if (!plan) {
-		throw new TRPCError({ code: 'NOT_FOUND' });
-	}
+  if (!plan) {
+    throw new TRPCError({ code: "NOT_FOUND" });
+  }
 
-	const sharedWith = await planPromise.sharedWith();
+  const sharedWith = await planPromise.sharedWith();
 
-	checkAuthority(plan, userId, sharedWith);
+  checkAuthority(plan, userId, sharedWith);
 };
 
 function checkAuthority(plan: Plan, userId: string, sharedWith: User[] | null) {
-	const isPlanOwner = plan.userId === userId;
-	const isSharedWith = sharedWith?.map((user) => user.id).includes(userId);
+  const isPlanOwner = plan.userId === userId;
+  const isSharedWith = sharedWith?.map((user) => user.id).includes(userId);
 
-	if (!isPlanOwner && !isSharedWith) {
-		throw new TRPCError({ code: 'UNAUTHORIZED' });
-	}
+  if (!isPlanOwner && !isSharedWith) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
 }

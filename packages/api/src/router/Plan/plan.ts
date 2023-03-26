@@ -1,3 +1,4 @@
+import { clerkClient } from "@clerk/nextjs/server";
 import type { Plan, PlanWish, Prisma, Wish } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
@@ -264,7 +265,6 @@ export const planRouter = router({
       );
     }),
   deleteWish: protectedProcedure
-
     .input(z.object({ planId: z.string().nullish(), wishId: z.string() }))
     .mutation(async ({ input, ctx }) => {
       const planId = input.planId ?? (await getPlanIdFromSession(ctx));
@@ -342,8 +342,8 @@ export const planRouter = router({
         throw new TRPCError({ code: "NOT_FOUND" });
       }
 
-      const users = await ctx.prisma.user.findMany({
-        where: { email: { in: input.emails } },
+      const users = await clerkClient.users.getUserList({
+        emailAddress: input.emails,
       });
 
       const sharedWith = await plan.sharedWith();

@@ -44,7 +44,7 @@ import {
 } from '@chakra-ui/react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import type { PlanWishType } from '@acme/api/src/router/plan/plan';
+import type { PlanWishType } from '@acme/api/src/router/Plan/plan';
 import { trpc } from '@utils/trpc';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';

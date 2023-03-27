@@ -31,7 +31,7 @@ export const assertHasAccessToPlan = async (ctx: Context, planId: string) => {
 };
 
 function checkAuthority(plan: Plan, userId: string, sharedWith: User[] | null) {
-  const isPlanOwner = plan.userId === userId;
+  const isPlanOwner = plan.mainUserId === userId || plan.userId === userId;
   const isSharedWith = sharedWith?.map((user) => user.id).includes(userId);
 
   if (!isPlanOwner && !isSharedWith) {

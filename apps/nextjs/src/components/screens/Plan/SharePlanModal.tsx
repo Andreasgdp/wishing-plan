@@ -20,7 +20,7 @@ import {
 	TagLabel,
 	useDisclosure,
 } from '@chakra-ui/react';
-import type { User } from '@prisma/client';
+import { User } from "@clerk/nextjs/dist/api";
 import { isNull } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -45,7 +45,7 @@ export const SharePlanModal = (props: SharePlanModalProps) => {
 
 	useEffect(() => {
 		const emails = props.sharedWith
-			.map((user) => user.email)
+			.map((user) => user.primaryEmailAddressId)
 			.filter((email) => !isNull(email)) as string[];
 
 		setSharedWithEmails(emails);

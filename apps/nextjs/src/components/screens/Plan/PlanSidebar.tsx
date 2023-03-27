@@ -20,7 +20,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useUser } from "@clerk/nextjs";
-import type { Plan, User, Wish } from "@prisma/client";
+import { User } from "@clerk/nextjs/dist/api";
+import type { Plan, Wish } from "@prisma/client";
 import { trpc } from "@utils/trpc";
 import type { ChangeEvent } from "react";
 import React, { useEffect, useState } from "react";
@@ -269,15 +270,15 @@ export const PlanSidebar = (props: PlanSidebarProps) => {
             <AvatarGroup size="md" max={5}>
               {user?.id !== props.owner?.id && (
                 <Avatar
-                  name={props.owner?.name ?? ""}
-                  src={props.owner?.image ?? ""}
+                  name={props.owner?.username ?? ""}
+                  src={props.owner?.profileImageUrl ?? ""}
                 />
               )}
               {props.sharedWith.map((user) => (
                 <Avatar
                   key={user.id}
-                  name={user.name ?? ""}
-                  src={user.image ?? ""}
+                  name={user.username ?? ""}
+                  src={user.profileImageUrl ?? ""}
                 />
               ))}
             </AvatarGroup>

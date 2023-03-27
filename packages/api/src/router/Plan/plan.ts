@@ -11,6 +11,7 @@ import {
 
 import { protectedProcedure, router } from "../../trpc";
 import { assertHasAccessToPlan } from "../../utils/assertHasAccessToPlan";
+import { getClerkUserFromPrismaUser, getClerkUsersFromListOfPrismaUsers } from "../../utils/clerk/userUtils";
 
 export interface PlanWishType extends Wish {
   placement: number;
@@ -424,23 +425,20 @@ async function modifyPlan(
   }
 
   // get wishes
-  return ctx.prisma.planWish
-    .findMany({
-      where: { planId: plan.id },
-      orderBy: { placement: "asc" },
-      include: { wish: true },
-    })
-    .then((planWishes) => {
-      return appendPlacementAndSumOfMoney(planWishes);
-    })
-    .then((wishes) => {
-      return {
-        plan: { ...plan },
-        sharedWith: sharedWith ?? [],
-        owner: owner ?? null,
-        wishes,
-      };
-    });
+  const planWishes = await ctx.prisma.planWish.findMany({
+    where: { planId: plan.id },
+    orderBy: { placement: "asc" },
+    include: { wish: true },
+  });
+
+  const wishes = appendPlacementAndSumOfMoney(planWishes);
+
+  return {
+    plan: { ...plan },
+    sharedWith: await getClerkUsersFromListOfPrismaUsers(sharedWith),
+    owner: await getClerkUserFromPrismaUser(owner),
+    wishes,
+  };
 }
 
 function appendPlacementAndSumOfMoney(

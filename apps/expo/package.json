@@ -4,7 +4,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "expo start",
-    "dev": "expo start --ios",
+    "dev": "expo start --android",
     "clean": "rm -rf .expo .turbo node_modules",
     "android": "expo start --android",
     "ios": "expo start --ios",

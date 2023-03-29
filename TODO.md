@@ -1,6 +1,6 @@
 # TODO to do the following steps before the migration is done
 
-- [ ] Go over expo setup and make sure it's up to date and has Wishing Plan relevant information
+- [X] Go over expo setup and make sure it's up to date and has Wishing Plan relevant information
     - Remove unnecessary steps like setting up vercel
 - [ ] Go over the codebase in general and investigate areas it would make sense to make breaking changes in (since this migration is already a breaking change)
 - [ ] Look at the state of the components and use the philosophy mentioned [here](https://www.youtube.com/watch?v=vPRdY87_SH0) to redesign and make the overall app more clean and understandable.

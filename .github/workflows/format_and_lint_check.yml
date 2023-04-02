@@ -27,6 +27,6 @@ jobs:
         with:
           node-version: 16.15
       - name: Install dependencies
-        run: yarn
+        run: pnpm install
       - name: Run prettier check
-        run: yarn format:check
+        run: pnpm format:check

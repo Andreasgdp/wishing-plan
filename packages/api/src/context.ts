@@ -1,4 +1,4 @@
-import { prisma, PrismaClient } from "@acme/db";
+import { prisma, PrismaClient } from "@wishingplan/db";
 import type {
   SignedInAuthObject,
   SignedOutAuthObject,

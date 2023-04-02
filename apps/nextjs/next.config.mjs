@@ -9,7 +9,7 @@
 const config = {
   reactStrictMode: true,
   swcMinify: true,
-  transpilePackages: ["@acme/api", "@acme/db"],
+  transpilePackages: ["@wishingplan/api", "@wishingplan/db"],
   // We already do linting on GH actions
   eslint: {
     ignoreDuringBuilds: !!process.env.CI,

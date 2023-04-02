@@ -1,7 +1,7 @@
 // endpoint to handle user webhooks of type 'user.created', 'user.deleted' from Clerk
 
-import { SavingsFrequency } from "@acme/api/src/router/Plan/planUtils";
-import { Plan, User } from "@acme/db";
+import { SavingsFrequency } from "@wishingplan/api/src/router/Plan/planUtils";
+import { Plan, User } from "@wishingplan/db";
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 

@@ -1,5 +1,5 @@
 {
-  "name": "@acme/api",
+  "name": "@wishingplan/api",
   "version": "0.1.0",
   "main": "./index.ts",
   "types": "./index.ts",
@@ -10,7 +10,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@acme/db": "*",
+    "@wishingplan/db": "*",
     "@trpc/client": "^10.1.0",
     "@trpc/server": "^10.1.0",
     "axios": "^1.3.4",

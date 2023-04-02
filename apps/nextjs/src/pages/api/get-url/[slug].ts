@@ -1,4 +1,4 @@
-import { prisma } from "@acme/db";
+import { prisma } from "@wishingplan/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const slug = async (req: NextApiRequest, res: NextApiResponse) => {

@@ -2,6 +2,7 @@ import { ExpoConfig, ConfigContext } from "@expo/config";
 
 const CLERK_PUBLISHABLE_KEY = "pk_test_aGlwLWFwZS01Ny5jbGVyay5hY2NvdW50cy5kZXYk";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const defineConfig = (_ctx: ConfigContext): ExpoConfig => ({
   name: "expo",
   slug: "expo",

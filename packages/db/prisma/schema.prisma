@@ -42,8 +42,6 @@ model User {
     mainPlan          Plan?          @relation("MainPlan")
     plans             Plan[]         @relation("Plans")
     sharedPlans       Plan[]         @relation("SharedPlans")
-    notifications     Notification[] @relation("toUser")
-    sentNotifications Notification[] @relation("fromUser")
 }
 
 model UserSettings {
@@ -89,22 +87,6 @@ model PlanWish {
     @@index([planId])
     @@index([wishId])
     @@map("PlanWishBridge")
-}
-
-model Notification {
-    id         String   @id @default(cuid())
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-    title      String
-    message    String
-    type       String
-    toUser     User     @relation(name: "toUser", fields: [toUserId], references: [id], onDelete: Cascade)
-    toUserId   String   @map("userId")
-    fromUser   User?    @relation(name: "fromUser", fields: [fromUserId], references: [id], onDelete: Cascade)
-    fromUserId String?
-
-    @@index([toUserId])
-    @@index([fromUserId])
 }
 
 model Wish {

@@ -1,4 +1,4 @@
-import { User } from "@acme/db";
+import { User } from "@wishingplan/db";
 import { clerkClient } from "@clerk/nextjs/server";
 
 export async function getClerkUserFromPrismaUser(user: User | null) {

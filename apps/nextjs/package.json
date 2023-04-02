@@ -1,5 +1,5 @@
 {
-  "name": "@acme/nextjs",
+  "name": "@wishingplan/nextjs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,9 +12,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@acme/api": "*",
-    "@acme/db": "*",
-    "@acme/tailwind-config": "*",
+    "@wishingplan/api": "*",
+    "@wishingplan/db": "*",
+    "@wishingplan/tailwind-config": "*",
     "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/react": "^2.5.3",
     "@clerk/nextjs": "^4.11.0",

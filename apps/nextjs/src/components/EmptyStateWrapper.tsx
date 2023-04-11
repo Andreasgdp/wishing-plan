@@ -29,13 +29,7 @@ export const EmptyStateWrapper = ({
           />
         </Center>
       ) : (
-        <>
-          {isEmpty(data) ? (
-            EmptyComponent
-          ) : (
-            NonEmptyComponent
-          )}
-        </>
+        <>{isEmpty(data) ? EmptyComponent : NonEmptyComponent}</>
       )}
     </div>
   );

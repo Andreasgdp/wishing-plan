@@ -72,6 +72,9 @@ const CreatePost: React.FC = () => {
   );
 };
 
+// ItemSeparatorComponent
+const Separator = () => <View className="h-2" />;
+
 export const HomeScreen = () => {
   const postQuery = trpc.post.all.useQuery();
   const [showPost, setShowPost] = React.useState<string | null>(null);
@@ -99,7 +102,7 @@ export const HomeScreen = () => {
         <FlashList
           data={postQuery.data}
           estimatedItemSize={20}
-          ItemSeparatorComponent={() => <View className="h-2" />}
+          ItemSeparatorComponent={Separator}
           renderItem={(p) => (
             <TouchableOpacity onPress={() => setShowPost(p.item.id)}>
               <PostCard post={p.item} />

@@ -6,10 +6,6 @@ import { Navigation } from "@components/common/Navigation/Navigation";
 import { Content } from "@components/layouts/Content";
 import { settingsNavigationData } from "@lib/constants";
 
-// TODO: implement something like this to get rid of duplicate code when creating new pages in the settings section
-// https://github.com/hauptrolle/chakra-templates/blob/main/src/pages/%5B...slug%5D.tsx
-
-// Create about page component
 const Profile = () => {
   const { user } = useUser();
   const { signOut } = useAuth();

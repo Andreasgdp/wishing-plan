@@ -1,4 +1,4 @@
-import { useSignUp, useSignIn } from "@clerk/clerk-expo";
+import { useSignIn, useSignUp } from "@clerk/clerk-expo";
 import React from "react";
 import { Button, View } from "react-native";
 
@@ -25,7 +25,9 @@ const SignInWithOAuth = () => {
       } = signIn;
 
       if (!externalVerificationRedirectURL)
-        throw "Something went wrong during the OAuth flow. Try again.";
+        throw new Error(
+          "Something went wrong during the OAuth flow. Try again.",
+        );
 
       const authResult = await AuthSession.startAsync({
         authUrl: externalVerificationRedirectURL.toString(),
@@ -33,7 +35,9 @@ const SignInWithOAuth = () => {
       });
 
       if (authResult.type !== "success") {
-        throw "Something went wrong during the OAuth flow. Try again.";
+        throw new Error(
+          "Something went wrong during the OAuth flow. Try again.",
+        );
       }
 
       // Get the rotatingTokenNonce from the redirect URL parameters
@@ -54,7 +58,9 @@ const SignInWithOAuth = () => {
           !signUp ||
           signIn.firstFactorVerification.status !== "transferable"
         ) {
-          throw "Something went wrong during the Sign up OAuth flow. Please ensure that all sign up requirements are met.";
+          throw new Error(
+            "Something went wrong during the Sign up OAuth flow. Please ensure that all sign up requirements are met.",
+          );
         }
 
         console.log(

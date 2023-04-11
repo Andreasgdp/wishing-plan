@@ -70,8 +70,8 @@ export const Navigation = (props: NavigationProps) => {
       display={{ base: "none", lg: "block" }}
     >
       {props.data &&
-        props.data.map((category, index) => (
-          <Stack key={index}>
+        props.data.map((category) => (
+          <Stack key={category.name}>
             <Text
               textTransform={"uppercase"}
               color={categoryColor}
@@ -82,10 +82,10 @@ export const Navigation = (props: NavigationProps) => {
               {category.name}
             </Text>
             <Stack spacing={1}>
-              {category.children?.map((subCategory, index) => (
+              {category.children?.map((subCategory) => (
                 <NavigationLink
                   asPath={asPath}
-                  key={index}
+                  key={subCategory.name}
                   href={`${baseURL}${subCategory.url}`}
                 >
                   {subCategory.name}

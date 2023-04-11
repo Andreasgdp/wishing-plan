@@ -37,7 +37,7 @@ export const WishListCard = ({
       name: name,
       description: description,
     });
-    if (refreshListFunc) await refreshListFunc();
+    if (refreshListFunc) refreshListFunc();
   };
 
   return (

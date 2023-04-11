@@ -62,7 +62,6 @@ export const WishListScreen = (props: WishListScreenProps) => {
               onSubmit={onSubmit}
             />
           </Center>
-          {/* TODO: replace with skeleton setup in future */}
           <EmptyStateWrapper
             isLoading={isLoadingWishes && isLoadingSettings}
             data={wishes}

@@ -12,12 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.3.0
-      - name: ESLint Reviewdog Check
-        uses: reviewdog/action-eslint@v1.18.1
+      - uses: actions/setup-node@v3.6.0
         with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
-          eslint_flags: 'src/'
+          node-version: 16.15
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run prettier check
+        run: pnpm lint
   prettier:
     name: Prettier
     runs-on: ubuntu-latest

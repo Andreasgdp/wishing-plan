@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: 16.15
       - name: Install dependencies
-        run: yarn
+        run: pnpm install
       - name: Run Unit Tests
-        run: yarn test:ci
+        run: pnpm test:ci
         env:
           SKIP_ENV_VALIDATION: true

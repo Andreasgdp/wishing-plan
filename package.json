@@ -9,7 +9,7 @@
     "clean:workspaces": "turbo clean",
     "dev": "pnpm db:dev && turbo dev --parallel",
     "dev:clean": "pnpm db:reset && pnpm dev",
-    "test": "jest",
+    "test": "turbo run test",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:ci": "pnpm test:coverage",
@@ -41,5 +41,8 @@
     "patchedDependencies": {
       "react-native@0.70.5": "patches/react-native@0.70.5.patch"
     }
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
   }
 }

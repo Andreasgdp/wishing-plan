@@ -13,6 +13,9 @@
       "dependsOn": ["^db:generate"],
       "cache": false
     },
+    "test":{
+      "cache": false
+    },
     "build": {
       "dependsOn": ["^build", "^db:generate"],
       "outputs": [".next/**", ".expo/**"]

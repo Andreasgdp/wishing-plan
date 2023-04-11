@@ -16,8 +16,6 @@ jobs:
         with:
           node-version: 16.15
       - uses: pnpm/action-setup@v2.2.4
-      - name: Install dependencies
-        run: pnpm install
       - name: Run prettier check
         run: pnpm lint
   prettier:
@@ -29,7 +27,5 @@ jobs:
         with:
           node-version: 16.15
       - uses: pnpm/action-setup@v2.2.4
-      - name: Install dependencies
-        run: pnpm install
       - name: Run prettier check
         run: pnpm format:check

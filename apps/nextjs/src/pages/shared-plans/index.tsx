@@ -1,17 +1,17 @@
-import Head from 'next/head';
+import Head from "next/head";
 
-import { SharedPlansScreen } from '@components/screens/Plan/SharedPlans/SharedPlansScreen';
+import { SharedPlansScreen } from "@components/screens/Plan/SharedPlans/SharedPlansScreen";
 
 const Plan = () => {
-	return (
-		<>
-			<Head>
-				<title>Shared Plans</title>
-			</Head>
+  return (
+    <>
+      <Head>
+        <title>Shared Plans</title>
+      </Head>
 
-			<SharedPlansScreen />
-		</>
-	);
+      <SharedPlansScreen />
+    </>
+  );
 };
 
 export default Plan;

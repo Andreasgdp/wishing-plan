@@ -11,7 +11,10 @@ import {
 
 import { protectedProcedure, router } from "../../trpc";
 import { assertHasAccessToPlan } from "../../utils/assertHasAccessToPlan";
-import { getClerkUserFromPrismaUser, getClerkUsersFromListOfPrismaUsers } from "../../utils/clerk/userUtils";
+import {
+  getClerkUserFromPrismaUser,
+  getClerkUsersFromListOfPrismaUsers,
+} from "../../utils/clerk/userUtils";
 
 export interface PlanWishType extends Wish {
   placement: number;

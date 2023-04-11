@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   db:
@@ -10,7 +10,7 @@ services:
       MYSQL_USER: db_user
       MYSQL_PASSWORD: db_user_pass
     ports:
-      - '6033:3306'
+      - "6033:3306"
     volumes:
       - dbdata:/var/lib/mysql
   phpmyadmin:

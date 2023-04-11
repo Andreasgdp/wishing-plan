@@ -4,7 +4,7 @@
 
 ### Expo
 
-Deploying our Expo application works slightly differently compared to Next.js on the web. Instead of "deploying" our app online, we need to submit production builds of our app to the app stores, like [Apple App Store](https://www.apple.com/app-store/) and [Google Play](https://play.google.com/store/apps). 
+Deploying our Expo application works slightly differently compared to Next.js on the web. Instead of "deploying" our app online, we need to submit production builds of our app to the app stores, like [Apple App Store](https://www.apple.com/app-store/) and [Google Play](https://play.google.com/store/apps).
 
 Read the full [Distributing your app](https://docs.expo.dev/distribution/introduction/), including best practices, in the Expo docs for more information.
 
@@ -50,10 +50,10 @@ Read the full [Distributing your app](https://docs.expo.dev/distribution/introdu
    const CLERK_PUBLISHABLE_KEY = "your-clerk-publishable-key";
 
    const defineConfig = (_ctx: ConfigContext): ExpoConfig => ({
-      name: "expo",
-      slug: "expo",
-      scheme: "your-app-scheme",
-      // ...
+     name: "expo",
+     slug: "expo",
+     scheme: "your-app-scheme",
+     // ...
    });
    ```
 
@@ -82,9 +82,9 @@ Read the full [Distributing your app](https://docs.expo.dev/distribution/introdu
    $ eas update:configure
    ```
 
-6. Before we can send out updates to our app, we have to create a new build and submit it to the app stores. For every change that includes native APIs, we have to rebuild the app and submit the update to the app stores. See steps 2 and 3.
+7. Before we can send out updates to our app, we have to create a new build and submit it to the app stores. For every change that includes native APIs, we have to rebuild the app and submit the update to the app stores. See steps 2 and 3.
 
-7. Now that everything is ready for updates, let's create a new update for `production` builds. With the `--auto` flag, EAS Update uses our current git branch name and commit message for this update. See [How EAS Update works](https://docs.expo.dev/eas-update/how-eas-update-works/#publishing-an-update) for more information.
+8. Now that everything is ready for updates, let's create a new update for `production` builds. With the `--auto` flag, EAS Update uses our current git branch name and commit message for this update. See [How EAS Update works](https://docs.expo.dev/eas-update/how-eas-update-works/#publishing-an-update) for more information.
 
    ```bash
    $ cd apps/expo
@@ -93,4 +93,4 @@ Read the full [Distributing your app](https://docs.expo.dev/distribution/introdu
 
    > Your OTA (Over The Air) updates must always follow the app store's rules. You can't change your app's primary functionality without getting app store approval. But this is a fast way to update your app for minor changes and bug fixes.
 
-8. Done! Now that we have created our production build, submitted it to the stores, and installed EAS Update, we are ready for anything!
+9. Done! Now that we have created our production build, submitted it to the stores, and installed EAS Update, we are ready for anything!

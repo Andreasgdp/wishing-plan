@@ -1,6 +1,6 @@
 name: Good First Issue
 description: Suggest a simple contribution to improve our product
-title: '[GFI]: '
+title: "[GFI]: "
 labels: [good first issue]
 body:
   - type: markdown
@@ -12,7 +12,7 @@ body:
     attributes:
       label: Description
       description: Short description of the contribution
-      placeholder: 'Describe the contribution'
+      placeholder: "Describe the contribution"
     validations:
       required: true
   - type: textarea
@@ -20,7 +20,7 @@ body:
     attributes:
       label: Comments / questions
       description: Any comments or questions relating the contribution.
-      placeholder: 'Comments / questions'
+      placeholder: "Comments / questions"
   - type: checkboxes
     id: terms
     attributes:

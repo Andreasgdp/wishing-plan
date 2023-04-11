@@ -11,8 +11,8 @@ import { settingsNavigationData } from "@lib/constants";
 
 // Create about page component
 const Profile = () => {
-	const { user } = useUser();
-	const { signOut } = useAuth();
+  const { user } = useUser();
+  const { signOut } = useAuth();
 
   return (
     <>

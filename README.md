@@ -26,7 +26,7 @@ Wishting Plan is an open source project. We welcome contributions from the commu
 - [Implement new features](https://github.com/Andreasgdp/Wishing-Plan/issues/new/choose) - If you want to implement a new feature, please create an issue in the issue tracker and describe the feature you want to implement. This will allow us to discuss the feature and make sure it fits with the project.
 - [Improve code quality](https://github.com/Andreasgdp/Wishing-Plan#repo-health-information) - We use SonarCloud and CodeScene to measure the code quality of our project. You can help us improve the code quality by fixing bugs and vulnerabilities.
 - Improve documentation - If you find any errors in the documentation or want to improve it, please contribute with a pull request.
-- In the future, we will want to implement translations of the app. If you are interested in helping us with this, please contact us at [wishing.plan.com@gmail.com](mailto: 'wishing.plan.com@gmail.com').
+- In the future, we will want to implement translations of the app. If you are interested in helping us with this, please contact us at [wishing.plan.com@gmail.com](mailto: "wishing.plan.com@gmail.com").
 
 # Getting started
 
@@ -55,6 +55,7 @@ For this app to work you need to enable Discord as an OAuth provider. You can fi
 ## For further information - [Expo setup](./DOCS/HOW_TOs/expo_setup.md)
 
 # Code Layout
+
 It uses [Turborepo](https://turborepo.org/) and contains:
 
 ```

@@ -8,19 +8,22 @@ describe("Example", () => {
   });
 
   it("should return an example", async () => {
+    const updatedDate = new Date();
+    const createdDate = new Date();
+
     prismaMock.example.findMany.mockResolvedValue([
       {
         id: "2",
-        updatedAt: new Date(),
-        createdAt: new Date(),
+        updatedAt: updatedDate,
+        createdAt: createdDate,
       },
     ]);
     const result = await prismaMock.example.findMany();
     expect(result).toEqual([
       {
         id: "2",
-        updatedAt: new Date(),
-        createdAt: new Date(),
+        updatedAt: updatedDate,
+        createdAt: createdDate,
       },
     ]);
   });

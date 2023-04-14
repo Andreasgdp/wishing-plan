@@ -16,6 +16,15 @@
     "test": {
       "cache": false
     },
+    "test:watch": {
+      "cache": false
+    },
+    "test:coverage": {
+      "cache": false
+    },
+    "test:ci": {
+      "cache": false
+    },
     "build": {
       "dependsOn": ["^build", "^db:generate"],
       "outputs": [".next/**", ".expo/**"]

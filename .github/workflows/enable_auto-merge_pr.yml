@@ -16,8 +16,7 @@ permissions:
 jobs:
   Enable_auto_merge_pr:
     runs-on: ubuntu-latest
-    # Only run if the PR is not a draft and not a PR from a forked repo
-    if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
+    if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
       # Finally, this sets the PR to allow auto-merging for patch and minor
       # updates if all checks pass

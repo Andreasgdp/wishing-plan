@@ -1,0 +1,39 @@
+name: Format and lint check
+
+on: [pull_request]
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.3.0
+      - uses: actions/setup-node@v3.6.0
+        with:
+          node-version: 16.15
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          run_install: false
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run prettier check
+        run: pnpm lint
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.3.0
+      - uses: actions/setup-node@v3.6.0
+        with:
+          node-version: 16.15
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          run_install: false
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run prettier check
+        run: pnpm format:check

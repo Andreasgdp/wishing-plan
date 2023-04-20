@@ -6,6 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3.6.0
+        with:
+          node-version: 16.15
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          run_install: false
       - uses: EPMatt/reviewdog-action-prettier@v1
         with:
           github_token: ${{ secrets.github_token }}

@@ -22,10 +22,10 @@ type AuthContextProps = CreateNextContextOptions & {
  */
 export const createContextInner = async (opts: AuthContextProps) => {
   return {
-		auth: opts.auth,
-		prisma: opts.prisma || prisma,
-		req: opts.req,
-		res: opts.res,
+    auth: opts.auth,
+    prisma: opts.prisma || prisma,
+    req: opts.req,
+    res: opts.res,
   };
 };
 
@@ -35,9 +35,9 @@ export const createContextInner = async (opts: AuthContextProps) => {
  **/
 export const createContext = async (opts: CreateNextContextOptions) => {
   return await createContextInner({
-		auth: getAuth(opts.req),
-		req: opts.req,
-		res: opts.res,
+    auth: getAuth(opts.req),
+    req: opts.req,
+    res: opts.res,
   });
 };
 

@@ -36,4 +36,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run prettier check
-        run: npx prettier --write $(git diff --name-only --diff-filter d | grep -e '\.[tj]sx\?$' | xargs)
+        run: npx prettier --write **/*.{ts,tsx,md}

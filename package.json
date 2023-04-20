@@ -20,9 +20,8 @@
     "db:push": "turbo db:push",
     "db:stop": "docker-compose down",
     "db:reset": "pnpm db:stop && pnpm db:dev && pnpm db:push",
-    "format:check": "prettier --check .",
-    "format:write": "prettier --write .",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md}\"",
+    "format:write": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo lint",
     "FIXME:lint": "turbo lint && manypkg check",
     "type-check": "turbo type-check"

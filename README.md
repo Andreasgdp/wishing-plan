@@ -43,6 +43,7 @@ For this app to work you need to enable Discord as an OAuth provider. You can fi
 > If you change any setting here outside of adding Discord, you need to update the Expo code to handle any requirements you change.
 
 #### Clerk Webhook Setup
+
 For handling user creation and deletion, you need to setup a webhook in the [Clerk Dashboard](https://dashboard.clerk.dev). You can find the webhook settings under `User & Authentication / Webhooks`. You need to add a webhook with the Subscribed events being `user.deleted` and `user.created`. In order for Clerk to communicate with your local development server, you need to use a tool like [ngrok](https://ngrok.com/) to expose your local development server to the internet. You can find the ngrok setup instructions [here](https://ngrok.com/docs/integrations/clerk/webhooks/).
 
 ## Installation and setup

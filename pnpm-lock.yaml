@@ -174,13 +174,13 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(react@18.2.0)
       '@wishingplan/api':
-        specifier: ^0.1.0
+        specifier: '*'
         version: link:../../packages/api
       '@wishingplan/db':
-        specifier: ^0.1.0
+        specifier: '*'
         version: link:../../packages/db
       '@wishingplan/tailwind-config':
-        specifier: ^0.1.0
+        specifier: '*'
         version: link:../../packages/config/tailwind
       framer-motion:
         specifier: ^10.12.4

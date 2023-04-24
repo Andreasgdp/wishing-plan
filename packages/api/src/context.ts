@@ -10,7 +10,7 @@ import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 /**
  * Replace this with an object if you want to pass things to createContextInner
  */
-type AuthContextProps = CreateNextContextOptions & {
+type AuthContextProps = {
   auth: SignedInAuthObject | SignedOutAuthObject;
   prisma?: PrismaClient;
 };
@@ -24,8 +24,6 @@ export const createContextInner = async (opts: AuthContextProps) => {
   return {
     auth: opts.auth,
     prisma: opts.prisma || prisma,
-    req: opts.req,
-    res: opts.res,
   };
 };
 
@@ -34,11 +32,7 @@ export const createContextInner = async (opts: AuthContextProps) => {
  * @link https://trpc.io/docs/context
  **/
 export const createContext = async (opts: CreateNextContextOptions) => {
-  return await createContextInner({
-    auth: getAuth(opts.req),
-    req: opts.req,
-    res: opts.res,
-  });
+  return await createContextInner({ auth: getAuth(opts.req) });
 };
 
 export type Context = inferAsyncReturnType<typeof createContext>;

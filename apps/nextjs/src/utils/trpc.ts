@@ -2,7 +2,7 @@
 import { createTRPCNext } from "@trpc/next";
 import { httpBatchLink, loggerLink } from "@trpc/client";
 import { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
-import { type AppRouter } from "@wishingplan/api";
+import type { AppRouter } from "@wishingplan/api";
 import { transformer } from "@wishingplan/api/transformer";
 
 const getBaseUrl = () => {

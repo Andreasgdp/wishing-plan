@@ -4,7 +4,7 @@ import debounce from "lodash/debounce";
 import { nanoid } from "nanoid";
 import type { NextPage } from "next";
 import { useState } from "react";
-import { trpc } from "@utils/trpc";
+import { trpc } from "../../utils/trpc";
 
 type Form = {
   slug: string;

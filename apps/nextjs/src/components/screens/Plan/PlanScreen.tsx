@@ -1,4 +1,3 @@
-import { PlanWishType } from "@wishingplan/api/src/router/Plan/plan";
 import {
   Center,
   Container,
@@ -15,13 +14,15 @@ import type { SortablePlanWishType } from "@components/screens/Plan/PlanWish";
 import { PlanWishComponent } from "@components/screens/Plan/PlanWish";
 import { WishModal } from "@components/screens/WishList/WishModal";
 import type { DragEndEvent } from "@dnd-kit/core";
-import { closestCenter, DndContext } from "@dnd-kit/core";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import {
-  arrayMove,
   SortableContext,
+  arrayMove,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import type { Plan } from "@prisma/client";
+import { PlanWishType } from "@wishingplan/api/src/router/Plan/plan";
 
 import { trpc } from "@utils/trpc";
 import moment from "moment";
@@ -281,6 +282,7 @@ export const PlanScreen = (props: PlanScreenProps) => {
                   <DndContext
                     collisionDetection={closestCenter}
                     onDragEnd={handleDragEnd}
+                    modifiers={[restrictToVerticalAxis]}
                   >
                     <Stack spacing={4}>
                       <SortableContext
@@ -348,27 +350,26 @@ export const PlanScreen = (props: PlanScreenProps) => {
     if (over === null) {
       return;
     }
+    const oldWish = stateWishes.find((e) => e.id === over.id);
+    const newWish = stateWishes.find((e) => e.id === active.id);
 
     if (active.id !== over.id) {
+      relocateWish
+        .mutateAsync({
+          planId,
+          wishId: active.id.toString(),
+          oldIndex: newWish?.placement ?? 0,
+          newIndex: oldWish?.placement ?? 0,
+        })
+        .then(async () => {
+          await refetchPlan();
+          await refetchCurrency();
+        });
+
       setWishes((items) => {
         if (items === undefined) {
           return [];
         }
-
-        const oldWish = items.find((e) => e.id === over.id);
-        const newWish = items.find((e) => e.id === active.id);
-
-        relocateWish
-          .mutateAsync({
-            planId,
-            wishId: active.id.toString(),
-            oldIndex: newWish?.placement ?? 0,
-            newIndex: oldWish?.placement ?? 0,
-          })
-          .then(async () => {
-            await refetchPlan();
-            await refetchCurrency();
-          });
 
         const activeIndex = items
           .map((e) => e.id)

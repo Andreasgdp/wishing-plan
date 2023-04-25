@@ -46,7 +46,6 @@ const LinkItem = ({ href, path, children }: LinkItemProps) => {
       color={active ? "#202023" : inacitiveColor}
       borderRadius={4}
       href={href}
-      style={{ marginTop: "-2px" }}
     >
       {children}
     </Link>

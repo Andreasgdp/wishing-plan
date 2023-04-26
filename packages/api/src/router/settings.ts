@@ -3,14 +3,14 @@ import { protectedProcedure, router } from "../trpc";
 
 export const settingsRouter = router({
   get: protectedProcedure.query(({ ctx }) => {
-    const userId = ctx.auth.userId;
+    const userId = ctx.userId;
 
     return ctx.prisma.userSettings.findFirst({
       where: { userId: userId },
     });
   }),
   getCurrency: protectedProcedure.query(async ({ ctx }) => {
-    const userId = ctx.auth.userId;
+    const userId = ctx.userId;
 
     return (
       await ctx.prisma.userSettings.findFirst({
@@ -21,7 +21,7 @@ export const settingsRouter = router({
   updateCurrency: protectedProcedure
     .input(z.object({ currency: z.string() }))
     .mutation(({ input, ctx }) => {
-      const userId = ctx.auth.userId;
+      const userId = ctx.userId;
 
       return ctx.prisma.userSettings.upsert({
         where: { userId: userId },

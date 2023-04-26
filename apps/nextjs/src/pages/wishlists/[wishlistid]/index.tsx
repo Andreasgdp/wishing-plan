@@ -1,12 +1,9 @@
 import { WishListScreen } from "@components/screens/WishList/WishListScreen";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
+import { generateSSGHelper } from "src/helpers/ssgHelper";
 
-const WishListPage: NextPage = () => {
-  const router = useRouter();
-  const wishListId = router.query.wishlistid as string;
-
+const WishListPage: NextPage<{ id: string }> = ({ id }) => {
   return (
     <>
       <Head>
@@ -17,9 +14,35 @@ const WishListPage: NextPage = () => {
         />
       </Head>
 
-      {wishListId && <WishListScreen wishListId={wishListId} />}
+      <WishListScreen wishListId={id} />
     </>
   );
 };
 
+export const getStaticProps: GetStaticProps = async (context) => {
+  const ssg = generateSSGHelper();
+
+  const id = context.params?.wishlistid;
+
+  if (typeof id !== "string") throw new Error("no id");
+
+  const wishlist = await ssg.wishList.getById.fetch({ id });
+
+  if (!wishlist) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      id,
+    },
+  };
+};
+
+export const getStaticPaths = () => {
+  return { paths: [], fallback: "blocking" };
+};
 export default WishListPage;

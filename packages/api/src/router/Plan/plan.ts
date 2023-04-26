@@ -36,7 +36,7 @@ export const planRouter = router({
       }
     }),
   getAll: protectedProcedure.query(async ({ ctx }) => {
-    const userId = ctx.auth.userId;
+    const userId = ctx.userId;
 
     const plans = await ctx.prisma.plan.findMany({
       where: {
@@ -66,7 +66,7 @@ export const planRouter = router({
       }),
     )
     .mutation(async ({ input, ctx }) => {
-      const userId = ctx.auth.userId;
+      const userId = ctx.userId;
 
       const plan = await ctx.prisma.plan.create({
         data: {
@@ -137,7 +137,7 @@ export const planRouter = router({
       const planId = input.planId ?? (await getPlanIdFromSession(ctx));
       await assertHasAccessToPlan(ctx, planId);
 
-      const userId = ctx.auth.userId;
+      const userId = ctx.userId;
 
       // check if wish already exists based on url
       const existingWish = await ctx.prisma.wish.findFirst({
@@ -388,7 +388,7 @@ async function getPlanWishes(ctx: Context, planId: string, wishId: string) {
 }
 
 async function getMainPlan(ctx: Context) {
-  const userId = ctx.auth.userId;
+  const userId = ctx.userId;
 
   if (!userId) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
@@ -460,7 +460,7 @@ function appendPlacementAndSumOfMoney(
 }
 
 async function getPlanIdFromSession(ctx: Context) {
-  const userId = ctx.auth.userId;
+  const userId = ctx.userId;
 
   if (!userId) {
     throw new TRPCError({ code: "UNAUTHORIZED" });

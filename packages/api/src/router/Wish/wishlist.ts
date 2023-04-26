@@ -6,7 +6,7 @@ import { protectedProcedure, router } from "../../trpc";
 
 export const wishListRouter = router({
   getAll: protectedProcedure.query(({ ctx }) => {
-    const userId = ctx.auth.userId;
+    const userId = ctx.userId;
 
     return ctx.prisma.wishList.findMany({
       where: { creatorId: userId },
@@ -59,7 +59,7 @@ export const wishListRouter = router({
       }),
     )
     .mutation(({ input, ctx }) => {
-      const userId = ctx.auth.userId;
+      const userId = ctx.userId;
 
       return ctx.prisma.wishList.create({
         data: {

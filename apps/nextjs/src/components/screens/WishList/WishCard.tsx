@@ -1,3 +1,4 @@
+import { DeleteIcon, EditIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Button,
   Card,
@@ -6,14 +7,18 @@ import {
   Center,
   Divider,
   Heading,
+  IconButton,
   Image,
+  Menu,
+  MenuButton,
+  MenuList,
   Stack,
   Tag,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { DeleteAlert } from "@components/common/Alert/DeleteAlert";
 import { EmptyStateWrapper } from "@components/EmptyStateWrapper";
+import { DeleteAlert } from "@components/common/Alert/DeleteAlert";
 import type { Wish } from "@prisma/client";
 import { trpc } from "@utils/trpc";
 import { motion } from "framer-motion";
@@ -115,7 +120,7 @@ export const WishCard = ({
               </CardBody>
               <Divider />
               <CardFooter
-                justify="start"
+                justify="space-between"
                 flexWrap="wrap"
                 sx={{
                   "& > button": {
@@ -137,23 +142,36 @@ export const WishCard = ({
                     Open link
                   </Button>
                 )}
-
-                <WishModal
-                  buttonProps={{
-                    mr: 2,
-                    mb: 2,
-                    variant: "ghost",
-                    colorScheme: "purple",
-                  }}
-                  buttonName="Edit"
-                  onSubmit={onSubmit}
-                  existingWish={wish}
-                />
-                <DeleteAlert
-                  typeToDelete="Wish"
-                  entityName={wish.title}
-                  onDelete={onDelete}
-                />
+                <Menu>
+                  <MenuButton
+                    as={IconButton}
+                    aria-label="Options"
+                    icon={<HamburgerIcon />}
+                    variant="outline"
+                    colorScheme="blue"
+                    mb={{ base: "2", sm: "6", md: "2" }}
+                  />
+                  <MenuList>
+                    <WishModal
+                      buttonName="Edit"
+                      onSubmit={onSubmit}
+                      existingWish={wish}
+                      menuConfig={{
+                        icon: <EditIcon />,
+                        command: "⌘E",
+                      }}
+                    />
+                    <DeleteAlert
+                      typeToDelete="Wish"
+                      entityName={wish.title}
+                      onDelete={onDelete}
+                      menuConfig={{
+                        icon: <DeleteIcon />,
+                        command: "⌘D",
+                      }}
+                    />
+                  </MenuList>
+                </Menu>
               </CardFooter>
             </Card>
           }

@@ -6,6 +6,8 @@ import {
   AlertDialogHeader,
   AlertDialogOverlay,
   Button,
+  MenuItem,
+  MenuItemProps,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRef } from "react";
@@ -14,6 +16,7 @@ type DeleteAlertProps = {
   typeToDelete: string;
   entityName: string;
   onDelete: () => void;
+  menuConfig?: MenuItemProps;
 };
 
 export const DeleteAlert = (props: DeleteAlertProps) => {
@@ -28,9 +31,15 @@ export const DeleteAlert = (props: DeleteAlertProps) => {
 
   return (
     <>
-      <Button variant={"ghost"} colorScheme="red" onClick={onOpen}>
-        Delete {props.typeToDelete}
-      </Button>
+      {props.menuConfig ? (
+        <MenuItem {...props.menuConfig} onClick={onOpen}>
+          Delete {props.typeToDelete}
+        </MenuItem>
+      ) : (
+        <Button variant={"ghost"} colorScheme="red" onClick={onOpen}>
+          Delete {props.typeToDelete}
+        </Button>
+      )}
 
       <AlertDialog
         isOpen={isOpen}

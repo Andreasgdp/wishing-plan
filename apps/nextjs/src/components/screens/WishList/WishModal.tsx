@@ -1,13 +1,15 @@
 import { InfoOutlineIcon, LinkIcon } from "@chakra-ui/icons";
-import type { ButtonProps } from "@chakra-ui/react";
 import {
   Button,
+  ButtonProps,
   Center,
   FormControl,
   FormLabel,
   Input,
   InputGroup,
   InputLeftElement,
+  MenuItem,
+  MenuItemProps,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -38,7 +40,7 @@ export type WishForm = {
 
 type WishModalProps = {
   buttonName: string;
-  buttonProps: ButtonProps;
+  buttonProps?: ButtonProps;
   onSubmit: (
     title: string,
     description: string,
@@ -47,6 +49,7 @@ type WishModalProps = {
     price: number,
   ) => void;
   existingWish?: Wish;
+  menuConfig?: MenuItemProps;
 };
 
 export const WishModal = (props: WishModalProps) => {
@@ -109,9 +112,16 @@ export const WishModal = (props: WishModalProps) => {
 
   return (
     <>
-      <Button {...props.buttonProps} onClick={openModal}>
-        {props.buttonName}
-      </Button>
+      {props.menuConfig ? (
+        <MenuItem {...props.menuConfig} onClick={openModal}>
+          {props.buttonName}
+        </MenuItem>
+      ) : (
+        <Button {...props.buttonProps} onClick={openModal}>
+          {props.buttonName}
+        </Button>
+      )}
+
       <Modal isOpen={isOpen} onClose={onClose} size={{ base: "xs", md: "xl" }}>
         <ModalOverlay />
 

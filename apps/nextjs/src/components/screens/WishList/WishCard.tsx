@@ -149,7 +149,7 @@ export const WishCard = ({
                     icon={<HamburgerIcon />}
                     variant="outline"
                     colorScheme="blue"
-                    mb={{ base: "2", sm: "6", md: "2" }}
+                    w={10}
                   />
                   <MenuList>
                     <WishModal

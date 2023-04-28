@@ -13,7 +13,7 @@ const WishListPage: NextPage = () => {
         <title>Wishes</title>
         <meta
           name="description"
-          content="all of the classrooms you've created as a teacher"
+          content="Your wish lists. Add wishes to your wish lists"
         />
       </Head>
 

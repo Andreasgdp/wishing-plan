@@ -3,17 +3,17 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-const ClassroomPage: NextPage = () => {
+const SharedPlansPage: NextPage = () => {
   const router = useRouter();
   const planId = router.query.planid as string;
 
   return (
     <>
       <Head>
-        <title>Wishes</title>
+        <title>Shared Plans</title>
         <meta
           name="description"
-          content="all of the classrooms you've created as a teacher"
+          content="Your friends shared their plans with you."
         />
       </Head>
 
@@ -22,4 +22,4 @@ const ClassroomPage: NextPage = () => {
   );
 };
 
-export default ClassroomPage;
+export default SharedPlansPage;

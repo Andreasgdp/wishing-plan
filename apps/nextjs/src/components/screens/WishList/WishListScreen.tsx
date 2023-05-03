@@ -4,6 +4,7 @@ import { Content } from "@components/layouts/Content";
 import { trpc } from "@utils/trpc";
 import { WishesList } from "./WishesList";
 import { WishModal } from "./WishModal";
+import { WishExportModal } from "./WishExportModal";
 
 export type WishForm = {
   title: string;
@@ -61,6 +62,18 @@ export const WishListScreen = (props: WishListScreenProps) => {
               buttonName="Add a wish"
               onSubmit={onSubmit}
             />
+            {wishes && wishes.length !== 0 ? (
+              <WishExportModal
+                buttonProps={{
+                  variant: "solid",
+                  colorScheme: "red",
+                }}
+                buttonName="Export to PDF"
+                wishes={wishes ?? []}
+              />
+            ) : (
+              <></>
+            )}
           </Center>
           <EmptyStateWrapper
             isLoading={isLoadingWishes && isLoadingSettings}

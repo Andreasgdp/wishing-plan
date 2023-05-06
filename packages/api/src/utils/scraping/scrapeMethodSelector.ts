@@ -49,11 +49,7 @@ export const getProductInfo = async (url: string) => {
   const currentHostnamesConfig = hostnamesConfig[hostname];
 
   if (!currentHostnamesConfig) {
-    return {
-      title: "",
-      price: 0,
-      imageUrl: "",
-    };
+    return 
   }
 
   return await siteScraper(

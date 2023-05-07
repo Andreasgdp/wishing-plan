@@ -23,6 +23,7 @@ import type { Wish } from "@prisma/client";
 import { trpc } from "@utils/trpc";
 import { motion } from "framer-motion";
 import { WishModal } from "./WishModal";
+import { DestinationId, WishCopyModal } from "./WishCopyModal";
 
 const variants = {
   hidden: { opacity: 0, x: 0, y: 20 },
@@ -40,6 +41,8 @@ export const WishCard = ({
 }) => {
   const { data: settings, isLoading } = trpc.settings.get.useQuery();
 
+  const copyToWishList = trpc.wish.create.useMutation();
+  const copyToPlan = trpc.plan.createAndAddWish.useMutation();
   const deleteWish = trpc.wish.delete.useMutation();
 
   const onDelete = async () => {
@@ -72,6 +75,31 @@ export const WishCard = ({
       price: price,
       wishListId: wish.wishListId,
     });
+    if (refreshListFunc) refreshListFunc();
+  };
+
+  const onCopy = async (
+    destinationId: DestinationId,
+  ) => {
+    if (destinationId.wishListId) {
+      await copyToWishList.mutateAsync({
+        title: wish.title,
+        description: wish.description,
+        url: wish.url,
+        imageUrl: wish.imageUrl,
+        price: wish.price,
+        wishListId: destinationId.wishListId,
+      });
+    } else if (destinationId.planId) {
+      await copyToPlan.mutateAsync({
+        wishTitle: wish.title,
+        wishDescription: wish.description,
+        wishUrl: wish.url,
+        wishImageUrl: wish.imageUrl,
+        wishPrice: wish.price,
+        planId: destinationId.planId,
+      });
+    }
     if (refreshListFunc) refreshListFunc();
   };
 
@@ -159,6 +187,15 @@ export const WishCard = ({
                       menuConfig={{
                         icon: <EditIcon />,
                         command: "⌘E",
+                      }}
+                    />
+                    <WishCopyModal
+                      buttonName="Copy To"
+                      onSubmit={onCopy}
+                      wish={wish}
+                      menuProps={{
+                        icon: <EditIcon />,
+                        command: "⌘C",
                       }}
                     />
                     <DeleteAlert

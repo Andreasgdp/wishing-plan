@@ -20,7 +20,7 @@ export const Content = ({ children, title }: ArticleLayoutProps) => (
     animate="enter"
     exit="exit"
     variants={variants}
-    transition={{ duration: 0.1, type: "easeInOut" }}
+    transition={{ duration: 0, type: "easeInOut" }}
     style={{ position: "relative" }}
   >
     <>

@@ -1,4 +1,3 @@
-import { prisma, PrismaClient } from "@wishingplan/db";
 import type {
   SignedInAuthObject,
   SignedOutAuthObject,
@@ -6,6 +5,7 @@ import type {
 import { getAuth } from "@clerk/nextjs/server";
 import { type inferAsyncReturnType } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
+import { DrizzleDB, PrismaClient, drizzleDB, prisma } from "@wishingplan/db";
 
 /**
  * Replace this with an object if you want to pass things to createContextInner
@@ -13,6 +13,7 @@ import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 type AuthContextProps = {
   auth: SignedInAuthObject | SignedOutAuthObject;
   prisma?: PrismaClient;
+  drizzle?: DrizzleDB;
 };
 
 /** Use this helper for:
@@ -24,6 +25,7 @@ export const createContextInner = async (opts: AuthContextProps) => {
   return {
     auth: opts.auth,
     prisma: opts.prisma || prisma,
+    drizzle: opts.drizzle || drizzleDB,
   };
 };
 

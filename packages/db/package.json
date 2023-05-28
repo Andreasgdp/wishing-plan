@@ -12,10 +12,13 @@
     "db:generate": "pnpm with-env prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^4.14.0"
+    "@planetscale/database": "^1.7.0",
+    "@prisma/client": "^4.14.0",
+    "drizzle-orm": "^0.26.1"
   },
   "devDependencies": {
     "dotenv-cli": "^7.2.1",
+    "drizzle-kit": "^0.18.1",
     "prisma": "^4.14.0",
     "typescript": "^5.0.4"
   }

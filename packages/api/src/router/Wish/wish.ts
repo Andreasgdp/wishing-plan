@@ -7,8 +7,8 @@ export const wishRouter = router({
   getAll: protectedProcedure.query(({ ctx }) => {
     const userId = ctx.auth.userId;
 
-    return ctx.prisma.wish.findMany({
-      where: { creatorId: userId },
+    return ctx.drizzle.query.wish.findMany({
+      where: {},
     });
   }),
   getById: protectedProcedure

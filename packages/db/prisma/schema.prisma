@@ -6,7 +6,6 @@
 
 generator client {
     provider = "prisma-client-js"
-    previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
@@ -31,14 +30,14 @@ model ShortLink {
 }
 
 model User {
-    id                String         @id
-    settings          UserSettings?
-    wishes            Wish[]
-    wishLists         WishList[]     @relation("WishLists")
-    sharedWishLists   WishList[]     @relation("SharedWishLists")
-    mainPlan          Plan?          @relation("MainPlan")
-    plans             Plan[]         @relation("Plans")
-    sharedPlans       Plan[]         @relation("SharedPlans")
+    id              String        @id
+    settings        UserSettings?
+    wishes          Wish[]
+    wishLists       WishList[]    @relation("WishLists")
+    sharedWishLists WishList[]    @relation("SharedWishLists")
+    mainPlan        Plan?         @relation("MainPlan")
+    plans           Plan[]        @relation("Plans")
+    sharedPlans     Plan[]        @relation("SharedPlans")
 }
 
 model UserSettings {

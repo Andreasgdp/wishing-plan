@@ -1,6 +1,7 @@
 packages:
-  - apps/expo
-  - apps/nextjs
+  # - apps/expo
+  # - apps/nextjs
+  - apps/skateshop
   - packages/api
   - packages/db
   - packages/config/*

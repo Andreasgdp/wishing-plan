@@ -1,0 +1,125 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1685624409376,
+      "tag": "0000_luxuriant_random",
+      "breakpoints": false
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1687062489542,
+      "tag": "0001_freezing_captain_flint",
+      "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1687257729390,
+      "tag": "0002_romantic_lilandra",
+      "breakpoints": false
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1687260162470,
+      "tag": "0003_parallel_bloodaxe",
+      "breakpoints": false
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1687408786496,
+      "tag": "0004_faulty_hellcat",
+      "breakpoints": false
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1687498151885,
+      "tag": "0005_powerful_golden_guardian",
+      "breakpoints": false
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1687915971685,
+      "tag": "0006_familiar_payback",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1687918985272,
+      "tag": "0007_condemned_morgan_stark",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1687919020550,
+      "tag": "0008_bouncy_korg",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1687987519499,
+      "tag": "0009_tearful_warlock",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1688009834283,
+      "tag": "0010_clever_leper_queen",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1688294924584,
+      "tag": "0011_wide_screwball",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "5",
+      "when": 1688560718280,
+      "tag": "0012_stiff_proudstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "5",
+      "when": 1688562688509,
+      "tag": "0013_perfect_lady_mastermind",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "5",
+      "when": 1688636359424,
+      "tag": "0014_bored_proteus",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "5",
+      "when": 1688636623929,
+      "tag": "0015_panoramic_wendigo",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "5",
+      "when": 1688639476050,
+      "tag": "0016_green_ultron",
+      "breakpoints": true
+    }
+  ]
+}

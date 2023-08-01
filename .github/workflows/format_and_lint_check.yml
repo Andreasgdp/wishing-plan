@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v3.6.0
         with:
           node-version: 16.15
-      - uses: pnpm/action-setup@v2.2.4
+      - uses: pnpm/action-setup@v2.4.0
         with:
           run_install: false
       - name: Install dependencies
@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-node@v3.6.0
         with:
           node-version: 16.15
-      - uses: pnpm/action-setup@v2.2.4
+      - uses: pnpm/action-setup@v2.4.0
         with:
           run_install: false
       - name: Install dependencies

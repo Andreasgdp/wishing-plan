@@ -18,8 +18,6 @@ type WishListScreenProps = {
 };
 
 export const WishListScreen = (props: WishListScreenProps) => {
-  const { isLoading: isLoadingSettings } = trpc.settings.get.useQuery();
-
   const {
     data: wishes,
     isLoading: isLoadingWishes,
@@ -28,6 +26,7 @@ export const WishListScreen = (props: WishListScreenProps) => {
     id: props.wishListId,
   });
 
+  const { isLoading: isLoadingSettings } = trpc.settings.get.useQuery();
   const createWish = trpc.wish.create.useMutation();
 
   const onSubmit = async (

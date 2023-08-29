@@ -11,7 +11,7 @@ export const assertIsWishListCreator = async (
   wishListId: string,
 ) => {
   // Get the authenticated user's ID
-  const userId = ctx.auth.userId;
+  const userId = ctx.userId;
 
   // Get the wish list
   const wishList = await ctx.prisma.wishList.findFirst({

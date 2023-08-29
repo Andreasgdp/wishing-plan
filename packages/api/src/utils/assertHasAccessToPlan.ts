@@ -9,7 +9,7 @@ import { Context } from "../context";
  */
 export const assertHasAccessToPlan = async (ctx: Context, planId: string) => {
   // Get the authenticated user's ID
-  const userId = ctx.auth.userId;
+  const userId = ctx.userId;
 
   if (!userId) {
     throw new TRPCError({ code: "FORBIDDEN" });

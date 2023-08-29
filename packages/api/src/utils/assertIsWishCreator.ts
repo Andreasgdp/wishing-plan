@@ -8,7 +8,7 @@ import { Context } from "../context";
  */
 export const assertIsWishCreator = async (ctx: Context, wishId: string) => {
   // Get the authenticated user's ID
-  const userId = ctx.auth.userId;
+  const userId = ctx.userId;
 
   // Get the wish list
   const wish = await ctx.prisma.wish.findFirst({
